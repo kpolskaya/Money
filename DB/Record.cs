@@ -6,15 +6,6 @@ namespace DB
 {
     struct Record
     {
-        /// <summary>
-        /// Поле "Номер записи"
-        /// </summary>
-        int recNumber;
-
-        /// <summary>
-        /// Поле "Дата создания записи"
-        /// </summary>
-        DateTime crDate;
 
         /// <summary>
         /// Поле "Дата операции"
@@ -25,12 +16,12 @@ namespace DB
         /// Поле "Доход/Расход".
         /// Значение "1" соответствует доходу, "-1" - расходу
         /// </summary>
-        byte type;
+        byte opType;
 
         /// <summary>
         /// Поле "Сумма"
         /// </summary>
-        double sum;
+        double opSum;
 
         /// <summary>
         /// Поле "Счет"
@@ -47,26 +38,75 @@ namespace DB
         /// </summary>
         string note;
 
-        
+
         /// <summary>
         /// Создает новую запись
         /// </summary>
+        /// <param name="RecNumber">Номер записи</param>>
         /// <param name="OpDate">Дата операции</param>
         /// <param name="IsArrival">true - Доход / false - Расход</param>
-        /// <param name="Sum">Сумма</param>
+        /// <param name="OpSum">Сумма</param>
         /// <param name="Account">Счет</param>
         /// <param name="Category">Вид дохода/расхода</param>
         /// <param name="Note">Примечание</param>
-        public Record(DateTime OpDate, bool IsArrival, double Sum, string Account, string Category, string Note)
+        public Record(int RecNumber, DateTime OpDate, bool IsArrival, double OpSum, string Account, string Category, string Note)
         {
-            this.recNumber = 0;
-            this.crDate = DateTime.Now;
+            this.RecNumber = RecNumber;
+            this.CrDate = DateTime.Now;
             this.opDate = OpDate;
-            this.type = (byte)(IsArrival ? 1 : -1);
-            this.sum = Sum;
+            this.opType = (byte)(IsArrival ? 1 : -1);
+            this.opSum = OpSum;
             this.account = Account;
             this.category = Category;
             this.note = Note;
         }
+
+        /// <summary>
+        /// Номер записи
+        /// </summary>
+        public int RecNumber { get; }
+
+        /// <summary>
+        /// Дата создания записи
+        /// </summary>
+        public DateTime CrDate { get; }
+
+        /// <summary>
+        /// Дата операции
+        /// </summary>
+        public DateTime OpDate { get { return opDate; } set { this.opDate = value; } }
+
+        /// <summary>
+        /// Тип операции (доход/расход)
+        /// </summary>
+        public byte OpType { get { return opType; } set { this.opType = value; } }
+
+        /// <summary>
+        /// Сумма операции
+        /// </summary>
+        public double OpSum { get { return opSum; } set { this.opSum = value; } }
+
+        /// <summary>
+        /// Сумма операции со знаком +/- в соответствии с направлением движения средств
+        /// </summary>
+        public double Sum
+        {
+            get
+            { return opType * opSum; }
+        }
+
+        /// <summary>
+        /// Счет поступления/выбытия средств
+        /// </summary>
+        public string Account { get { return account; } set { this.account = value; } }
+
+        /// <summary>
+        /// Вид дохода/расхода
+        /// </summary>
+        public string Category { get { return category; } set { this.category = value; } }
+
+
+        public string Note { get { return note; } set { this.note = value; } }
+
     }
 }
