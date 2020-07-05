@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 
 namespace DB
 {
@@ -6,7 +7,12 @@ namespace DB
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string path = @"data.csv";
+            Repository db = new Repository(path);
+            Console.WriteLine($"Файл {path} открыт успешно.");
+            db.Save();
+            Console.WriteLine($"База выгружена. Файл {path} записан успешно.");
+            Console.ReadKey();
         }
     }
 }

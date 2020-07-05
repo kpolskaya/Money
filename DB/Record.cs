@@ -19,7 +19,7 @@ namespace DB
         /// Поле "Доход/Расход".
         /// Значение "1" соответствует доходу, "-1" - расходу
         /// </summary>
-        byte opType;
+        sbyte opType;
 
         /// <summary>
         /// Поле "Сумма"
@@ -52,7 +52,7 @@ namespace DB
         /// <param name="Account">Счет</param>
         /// <param name="Category">Вид дохода/расхода</param>
         /// <param name="Note">Примечание</param>
-        public Record(DateTime CrDate, DateTime OpDate, byte OpType, double OpSum, string Account, string Category, string Note)
+        public Record(DateTime CrDate, DateTime OpDate, sbyte OpType, double OpSum, string Account, string Category, string Note)
         {
             this.RecNumber = 0;
             this.CrDate = CrDate;
@@ -73,7 +73,7 @@ namespace DB
         /// <param name="Account">Счет</param>
         /// <param name="Category">Вид дохода/расхода</param>
         /// <param name="Note">Примечание</param>
-        public Record(DateTime OpDate, byte OpType, double OpSum, string Account, string Category, string Note) :
+        public Record(DateTime OpDate, sbyte OpType, double OpSum, string Account, string Category, string Note) :
             this(DateTime.Now, OpDate, OpType, OpSum, Account, Category, Note)
         {
             this.RecNumber = 0;
@@ -98,7 +98,7 @@ namespace DB
         /// <summary>
         /// Тип операции (доход/расход)
         /// </summary>
-        public byte OpType { get { return opType; } set { this.opType = value; } }
+        public sbyte OpType { get { return opType; } set { this.opType = value; } }
 
         /// <summary>
         /// Сумма операции

@@ -47,9 +47,13 @@ namespace DB
                 {
                     string[] args = dbStream.ReadLine().Split(';');
 
-                    DateTime created = DateTime.Parse(args[1]);
+                    foreach (var item in args)
+                    {
+                        Console.Write($" {item} ");
+                    }
+                    Console.WriteLine();
 
-                    Add(new Record(DateTime.Parse(args[1]), DateTime.Parse(args[2]), Convert.ToByte(args[3]), Convert.ToDouble(args[4]), args[5], args[6], args[7]));
+                    Add(new Record(DateTime.Parse(args[1]), DateTime.Parse(args[2]), Convert.ToSByte(args[3]), Convert.ToDouble(args[4]), args[5], args[6], args[7]));
                 }
             }
         }
@@ -71,7 +75,7 @@ namespace DB
             File.WriteAllText(this.dbPath, $"{temp}\n");
             for (int i = 0; i < index; i++)
             {
-                temp = String.Format("{0};{1 : G};{2 : d};{3};{4 : 0,00};{5};{6};{7}",
+                temp = String.Format("{0};{1};{2};{3};{4};{5};{6};{7}",
                                         this.records[i].RecNumber,
                                         this.records[i].CrDate,
                                         this.records[i].OpDate,
