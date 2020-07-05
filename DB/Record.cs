@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace DB
-{
+{   /// <summary>
+    /// Структура записи в базе данных
+    /// </summary>
     struct Record
     {
 
@@ -40,21 +43,21 @@ namespace DB
 
 
         /// <summary>
-        /// Создает новую запись
+        /// Конструктор
         /// </summary>
         /// <param name="RecNumber">Номер записи</param>>
         /// <param name="OpDate">Дата операции</param>
-        /// <param name="IsArrival">true - Доход / false - Расход</param>
+        /// <param name="OpType">1 - Доход / -1 - Расход </param>
         /// <param name="OpSum">Сумма</param>
         /// <param name="Account">Счет</param>
         /// <param name="Category">Вид дохода/расхода</param>
         /// <param name="Note">Примечание</param>
-        public Record(int RecNumber, DateTime OpDate, bool IsArrival, double OpSum, string Account, string Category, string Note)
+        public Record(DateTime CrDate, DateTime OpDate, byte OpType, double OpSum, string Account, string Category, string Note)
         {
-            this.RecNumber = RecNumber;
-            this.CrDate = DateTime.Now;
+            this.RecNumber = 0;
+            this.CrDate = CrDate;
             this.opDate = OpDate;
-            this.opType = (byte)(IsArrival ? 1 : -1);
+            this.opType = OpType;
             this.opSum = OpSum;
             this.account = Account;
             this.category = Category;
@@ -62,9 +65,25 @@ namespace DB
         }
 
         /// <summary>
+        /// Конструктор с фиксацией текущего времени как даты создания записи
+        /// </summary>
+        /// <param name="OpDate">Дата операции</param>
+        /// <param name="OpType">1 - Доход / -1 - Расход</param>
+        /// <param name="OpSum">Сумма</param>
+        /// <param name="Account">Счет</param>
+        /// <param name="Category">Вид дохода/расхода</param>
+        /// <param name="Note">Примечание</param>
+        public Record(DateTime OpDate, byte OpType, double OpSum, string Account, string Category, string Note) :
+            this(DateTime.Now, OpDate, OpType, OpSum, Account, Category, Note)
+        {
+            this.RecNumber = 0;
+        }
+                
+
+        /// <summary>
         /// Номер записи
         /// </summary>
-        public int RecNumber { get; }
+        public int RecNumber { get; set; }
 
         /// <summary>
         /// Дата создания записи
