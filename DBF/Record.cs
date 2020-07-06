@@ -42,7 +42,7 @@ namespace DBF
         /// </summary>
         string note;
 
-
+        
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -63,6 +63,7 @@ namespace DBF
             this.account = Account;
             this.category = Category;
             this.note = Note;
+            this.Deleted = false;
         }
 
         /// <summary>
@@ -77,7 +78,8 @@ namespace DBF
         public Record(DateTime OpDate, sbyte OpType, double OpSum, string Account, string Category, string Note) :
             this(DateTime.Now, OpDate, OpType, OpSum, Account, Category, Note)
         {
-            this.RecNumber = 0;
+            this.RecNumber = 0;                 // нужны ли эти присваивания тут?
+            this.Deleted = false;
         }
 
 
@@ -125,8 +127,15 @@ namespace DBF
         /// </summary>
         public string Category { get { return category; } set { this.category = value; } }
 
-
+        /// <summary>
+        /// Примечание
+        /// </summary>
         public string Note { get { return note; } set { this.note = value; } }
+
+        /// <summary>
+        /// Пометка на удаление
+        /// </summary>
+        public bool Deleted { get; set; }
 
     }
 }
