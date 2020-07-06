@@ -13,6 +13,21 @@ namespace DBF
             Repository db = new Repository(path);
             Console.WriteLine($"Файл {path} открыт успешно.");
 
+            for (int i = 0; i <= db.Count; i++)
+            {
+                string[] content = db.ToText(i);
+                foreach (var item in content)
+                {
+                    Console.Write($"{item,14}");
+                }
+                Console.WriteLine();
+            }
+
+            Console.Write("Какую запись вы хотите удалить? Введите номер:");
+            int num = Convert.ToInt32(Console.ReadLine());
+            db.Delete(num);
+            Console.WriteLine();
+
             Console.WriteLine("Введите новую запись:");
             Console.Write("Дата операции (dd.mm.yyyy):");
             DateTime newDate = Convert.ToDateTime(Console.ReadLine());
@@ -33,6 +48,7 @@ namespace DBF
             string newNot = (Console.ReadLine());
 
             db.Add(new Record(newDate, newType, newSum, @newAcc, @newCat, @newNot));
+
 
             db.Save();
             Console.WriteLine($"База выгружена. Файл {path} записан успешно.");
