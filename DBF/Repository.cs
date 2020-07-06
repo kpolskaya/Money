@@ -41,9 +41,12 @@ namespace DBF
         /// </summary>
         private void Load()
         {
+            if (!File.Exists(this.dbPath)) return;
+
             using (StreamReader dbStream = new StreamReader(this.dbPath))
             {
-                this.titles = dbStream.ReadLine().Split(';');
+                //this.titles = 
+                dbStream.ReadLine();
 
                 while (!dbStream.EndOfStream)
                 {
@@ -98,7 +101,17 @@ namespace DBF
         {
             this.dbPath = DbPath;                   // получение пути к файлу с данными
             this.index = 0;                         // первый элемент базы имеет нулевой индекс
-            this.titles = new string[0];            // инициализация строк заголовка для работы конструктора  
+            this.titles = new string[8]             // задание строк заголовка
+                                        {
+                                        "No",
+                                        "Дата записи",
+                                        "Дата операции",
+                                        "Вид операции",
+                                        "Сумма операции",
+                                        "Счет",
+                                        "Категория",
+                                        "Примечание"
+                                        };
             this.records = new Record[1];           // длина массива при инициализации - 1 запись 
 
             Load();                      // сразу же при создании происходит загрузка данных из файла
