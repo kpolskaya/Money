@@ -21,23 +21,46 @@
         <TabItem Header="Приход">
             <Grid Background="#FFE5E5E5">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="67*"/>
-                    <RowDefinition Height="38*"/>
-                    <RowDefinition Height="38"/>
-                    <RowDefinition Height="38*"/>
-                    <RowDefinition Height="38*"/>
-                    <RowDefinition Height="38*"/>
-                    <RowDefinition Height="38*"/>
-                    <RowDefinition Height="38*"/>
-                    <RowDefinition Height="38*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="1*"/>
+
+
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="119*"/>
-                    <ColumnDefinition Width="128*"/>
-                    <ColumnDefinition Width="198*"/>
-                    <ColumnDefinition Width="321*"/>
+
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Border x:Name="Дата" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="36" Margin="23,10,0,0" VerticalAlignment="Top" Width="347"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="21,10,0,0"
+                           Grid.Row="1" TextWrapping="Wrap" Text="СЕГОДНЯ"
+                           VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="Underline"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    Grid.Row="2" TextWrapping="Wrap" Text="Дата операции"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="{x:Null}"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    Grid.Row="3" TextWrapping="Wrap" Text="Сумма"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="{x:Null}"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    Grid.Row="4" TextWrapping="Wrap" Text="Счет"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="{x:Null}"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    Grid.Row="5" TextWrapping="Wrap" Text="Категория"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="{x:Null}"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    Grid.Row="6" TextWrapping="Wrap" Text="Примечания"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="{x:Null}"/>
+                <Button Content="Записать" Grid.Column="2" HorizontalAlignment="Left" Margin="120,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="179" Height="38" FontStyle="Italic" FontSize="16" FontFamily="Segoe Print" FontWeight="Bold"/>
+                <TextBox Name="Today" Grid.Column="2" HorizontalAlignment="Left" Margin="79,5,0,7" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=CrDate}" Width="281"/>
+                <TextBox x:Name="Today_Copy" Grid.Column="2" HorizontalAlignment="Left" Margin="79,10,0,2" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Path=OpDate }" Width="281"/>
 
 
             </Grid>
