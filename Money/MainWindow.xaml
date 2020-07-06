@@ -60,7 +60,7 @@
                     VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="{x:Null}"/>
                 <Button Content="Записать" Grid.Column="2" HorizontalAlignment="Left" Margin="120,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="179" Height="38" FontStyle="Italic" FontSize="16" FontFamily="Segoe Print" FontWeight="Bold"/>
                 <TextBox Name="Today" Grid.Column="2" HorizontalAlignment="Left" Margin="79,5,0,7" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=CrDate}" Width="281"/>
-                <TextBox x:Name="Today_Copy" Grid.Column="2" HorizontalAlignment="Left" Margin="79,10,0,2" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Path=OpDate }" Width="281"/>
+                <TextBox x:Name="Today_Copy" Grid.Column="2" HorizontalAlignment="Left" Margin="79,10,0,2" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Path=O }" Width="281"/>
 
 
             </Grid>

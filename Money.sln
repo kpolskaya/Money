@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money", "Money\Money.csproj", "{6940E482-DA97-456E-96AE-CA7016C41119}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "DB\DB.csproj", "{7C5E11E5-AA79-440B-A367-81E72DDE60E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DB", "DB\DB.csproj", "{7C5E11E5-AA79-440B-A367-81E72DDE60E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBF", "DBF\DBF.csproj", "{7B29D83A-7604-4076-AA86-01F561B31CDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7C5E11E5-AA79-440B-A367-81E72DDE60E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C5E11E5-AA79-440B-A367-81E72DDE60E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C5E11E5-AA79-440B-A367-81E72DDE60E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B29D83A-7604-4076-AA86-01F561B31CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B29D83A-7604-4076-AA86-01F561B31CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B29D83A-7604-4076-AA86-01F561B31CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B29D83A-7604-4076-AA86-01F561B31CDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
