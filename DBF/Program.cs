@@ -13,20 +13,54 @@ namespace DBF
             Repository db = new Repository(path);
             Console.WriteLine($"Файл {path} открыт успешно.");
 
-            for (int i = 0; i <= db.Count; i++)
-            {
-                string[] content = db.ToText(i);
-                foreach (var item in content)
+                      
+                for (int i = 0; i < db.Count; i++)
                 {
-                    Console.Write($"{item,14}");
+                    string[] content = db.ToText(i);
+                    foreach (var item in content)
+                    {
+                        Console.Write($"{item,18}");
+                    }
+                    Console.WriteLine();
                 }
+            do
+            { 
+                Console.Write("Какую запись вы хотите удалить? Введите номер:");
+                int num = Convert.ToInt32(Console.ReadLine());
+                db.Delete(num);
                 Console.WriteLine();
-            }
 
-            Console.Write("Какую запись вы хотите удалить? Введите номер:");
-            int num = Convert.ToInt32(Console.ReadLine());
-            db.Delete(num);
-            Console.WriteLine();
+                Console.WriteLine("Давайте отфильтруем!");
+                Console.Write("Начальная дата: ");
+                DateTime startDate = Convert.ToDateTime(Console.ReadLine());
+
+                Console.Write("Конечная дата: ");
+                DateTime endDate = Convert.ToDateTime(Console.ReadLine());
+
+                Console.Write("Тип операции (-1, 1 или 0 если все: ");
+                sbyte type = Convert.ToSByte(Console.ReadLine());
+
+                Console.Write("счет или  <Enter> если все: ");
+                string acc = Console.ReadLine();
+
+                Console.Write("категория или  <Enter> если все: ");
+                string cat = Console.ReadLine();
+
+                Template filter = new Template(startDate, endDate, type, acc, cat);
+                int[] selected = db.Select(filter);
+
+                for (int i = 0; i < selected.Length; i++)
+                {
+                    string[] content = db.ToText(selected[i]);
+                    if (content == null) continue;
+                    foreach (var item in content)
+                    {
+                        Console.Write($"{item,18}");
+                    }
+                    Console.WriteLine();
+                }
+
+            } while (true);
 
             Console.WriteLine("Введите новую запись:");
             Console.Write("Дата операции (dd.mm.yyyy):");

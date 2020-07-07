@@ -18,7 +18,7 @@ namespace DBF
         /// <summary>
         /// Количество записей в базе
         /// </summary>
-        public int Count { get { return this.index - 1; } }
+        public int Count { get { return this.index; } }
         
         /// <summary>
         /// Увеличивает длину текущего массива записей в два раза
@@ -129,6 +129,44 @@ namespace DBF
                                             this.records[num].Note
             };
             return recordText;
+        }
+
+        /// <summary>
+        /// Отбирает записи по заданным в Template параметрам
+        /// </summary>
+        /// <param name="filter">фильтр</param>
+        /// <returns>массив номеров записей, удовлетворяющих заданным параметрам
+        /// или массив нулевой длины, если нечего не найдено</returns>
+        public int[] Select(Template filter)
+        {
+            bool dateOK;
+            bool typeOK;
+            bool accOK;
+            bool catOK;
+
+            int[] selection = new int[this.index];
+            int count = 0;
+            
+            for (int i = 0; i < this.index; i++)
+            {
+                dateOK = this.records[i].OpDate >= filter.FromDate && this.records[i].OpDate <= filter.EndDate;
+                typeOK = filter.WhatType == 0 || this.records[i].OpType == filter.WhatType;
+                accOK =  filter.WhatAcc == "" || this.records[i].Account == filter.WhatAcc;
+                catOK = filter.WhatCat == "" || this.records[i].Category == filter.WhatCat;
+
+                if(dateOK && typeOK && accOK && catOK)
+                {
+                    selection[count] = this.records[i].RecNumber;
+                    count++;
+                }
+
+            }
+            Array.Resize(ref selection, count);
+            //foreach (var item in selection)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            return selection;
         }
 
 
