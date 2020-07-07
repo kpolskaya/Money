@@ -57,11 +57,7 @@ namespace DBF
                 {
                     string[] args = dbStream.ReadLine().Split(';');
 
-                    //foreach (var item in args)
-                    //{
-                    //    Console.Write($" {item} ");
-                    //}
-                    //Console.WriteLine();
+                    
 
                     Add(new Record(DateTime.Parse(args[1]), DateTime.Parse(args[2]), Convert.ToSByte(args[3]), Convert.ToDouble(args[4]), args[5], args[6], args[7]));
                 }
@@ -117,7 +113,10 @@ namespace DBF
         /// <returns>Массив строк или  null, если такой записи не существует</returns>
         public string[] ToText(int num)
         {
+            
+            
             if (num < 0 || num > this.index) return null;
+            if (this.records[num].Deleted) return null;
             
             string[] recordText = new string[]
             {
