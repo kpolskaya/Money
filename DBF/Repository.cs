@@ -14,6 +14,7 @@ namespace DBF
         private string dbPath;                      // путь к базе данных на диске
         private int index;                          // текущий элемент для добавления в records
         private string[] titles;                    // заголовки полей записей
+        
 
         /// <summary>
         /// Количество записей в базе
@@ -115,7 +116,7 @@ namespace DBF
         {
             
             
-            if (num < 0 || num > this.index) return null;
+            if (num < 0 || num >= this.index) return null;
             if (this.records[num].Deleted) return null;
             
             string[] recordText = new string[]
@@ -132,6 +133,26 @@ namespace DBF
         }
 
         /// <summary>
+        /// Проверяет запись с указанным номером на соответствие заданным условиям
+        /// </summary>
+        /// <param name="num">номер записи</param>
+        /// <param name="filter">шаблон с условиями</param>
+        /// <returns>true - если запись соответствует,  false - если нет, или такая запись отстутствует</returns>
+        private bool Match(int num, Template filter)
+        {
+            if (num < 0 || num >= this.index) return false;
+            if (this.records[num].Deleted) return false;
+
+            bool dateOK = this.records[num].OpDate >= filter.FromDate && this.records[num].OpDate <= filter.EndDate;
+            bool typeOK = filter.WhatType == 0 || this.records[num].OpType == filter.WhatType;
+            bool accOK = filter.WhatAcc == "" || this.records[num].Account == filter.WhatAcc;
+            bool catOK = filter.WhatCat == "" || this.records[num].Category == filter.WhatCat;
+
+            return dateOK && typeOK && accOK && catOK;
+        }
+
+
+        /// <summary>
         /// Отбирает записи по заданным в Template параметрам
         /// </summary>
         /// <param name="filter">фильтр</param>
@@ -139,22 +160,12 @@ namespace DBF
         /// или массив нулевой длины, если нечего не найдено</returns>
         public int[] Select(Template filter)
         {
-            bool dateOK;
-            bool typeOK;
-            bool accOK;
-            bool catOK;
-
             int[] selection = new int[this.index];
             int count = 0;
             
             for (int i = 0; i < this.index; i++)
             {
-                dateOK = this.records[i].OpDate >= filter.FromDate && this.records[i].OpDate <= filter.EndDate;
-                typeOK = filter.WhatType == 0 || this.records[i].OpType == filter.WhatType;
-                accOK =  filter.WhatAcc == "" || this.records[i].Account == filter.WhatAcc;
-                catOK = filter.WhatCat == "" || this.records[i].Category == filter.WhatCat;
-
-                if(dateOK && typeOK && accOK && catOK)
+                if (Match(i, filter))
                 {
                     selection[count] = this.records[i].RecNumber;
                     count++;
@@ -162,10 +173,6 @@ namespace DBF
 
             }
             Array.Resize(ref selection, count);
-            //foreach (var item in selection)
-            //{
-            //    Console.WriteLine(item);
-            //}
             return selection;
         }
 

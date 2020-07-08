@@ -37,7 +37,7 @@ namespace DBF
                 Console.Write("Конечная дата: ");
                 DateTime endDate = Convert.ToDateTime(Console.ReadLine());
 
-                Console.Write("Тип операции (-1, 1 или 0 если все: ");
+                Console.Write("Тип операции (-1, 1 или 0 если все): ");
                 sbyte type = Convert.ToSByte(Console.ReadLine());
 
                 Console.Write("счет или  <Enter> если все: ");
