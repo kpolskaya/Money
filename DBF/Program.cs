@@ -47,7 +47,7 @@ namespace DBF
             Console.Write("Примечание:");
             string newNot = (Console.ReadLine());
 
-            db.Add(new Record(newDate, newType, newSum, @newAcc, @newCat, @newNot));
+            db.Add(new Record(newDate, newType, newSum, newAcc, newCat, newNot));
 
 
             db.Save();
