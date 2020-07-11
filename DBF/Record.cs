@@ -8,7 +8,7 @@ namespace DBF
 {   /// <summary>
     /// Структура записи в базе данных
     /// </summary>
-    public class Record ///поставила класс
+    public struct Record 
     {
 
         /// <summary>

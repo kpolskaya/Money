@@ -23,22 +23,16 @@ namespace Money
     /// </summary>
     public partial class MainWindow : Window
     {
-        private BindingList<Record> _todoDataList;
-
+       
         public MainWindow()
         {
             InitializeComponent();
-
-        }
-        //private void buttonRead_Click(object sender, RoutedEventArgs e)// чтение из файла
-        //{
-        //    txbTextFile.Text = File.ReadAllText(txb.Text);
-        //}
-        private void buttonRead_Click(object sender, RoutedEventArgs e)// запись в файл
-        {
-            File.WriteAllText(txb.Text, txbTextFile.Text);
+         //Reports.ItemsSource = Repository db;
         }
 
+        
+        Repository db = new Repository(@"data.csv");
+        
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -47,16 +41,42 @@ namespace Money
         private void Window_Loaded(object sender, RoutedEventArgs e)
                    
         {
-            _todoDataList = new BindingList<Record>()
-            {
-                new Record(DateTime.Today, 1, 1000, "cash", "home", "lalala"),
-           
-                new Record(DateTime.Today, 0, 5000, "card", "pets", "blablabla") 
-            };
-           
-            MoneyList.ItemsSource = _todoDataList;
-            
+      
         }
-        
+
+        private void MoneyList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var newDate = Convert.ToDateTime(dp1.SelectedDate.Value.Date.ToShortDateString());
+            var newType = (sbyte)-1;
+            var newSum = Convert.ToDouble(sumOp.Text);
+            var newAcc = account.Text;
+            var newCat = cat.Text;
+            var newNot = note.Text;
+            db.Add(new Record(newDate, newType, newSum, newAcc, newCat, newNot));
+            db.Save();
+        }
+
+        private void today_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime dt = DateTime.Today;
+            today.Content = dt.ToString ("dd.MM.yyyy");
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var newDate = Convert.ToDateTime(dp1P.SelectedDate.Value.Date.ToShortDateString());
+            var newType = (sbyte)1;
+            var newSum = Convert.ToDouble(sumOpP.Text);
+            var newAcc = accountP.Text;
+            var newCat = catP.Text;
+            var newNot = noteP.Text;
+            db.Add(new Record(newDate, newType, newSum, newAcc, newCat, newNot));
+            db.Save();
+        }
     }
 }

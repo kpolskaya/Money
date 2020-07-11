@@ -10,12 +10,91 @@
     <TabControl HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch">
         <TabItem Header="Программа учета личных финансов">
             <Grid Background="#FFE5E5E5">
-                <Image Source="image.jpg" RenderTransformOrigin="0.398,0.491" Margin="34,26,361,140" />
-                <TextBlock HorizontalAlignment="Left" Margin="34,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top"
-                           Width="676" Height="61" FontFamily="Matura MT Script Capitals" FontSize="24" FontWeight="Bold" FontStyle="Italic">
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="5*"/>
+
+                </Grid.RowDefinitions>
+                <Image Source="image.jpg" RenderTransformOrigin="0.398,0.491" Margin="10,40,400,40" />
+                <TextBlock HorizontalAlignment="Left" Margin="42,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" 
+                           Width="676" Height="61" FontFamily="Matura MT Script Capitals" FontSize="24" FontWeight="Bold" FontStyle="Italic" Grid.Row="1">
                     <Run Text="Куда деваются деньги?"/><LineBreak/><Run FontSize="14" Text="учет личных финансов"/></TextBlock>
 
 
+            </Grid>
+        </TabItem>
+        <TabItem Header="Расход">
+            <Grid Background="#FFE5E5E5">
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="220*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="450*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="21,10,0,0"
+                    Grid.Row="1" TextWrapping="Wrap" Text="СЕГОДНЯ"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" 
+                           TextDecorations="Underline" Grid.ColumnSpan="3"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10.472,0,0"
+                    Grid.Row="2" TextWrapping="Wrap" Text="Дата операции"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" 
+                           TextDecorations="{x:Null}" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,11.472,0,0"
+                    Grid.Row="3" TextWrapping="Wrap" Text="Сумма"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" 
+                           TextDecorations="{x:Null}" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10.472,0,0"
+                    Grid.Row="4" TextWrapping="Wrap" Text="Счет"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" 
+                           TextDecorations="{x:Null}" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10.944,0,0"
+                    Grid.Row="5" TextWrapping="Wrap" Text="Категория"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" 
+                           TextDecorations="{x:Null}" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10.944,0,0"
+                    Grid.Row="6" TextWrapping="Wrap" Text="Примечания"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="18" FontStyle="Italic" FontWeight="Bold" 
+                           TextDecorations="{x:Null}" Grid.ColumnSpan="2"/>
+                <Button Content="Записать" Grid.Column="4" HorizontalAlignment="Left" Margin="170,3,0,0" Grid.Row="7" VerticalAlignment="Top" Width="179" 
+                        Height="38" FontStyle="Italic" FontSize="16" FontFamily="Segoe Print" FontWeight="Bold" Click="Button_Click"/>
+                <TextBox x:Name="sumOp" FontFamily="Segoe Script" FontSize="15" Grid.Column="4" HorizontalAlignment="Left" Height="40" Margin="10,3,0,0"
+                         Grid.Row="3" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="485"/>
+                <TextBox x:Name="note" FontFamily="Segoe Script" FontSize="15" Grid.Column="4" HorizontalAlignment="Left" Height="40" Margin="10,3,0,0" 
+                         Grid.Row="6" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="485"/>
+                <Button Content="Нажми меня" x:Name="today" Background="White" FontFamily="Segoe Script" FontSize="15" Grid.Column="4" 
+                        HorizontalAlignment="Left" Margin="10,3,0,0" Grid.Row="1" VerticalAlignment="Top" Width="485" Height="40" Click="today_Click"/>
+                <DatePicker x:Name="dp1"  Grid.Column="4" HorizontalAlignment="Left" Margin="10,3,0,0" Grid.Row="2" VerticalAlignment="Top"
+                            Width="485" Height="40" />
+                <ComboBox Name ="cat" Grid.Column="4" HorizontalAlignment="Left" Margin="10,3,0,0" Grid.Row="5" VerticalAlignment="Top" Width="485" Height="40">
+                    <TextBlock> продукты</TextBlock>
+                    <TextBlock> дом</TextBlock>
+                    <TextBlock> коммунальные платежи</TextBlock>
+                    <TextBlock> развлечения</TextBlock>
+                    <TextBlock> инвестиции</TextBlock>
+                    <TextBlock> благотворительность</TextBlock>
+                </ComboBox>
+                <ComboBox Name="account" Grid.Column="4" HorizontalAlignment="Left" Margin="10,3,0,0" Grid.Row="4" VerticalAlignment="Top" Width="485" Height="40">
+                    <TextBlock> наличные</TextBlock>
+                    <TextBlock> карта</TextBlock>
+                    <TextBlock> кредит</TextBlock>
+                </ComboBox>
             </Grid>
         </TabItem>
         <TabItem Header="Приход">
@@ -29,50 +108,73 @@
                     <RowDefinition Height="10*"/>
                     <RowDefinition Height="10*"/>
                     <RowDefinition Height="10*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="10*"/>
 
 
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
 
-                    <ColumnDefinition Width="28*"/>
+                    <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="249*"/>
-                    <ColumnDefinition Width="35*"/>
-                    <ColumnDefinition Width="426*"/>
-                    <ColumnDefinition Width="28*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="84*"/>
+                    <ColumnDefinition Width="425*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="21,10,0,0"
                     Grid.Row="1" TextWrapping="Wrap" Text="СЕГОДНЯ"
-                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="Underline" Grid.ColumnSpan="2"/>
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" 
+                           TextDecorations="Underline" Grid.ColumnSpan="4"/>
                 <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0"
                     Grid.Row="2" TextWrapping="Wrap" Text="Дата операции"
-                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="{x:Null}" Grid.ColumnSpan="2"/>
-                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" 
+                           TextDecorations="{x:Null}" Grid.ColumnSpan="4"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,11,0,0"
                     Grid.Row="3" TextWrapping="Wrap" Text="Сумма"
-                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="{x:Null}" Grid.ColumnSpan="2"/>
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold"
+                           TextDecorations="{x:Null}" Grid.ColumnSpan="4"/>
                 <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0"
                     Grid.Row="4" TextWrapping="Wrap" Text="Счет"
-                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="{x:Null}" Grid.ColumnSpan="2"/>
-                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" 
+                           TextDecorations="{x:Null}" Grid.ColumnSpan="4"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,11,0,0"
                     Grid.Row="5" TextWrapping="Wrap" Text="Категория"
-                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="{x:Null}" Grid.ColumnSpan="2"/>
-                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" 
+                           TextDecorations="{x:Null}" Grid.ColumnSpan="4"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,11,0,0"
                     Grid.Row="6" TextWrapping="Wrap" Text="Примечания"
-                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="22" FontStyle="Italic" FontWeight="Bold" TextDecorations="{x:Null}" Grid.ColumnSpan="2"/>
-                <Button Content="Записать" Grid.Column="3" HorizontalAlignment="Left" Margin="120,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="179" Height="38" FontStyle="Italic" FontSize="16" FontFamily="Segoe Print" FontWeight="Bold"/>
-                <TextBox x:Name="Date_op" Grid.Column="3" HorizontalAlignment="Left" Margin="79,5,0,7" Grid.Row="2" TextWrapping="Wrap" Text="{Binding newDate}" Width="281"/>
-                <TextBox x:Name="Sum" Grid.Column="3" HorizontalAlignment="Left" Margin="79,10,0,2" Grid.Row="3" TextWrapping="Wrap" Text="{Binding newSum}" Width="281"/>
-                <TextBox x:Name="Account" Grid.Column="3" HorizontalAlignment="Left" Margin="79,10,0,3" Grid.Row="4" TextWrapping="Wrap" Text="{Binding newAcc}" Width="281"/>
-                <TextBox x:Name="Category" Grid.Column="3" HorizontalAlignment="Left" Margin="79,3,0,9" Grid.Row="5" TextWrapping="Wrap" Text="{Binding OnewCat}" Width="281"/>
-                <TextBox x:Name="Note" Grid.Column="3" HorizontalAlignment="Left" Margin="79,10,0,3" Grid.Row="6" TextWrapping="Wrap" Text="{Binding newNot}" Width="281"/>
-                <TextBox x:Name="Today" Grid.Column="3" HorizontalAlignment="Left" Margin="79,3,0,10" Grid.Row="1" TextWrapping="Wrap" Text="{Binding thisDay}" Width="281"/>
+                    VerticalAlignment="Top" Width="247" Height="32" FontFamily="Segoe Script" FontSize="18" FontStyle="Italic" FontWeight="Bold" 
+                           TextDecorations="{x:Null}" Grid.ColumnSpan="4"/>
+                <Button Content="Записать" Grid.Column="5" HorizontalAlignment="Left" Margin="86.111,3,0,0" Grid.Row="7" VerticalAlignment="Top" 
+                        Width="179" Height="38" FontStyle="Italic" FontSize="16" FontFamily="Segoe Print" FontWeight="Bold" Click="Button_Click_1"/>
+                <TextBox x:Name="sumOpP" FontFamily="Segoe Script" FontSize="15" Grid.Column="4" HorizontalAlignment="Left" Height="40" 
+                         Margin="10,3,0,0" Grid.Row="3" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="485" Grid.ColumnSpan="2"/>
 
-
+                <TextBox x:Name="noteP" FontFamily="Segoe Script" FontSize="15" Grid.Column="4" HorizontalAlignment="Left" Height="40" 
+                         Margin="10,3,0,0" Grid.Row="6" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="485" Grid.ColumnSpan="2"/>
+                <Button Content="Нажми меня" x:Name="todayR" Background="White" FontFamily="Segoe Script" FontSize="15" Grid.Column="4" 
+                        HorizontalAlignment="Left" Margin="10,3,0,0" Grid.Row="1" VerticalAlignment="Top" Width="485" Height="39" Click="today_Click" Grid.ColumnSpan="2"/>
+                <DatePicker x:Name="dp1P"  Grid.Column="4" HorizontalAlignment="Left" Margin="10,3,0,0" Grid.Row="2" VerticalAlignment="Top"
+                            Width="485" Height="40" Grid.ColumnSpan="2" />
+                <ComboBox Name ="catP" Grid.Column="4" HorizontalAlignment="Left" Margin="10,3,0,0" Grid.Row="5" VerticalAlignment="Top" 
+                          Width="485" Height="40" Grid.ColumnSpan="2">
+                    <TextBlock> зарплата</TextBlock>
+                    <TextBlock> подработка</TextBlock>
+                    <TextBlock> от инвестиций</TextBlock>
+                    <TextBlock> пожертвования</TextBlock>
+                    <TextBlock> воровство</TextBlock>
+                </ComboBox>
+                <ComboBox Name="accountP" Grid.Column="4" HorizontalAlignment="Left" Margin="10,3,0,0" Grid.Row="4" VerticalAlignment="Top" Width="485" Height="40" Grid.ColumnSpan="2">
+                    <TextBlock> наличные</TextBlock>
+                    <TextBlock> карта</TextBlock>
+                    <TextBlock> кредит</TextBlock>
+                </ComboBox>
             </Grid>
         </TabItem>
-        <TabItem Header="Расход">
+        <TabItem Header="Отчеты">
             <Grid Background="#FFE5E5E5">
-                <DataGrid x:Name ="MoneyList" FontSize="16" FontWeight="DemiBold" FontFamily="Segoe Script" Margin="10" AutoGenerateColumns="False">
+                <DataGrid x:Name ="Reports" FontSize="16" FontWeight="DemiBold" FontFamily="Segoe Script" Margin="10" AutoGenerateColumns="False" SelectionChanged="MoneyList_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Path=OpDate}"  IsReadOnly="False"  Header ="Дата операции" Width="2*"/>
                         <DataGridTextColumn Binding="{Binding Path=OpSum}" IsReadOnly="False" Header="Сумма" Width="2*"/>
@@ -84,26 +186,6 @@
 
 
 
-            </Grid>
-        </TabItem>
-        <TabItem Header="Отчеты">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBlock Margin="5">Введите путь к файлу</TextBlock>
-                <TextBox Grid.Row="1" x:Name="txb" FontSize="12"
-                 VerticalContentAlignment="Center" Margin="5"></TextBox>
-                <Button Grid.Row="1" Grid.Column="1" Padding="5" Margin="5"
-                x:Name="buttonRead" Click="buttonRead_Click">Прочитать</Button>
-                <TextBox x:Name="txbTextFile" Grid.Row="2" Grid.ColumnSpan="2" Margin="5,0,5,5"
-                 Padding="5" TextWrapping="Wrap"></TextBox>
             </Grid>
         </TabItem>
     </TabControl>
