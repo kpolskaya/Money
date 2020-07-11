@@ -176,6 +176,17 @@ namespace DBF
             return selection;
         }
 
+        public Record[] FilteredList (Template filter)
+        {
+            int[] selected = Select(filter);
+            Record[] lst = new Record[selected.Length];
+            for (int i = 0; i < lst.Length; i++)
+            {
+                lst[i] = this.records[selected[i]];
+            }
+            return lst;
+        }
+
 
         /// <summary>
         /// Конструктор
@@ -200,5 +211,7 @@ namespace DBF
 
             Load();                                 // сразу же при создании происходит загрузка данных из файла
         }
+
+        public string DbPath { get { return this.dbPath; } }
     }
 }
