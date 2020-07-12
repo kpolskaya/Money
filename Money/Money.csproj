@@ -102,6 +102,10 @@
       <Project>{7b29d83a-7604-4076-aa86-01f561b31cde}</Project>
       <Name>DBF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WpfDB\WpfDB.csproj">
+      <Project>{118b71a6-b39d-4a07-8d67-578d476676ae}</Project>
+      <Name>WpfDB</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
