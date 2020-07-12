@@ -67,16 +67,6 @@ namespace Money
             today.Content = dt.ToString ("dd.MM.yyyy");
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            var newDate = Convert.ToDateTime(dp1P.SelectedDate.Value.Date.ToShortDateString());
-            var newType = (sbyte)1;
-            var newSum = Convert.ToDouble(sumOpP.Text);
-            var newAcc = accountP.Text;
-            var newCat = catP.Text;
-            var newNot = noteP.Text;
-            db.Add(new Record(newDate, newType, newSum, newAcc, newCat, newNot));
-            db.Save();
-        }
+       
     }
 }
