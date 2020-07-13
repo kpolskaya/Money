@@ -35,7 +35,11 @@ namespace WpfDB
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             db.Add(new Record(Convert.ToDateTime(date.Text), Convert.ToSByte((optype.Text == "Доход") ? 1 : -1), Convert.ToDouble(sum.Text),acc.Text, cat.Text, note.Text));
-            Record[] lastRecords = db.FilteredList(new Template(Convert.ToDateTime("01.01.2001"), DateTime.Now, (sbyte)0, "", ""));
+            sum.Text = "";
+            acc.Text = "";
+            cat.Text = "";
+            note.Text = "";
+            Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now));
             listView.ItemsSource = lastRecords;
             listView.Items.Refresh();
         }

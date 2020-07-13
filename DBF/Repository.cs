@@ -20,7 +20,12 @@ namespace DBF
         /// Количество записей в базе
         /// </summary>
         public int Count { get { return this.index; } }
-        
+
+        /// <summary>
+        /// Время последнего сохранения базы данных в файл
+        /// </summary>
+        public DateTime LastSavingTime { get; set; }
+
         /// <summary>
         /// Увеличивает длину текущего массива записей в два раза
         /// </summary>
@@ -94,6 +99,8 @@ namespace DBF
                                         this.records[i].Category,
                                         this.records[i].Note);
                 File.AppendAllText(dbPath, $"{temp}\n");
+                this.LastSavingTime = DateTime.Now;
+
             }
         }
         
@@ -143,12 +150,13 @@ namespace DBF
             if (num < 0 || num >= this.index) return false;
             if (this.records[num].Deleted) return false;
 
+            bool crDateOK = this.records[num].CrDate >= filter.CrFromDate && this.records[num].CrDate <= filter.CrEndDate;
             bool dateOK = this.records[num].OpDate >= filter.FromDate && this.records[num].OpDate <= filter.EndDate;
             bool typeOK = filter.WhatType == 0 || this.records[num].OpType == filter.WhatType;
             bool accOK = filter.WhatAcc == "" || this.records[num].Account == filter.WhatAcc;
             bool catOK = filter.WhatCat == "" || this.records[num].Category == filter.WhatCat;
 
-            return dateOK && typeOK && accOK && catOK;
+            return crDateOK && dateOK && typeOK && accOK && catOK;
         }
 
 
@@ -194,6 +202,7 @@ namespace DBF
         /// <param name="DbPath">Путь к файлу базы данных</param>
         public Repository(string DbPath)
         {
+            this.LastSavingTime = DateTime.Now;
             this.dbPath = DbPath;                   // получение пути к файлу с данными
             this.index = 0;                         // первый элемент базы имеет нулевой индекс
             this.titles = new string[8]             // задание строк заголовка
@@ -210,6 +219,9 @@ namespace DBF
             this.records = new Record[1];           // длина массива при инициализации - 1 запись 
 
             Load();                                 // сразу же при создании происходит загрузка данных из файла
+
+            
+
         }
 
         public string DbPath { get { return this.dbPath; } }
