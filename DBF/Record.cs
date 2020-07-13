@@ -10,6 +10,7 @@ namespace DBF
     /// </summary>
     public struct Record
     {
+        #region Поля
 
         /// <summary>
         /// Поле "Дата операции"
@@ -41,47 +42,9 @@ namespace DBF
         /// Поле "Примечание"
         /// </summary>
         string note;
+        #endregion
 
-        
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="RecNumber">Номер записи</param>>
-        /// <param name="OpDate">Дата операции</param>
-        /// <param name="OpType">1 - Доход / -1 - Расход </param>
-        /// <param name="OpSum">Сумма</param>
-        /// <param name="Account">Счет</param>
-        /// <param name="Category">Вид дохода/расхода</param>
-        /// <param name="Note">Примечание</param>
-        public Record(DateTime CrDate, DateTime OpDate, sbyte OpType, double OpSum, string Account, string Category, string Note)
-        {
-            this.RecNumber = 0;
-            this.CrDate = CrDate;
-            this.opDate = OpDate;
-            this.opType = OpType;
-            this.opSum = OpSum;
-            this.account = Account;
-            this.category = Category;
-            this.note = Note;
-            this.Deleted = false;
-        }
-
-        /// <summary>
-        /// Конструктор с фиксацией текущего времени как даты создания записи
-        /// </summary>
-        /// <param name="OpDate">Дата операции</param>
-        /// <param name="OpType">1 - Доход / -1 - Расход</param>
-        /// <param name="OpSum">Сумма</param>
-        /// <param name="Account">Счет</param>
-        /// <param name="Category">Вид дохода/расхода</param>
-        /// <param name="Note">Примечание</param>
-        public Record(DateTime OpDate, sbyte OpType, double OpSum, string Account, string Category, string Note) :
-            this(DateTime.Now, OpDate, OpType, OpSum, Account, Category, Note)
-        {
-            this.RecNumber = 0;                 // нужны ли эти присваивания тут?
-            this.Deleted = false;
-        }
-
+        #region Свойства
 
         /// <summary>
         /// Номер записи
@@ -136,6 +99,47 @@ namespace DBF
         /// Пометка на удаление
         /// </summary>
         public bool Deleted { get; set; }
+        #endregion
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="RecNumber">Номер записи</param>>
+        /// <param name="OpDate">Дата операции</param>
+        /// <param name="OpType">1 - Доход / -1 - Расход </param>
+        /// <param name="OpSum">Сумма</param>
+        /// <param name="Account">Счет</param>
+        /// <param name="Category">Вид дохода/расхода</param>
+        /// <param name="Note">Примечание</param>
+        public Record(DateTime CrDate, DateTime OpDate, sbyte OpType, double OpSum, string Account, string Category, string Note)
+        {
+            this.RecNumber = 0;
+            this.CrDate = CrDate;
+            this.opDate = OpDate;
+            this.opType = OpType;
+            this.opSum = OpSum;
+            this.account = Account;
+            this.category = Category;
+            this.note = Note;
+            this.Deleted = false;
+        }
+
+        /// <summary>
+        /// Конструктор с фиксацией текущего времени как даты создания записи
+        /// </summary>
+        /// <param name="OpDate">Дата операции</param>
+        /// <param name="OpType">1 - Доход / -1 - Расход</param>
+        /// <param name="OpSum">Сумма</param>
+        /// <param name="Account">Счет</param>
+        /// <param name="Category">Вид дохода/расхода</param>
+        /// <param name="Note">Примечание</param>
+        public Record(DateTime OpDate, sbyte OpType, double OpSum, string Account, string Category, string Note) :
+            this(DateTime.Now, OpDate, OpType, OpSum, Account, Category, Note)
+        {
+            this.RecNumber = 0;                 // нужны ли эти присваивания тут?
+            this.Deleted = false;
+        }
+
 
     }
 }

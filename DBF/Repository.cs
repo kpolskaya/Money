@@ -10,21 +10,76 @@ namespace DBF
 
     public struct Repository
     {
-        private Record[] records;                   // массив для хранения всех данных в памяти
-        private string dbPath;                      // путь к базе данных на диске
-        private int index;                          // текущий элемент для добавления в records
-        private string[] titles;                    // заголовки полей записей
-        
+        #region Поля
+        /// <summary>
+        /// Массив для хранения всех данных в памяти
+        /// </summary>
+        private Record[] records;                   
+
+        /// <summary>
+        /// Путь к базе данных на диске
+        /// </summary>
+        private string dbPath;                      
+
+        /// <summary>
+        /// Индекс текущего элемента для добавления в records
+        /// </summary>
+        private int index;                          
+
+        /// <summary>
+        /// Заголовки таблицы записей
+        /// </summary>
+        private string[] titles;
+
+        #endregion
+
+        #region Свойства
+        /// <summary>
+        /// Путь к файлу с данными
+        /// </summary>
+        public string DbPath { get { return this.dbPath; } }
 
         /// <summary>
         /// Количество записей в базе
         /// </summary>
         public int Count { get { return this.index; } }
-
+        
+       
         /// <summary>
         /// Время последнего сохранения базы данных в файл
         /// </summary>
         public DateTime LastSavingTime { get; set; }
+
+        #endregion
+
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="DbPath">Путь к файлу базы данных</param>
+        public Repository(string DbPath)
+        {
+            this.LastSavingTime = DateTime.Now;     // когда в последний раз были сохранены данные
+            this.dbPath = DbPath;                   // получение пути к файлу с данными
+            this.index = 0;                         // первый элемент базы имеет нулевой индекс
+            this.titles = new string[8]             // задание строк заголовка
+            {
+                                "No",
+                                "Дата записи",
+                                "Дата операции",
+                                "Вид операции",
+                                "Сумма операции",
+                                "Счет",
+                                "Категория",
+                                "Примечание"
+            };
+            this.records = new Record[1];           // длина массива при инициализации - 1 запись 
+
+            Load();                                 // сразу же при создании происходит загрузка данных из файла
+        }
+
+
+        #region Частные Методы
 
         /// <summary>
         /// Увеличивает длину текущего массива записей в два раза
@@ -35,20 +90,7 @@ namespace DBF
         }
 
         /// <summary>
-        /// Добавляет текущую запись в базу данных
-        /// </summary>
-        /// <param name="currentRecord"></param>
-        public void Add(Record currentRecord)
-        {
-            if (this.index >= this.records.Length)
-                Resize();
-            this.records[index] = currentRecord;
-            this.records[index].RecNumber = index;
-            this.index++;
-        }
-
-        /// <summary>
-        /// Загружает в память базу данных из файла
+        ///  Загружает в структуру записи из файла
         /// </summary>
         private void Load()
         {
@@ -63,13 +105,61 @@ namespace DBF
                 {
                     string[] args = dbStream.ReadLine().Split(';');
 
-                    
+
 
                     Add(new Record(DateTime.Parse(args[1]), DateTime.Parse(args[2]), Convert.ToSByte(args[3]), Convert.ToDouble(args[4]), args[5], args[6], args[7]));
                 }
             }
+
+
+
+
+            /// <summary>
+            /// Добавляет текущую запись в базу данных
+            /// </summary>
+            /// <param name="currentRecord"></param>
+            public void Add(Record currentRecord)
+        {
+            if (this.index >= this.records.Length)
+                Resize();
+            this.records[index] = currentRecord;
+            this.records[index].RecNumber = index;
+            this.index++;
         }
 
+        /// <summary>
+        /// Загружает в память базу данных из файла
+        /// </summary>
+       
+        }
+
+        /// <summary>
+        /// Проверяет запись с указанным номером на соответствие заданным условиям
+        /// </summary>
+        /// <param name="num">номер записи</param>
+        /// <param name="filter">шаблон с условиями</param>
+        /// <returns>true - если запись соответствует,  false - если нет, или такая запись отстутствует</returns>
+        private bool Match(int num, Template filter)
+        {
+            if (num < 0 || num >= this.index) return false;
+            if (this.records[num].Deleted) return false;
+
+            bool crDateOK = this.records[num].CrDate >= filter.CrFromDate && this.records[num].CrDate <= filter.CrEndDate;
+            bool dateOK = this.records[num].OpDate >= filter.FromDate && this.records[num].OpDate <= filter.EndDate;
+            bool typeOK = filter.WhatType == 0 || this.records[num].OpType == filter.WhatType;
+            bool accOK = filter.WhatAcc == "" || this.records[num].Account == filter.WhatAcc;
+            bool catOK = filter.WhatCat == "" || this.records[num].Category == filter.WhatCat;
+
+            return crDateOK && dateOK && typeOK && accOK && catOK;
+        }
+
+        #endregion
+
+
+        #region Публичные Методы
+        /// <summary>
+        /// Сохраняет в файл все записи, которые не помечены для удаления
+        /// </summary>
         public void Save()
         {
             if (File.Exists(this.dbPath))
@@ -139,27 +229,7 @@ namespace DBF
             return recordText;
         }
 
-        /// <summary>
-        /// Проверяет запись с указанным номером на соответствие заданным условиям
-        /// </summary>
-        /// <param name="num">номер записи</param>
-        /// <param name="filter">шаблон с условиями</param>
-        /// <returns>true - если запись соответствует,  false - если нет, или такая запись отстутствует</returns>
-        private bool Match(int num, Template filter)
-        {
-            if (num < 0 || num >= this.index) return false;
-            if (this.records[num].Deleted) return false;
-
-            bool crDateOK = this.records[num].CrDate >= filter.CrFromDate && this.records[num].CrDate <= filter.CrEndDate;
-            bool dateOK = this.records[num].OpDate >= filter.FromDate && this.records[num].OpDate <= filter.EndDate;
-            bool typeOK = filter.WhatType == 0 || this.records[num].OpType == filter.WhatType;
-            bool accOK = filter.WhatAcc == "" || this.records[num].Account == filter.WhatAcc;
-            bool catOK = filter.WhatCat == "" || this.records[num].Category == filter.WhatCat;
-
-            return crDateOK && dateOK && typeOK && accOK && catOK;
-        }
-
-
+   
         /// <summary>
         /// Отбирает записи по заданным в Template параметрам
         /// </summary>
@@ -184,6 +254,11 @@ namespace DBF
             return selection;
         }
 
+        /// <summary>
+        /// Выбирает из хранилища все записи, отвечающие заданным условиям
+        /// </summary>
+        /// <param name="filter"> Условия отбора</param>
+        /// <returns>Массив записей</returns>
         public Record[] FilteredList (Template filter)
         {
             int[] selected = Select(filter);
@@ -195,35 +270,9 @@ namespace DBF
             return lst;
         }
 
+        #endregion
 
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="DbPath">Путь к файлу базы данных</param>
-        public Repository(string DbPath)
-        {
-            this.LastSavingTime = DateTime.Now;
-            this.dbPath = DbPath;                   // получение пути к файлу с данными
-            this.index = 0;                         // первый элемент базы имеет нулевой индекс
-            this.titles = new string[8]             // задание строк заголовка
-            {
-                                "No",
-                                "Дата записи",
-                                "Дата операции",
-                                "Вид операции",
-                                "Сумма операции",
-                                "Счет",
-                                "Категория",
-                                "Примечание"
-            };
-            this.records = new Record[1];           // длина массива при инициализации - 1 запись 
 
-            Load();                                 // сразу же при создании происходит загрузка данных из файла
 
-            
-
-        }
-
-        public string DbPath { get { return this.dbPath; } }
     }
 }

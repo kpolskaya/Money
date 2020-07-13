@@ -11,6 +11,8 @@ namespace DBF
     /// </summary>
     public struct Template
     {
+        #region Автосвойства
+
         /// <summary>
         /// Начальная дата создания
         /// </summary>
@@ -45,6 +47,8 @@ namespace DBF
         /// Категория
         /// </summary>
         public string WhatCat { get; }
+        #endregion
+
 
         /// <summary>
         /// Конструктор фильтра
@@ -84,7 +88,7 @@ namespace DBF
         }
 
         /// <summary>
-        /// Конструктор фильтра записей по условиям без учета даты создания
+        /// Конструктор фильтра записей без учета даты создания
         /// </summary>
         /// <param name="FromDate">Начальная дата операции</param>
         /// <param name="EndDate">Конечная дата операции</param>
