@@ -111,14 +111,14 @@ namespace DBF
                 }
             }
 
-
+        }
 
 
             /// <summary>
             /// Добавляет текущую запись в базу данных
             /// </summary>
             /// <param name="currentRecord"></param>
-            public void Add(Record currentRecord)
+        public void Add(Record currentRecord)
         {
             if (this.index >= this.records.Length)
                 Resize();
@@ -127,11 +127,7 @@ namespace DBF
             this.index++;
         }
 
-        /// <summary>
-        /// Загружает в память базу данных из файла
-        /// </summary>
-       
-        }
+        
 
         /// <summary>
         /// Проверяет запись с указанным номером на соответствие заданным условиям
