@@ -39,7 +39,7 @@ namespace WpfDB
             acc.Text = "";
             cat.Text = "";
             note.Text = "";
-            Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now));
+            Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now, (sbyte)0));
             listView.ItemsSource = lastRecords;
             listView.Items.Refresh();
         }

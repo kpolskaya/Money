@@ -75,14 +75,14 @@ namespace DBF
         /// </summary>
         /// <param name="CrFromDate">Начальная дата создания записи</param>
         /// <param name="CrEndDate">Конечная дата создания записей</param>
-        public Template(DateTime CrFromDate, DateTime CrEndDate)
+        public Template(DateTime CrFromDate, DateTime CrEndDate,  sbyte WhatType)
         {
 
             this.CrFromDate = CrFromDate;
             this.CrEndDate = CrEndDate;
             this.FromDate = DateTime.MinValue;
             this.EndDate = DateTime.MaxValue;
-            this.WhatType = (sbyte)0;
+            this.WhatType = WhatType;
             this.WhatAcc = "";
             this.WhatCat = "";
         }
