@@ -55,9 +55,9 @@ namespace DBF
         /// </summary>
         /// <param name="FromDate">От даты</param>
         /// <param name="EndDate">До даты</param>
-        /// <param name="WhatType">Вид операции (расход: -1 / доход: 1</param>
-        /// <param name="WhatAcc">По какому счету</param>
-        /// <param name="WhatCat">Какая категория дохода/расхода</param>
+        /// <param name="WhatType">Вид операции (расход: -1 / доход: 1 / все: 0</param>
+        /// <param name="WhatAcc">По какому счету (все - пустая строка)</param>
+        /// <param name="WhatCat">Какая категория дохода/расхода (все - пустая строка)</param>
         public Template(DateTime CrFromDate, DateTime CrEndDate, DateTime FromDate, DateTime EndDate, sbyte WhatType, string WhatAcc, string WhatCat)
         {
 
