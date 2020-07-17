@@ -35,8 +35,10 @@ namespace WpfDB
             MessageBox.Show($"База загружена из файла {db.DbPath}. Количество записей: {db.Count}.");
             acc.ItemsSource = accs;
             accP.ItemsSource = accs;
+            accR.ItemsSource = accs;
             cat.ItemsSource = cats;
             catP.ItemsSource = catsP;
+            catR.ItemsSource = cats.Concat(catsP);
         }
 
        
@@ -77,7 +79,7 @@ namespace WpfDB
             acc.Text = "";
             cat.Text = "";
             note.Text = "";
-            Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now));
+            Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now,(sbyte)(-1)));
             listView.ItemsSource = lastRecords;
             listView.Items.Refresh();
         }
@@ -90,9 +92,21 @@ namespace WpfDB
             acc.Text = "";
             cat.Text = "";
             note.Text = "";
-            Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now));
+            Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now, (sbyte)(1)));
             listViewP.ItemsSource = lastRecords;
             listViewP.Items.Refresh();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            sum.Text = "0";
+            acc.Text = "";
+            cat.Text = "";
+            note.Text = "";
+            Record[] lastRecords = db.FilteredList(new Template(Convert.ToDateTime(dp1R.SelectedDate.Value.Date.ToShortDateString()), 
+                Convert.ToDateTime(dp2R.SelectedDate.Value.Date.ToShortDateString()),Convert.ToSByte((typeR.Text == "приход") ? 1 : -1 ),Convert.ToString(accR),Convert.ToString(catR)));
+            listViewR.ItemsSource = lastRecords;
+            listViewR.Items.Refresh();
         }
     }
 }

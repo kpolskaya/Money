@@ -140,11 +140,6 @@ namespace DBF
             this.Deleted = false;
         }
 
-          public Record(DateTime OpDate,  double OpSum, string Account, string Category, string Note) :
-            this(DateTime.Now, OpDate, OpType, OpSum, Account, Category, Note)
-        {
-            this.RecNumber = 0;                 // нужны ли эти присваивания тут?
-            this.Deleted = false;
-        }
+        
     }
 }
