@@ -27,7 +27,7 @@ namespace WpfDB
         string[] accs = new string[] { "карта", "наличные", "кредит" };
         string[] cats = new string[] { "продукты", "дом", "коммунальные платежи","животные","отдых","погашение кредита","инвестиции","одежда и обувь","прочее" };
         string[] catsP = new string[] { "зарплата", "подработка", "проценты от инвестиций", "благотворительность", "воровство", "подарки и находки", "прочее" };
-
+        string[] all = new string[] {""};
         public MainWindow()
         {
             InitializeComponent();
@@ -38,7 +38,8 @@ namespace WpfDB
             accR.ItemsSource = accs;
             cat.ItemsSource = cats;
             catP.ItemsSource = catsP;
-            catR.ItemsSource = cats.Concat(catsP);
+            catR.ItemsSource = all.Concat(cats.Concat(catsP));
+            dp2R.SelectedDate = DateTime.Today;
         }
 
        
@@ -99,12 +100,32 @@ namespace WpfDB
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            sum.Text = "0";
-            acc.Text = "";
-            cat.Text = "";
-            note.Text = "";
+            sbyte t;
+            if (typeR.Text == "приход")
+            {
+                t = 1;
+            }
+            else if (typeR.Text == "расход")
+            {
+                t = -1;
+            }
+            else t = 0;
+
+            string a;
+            if (accR.Text == null)
+            {
+                a = "";
+            } else a = accR.Text;
+
+            string c;
+            if(catR.Text == null )
+            { 
+                c = ""; }
+            else
+            c = catR.Text;
+
             Record[] lastRecords = db.FilteredList(new Template(Convert.ToDateTime(dp1R.SelectedDate.Value.Date.ToShortDateString()), 
-                Convert.ToDateTime(dp2R.SelectedDate.Value.Date.ToShortDateString()),Convert.ToSByte((typeR.Text == "приход") ? 1 : -1 ),Convert.ToString(accR),Convert.ToString(catR)));
+                Convert.ToDateTime(dp2R.SelectedDate.Value.Date.ToShortDateString()),t,a,c));
             listViewR.ItemsSource = lastRecords;
             listViewR.Items.Refresh();
         }
