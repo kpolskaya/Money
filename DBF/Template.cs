@@ -107,17 +107,7 @@ namespace DBF
             this.WhatCat = WhatCat;
         }
 
-        public Template(DateTime CrFromDate, DateTime CrEndDate, sbyte WhatType)
-        {
-
-            this.CrFromDate = CrFromDate;
-            this.CrEndDate = CrEndDate;
-            this.FromDate = DateTime.MinValue;
-            this.EndDate = DateTime.MaxValue;
-            this.WhatType = WhatType;
-            this.WhatAcc = "";
-            this.WhatCat = "";
-        }
+        
 
     }
 }
