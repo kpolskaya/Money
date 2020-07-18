@@ -216,7 +216,13 @@
                     <ListView.View>
                         <GridView>
 
-                            <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding RecNumber}" Width="45"/>
+                            <GridViewColumn Width="45" DisplayMemberBinding="{Binding RecNumber}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Tag="RecNumber" Click="lvUsersColumnHeader_Click">Номер</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+
                             <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding OpDate}" Width="80"/>
                             <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding Sum}" Width="100"/>
 
@@ -235,6 +241,10 @@
             <Grid>
                 <Grid.ColumnDefinitions>
 
+                    <ColumnDefinition Width="233*"/>
+                    <ColumnDefinition Width="54*"/>
+                    <ColumnDefinition Width="479*"/>
+
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
@@ -242,7 +252,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal" Grid.Row ="1" Grid.ColumnSpan="2" Height="30" Margin="5,5,5,10" >
+                <StackPanel Orientation="Horizontal" Grid.Row ="1" Grid.ColumnSpan="3" Height="30" Margin="5,5,5,10" >
                     <DatePicker x:Name="dp1R" Margin="30,0,5,0" Width="100" SelectedDate="01.01.2020"/>
                     <DatePicker x:Name="dp2R" Margin="5,0,5,0" Width="100"/>
                     <ComboBox Name ="typeR" Margin="5,0,5,0" Width="100" ToolTipService.Placement="Mouse" ToolTip="Выберите категорию" >
@@ -263,12 +273,12 @@
 
 
 
-                <ListView x:Name ="listViewR" HorizontalAlignment="Center" Height="250" Margin="5" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="2">
+                <ListView x:Name ="listViewR" HorizontalAlignment="Center" Height="250" Margin="13,5,13,0" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="3">
                     <ListView.View>
                         <GridView>
 
                             <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding RecNumber}" Width="45">
-                               
+
                             </GridViewColumn>
                             <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding OpDate}" Width="80"/>
                             <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding Sum}" Width="100"/>
@@ -283,13 +293,13 @@
                 </ListView>
 
 
-                <Button Content="Отобрать" HorizontalAlignment="Left" Margin="666,5,0,0" VerticalAlignment="Top" Width="75" FontSize="14" FontWeight="Bold" Click="Button_Click_3"/>
-                <TextBlock HorizontalAlignment="Left" Margin="35,30,0,0" TextWrapping="Wrap" Text="за период:" VerticalAlignment="Top" RenderTransformOrigin="0.485,-0.094" Width="201"/>
-                <TextBlock HorizontalAlignment="Left" Margin="365,30,0,0" TextWrapping="Wrap" Text="счет:"/>
-                <TextBlock HorizontalAlignment="Left" Margin="505,30,0,0" TextWrapping="Wrap" Text="категория:" VerticalAlignment="Top"/>
-                <TextBlock HorizontalAlignment="Left" Margin="610,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="4.519,0.562"/>
-                <TextBlock HorizontalAlignment="Left" Margin="255,30,0,0" TextWrapping="Wrap" Text="приход/расход:"/>
-                <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="Отбор операций по параметрам:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top"/>
+                <Button Content="Отобрать" HorizontalAlignment="Left" Margin="379.25,5,0,0" VerticalAlignment="Top" Width="75" FontSize="14" FontWeight="Bold" Click="Button_Click_3" Grid.Column="2"/>
+                <TextBlock HorizontalAlignment="Left" Margin="35,30,0,0" TextWrapping="Wrap" Text="за период:" VerticalAlignment="Top" RenderTransformOrigin="0.485,-0.094" Width="201" Grid.ColumnSpan="2"/>
+                <TextBlock HorizontalAlignment="Left" Margin="78.25,30,0,0" TextWrapping="Wrap" Text="счет:" Grid.Column="2"/>
+                <TextBlock HorizontalAlignment="Left" Margin="218.25,30,0,0" TextWrapping="Wrap" Text="категория:" VerticalAlignment="Top" Grid.Column="2"/>
+                <TextBlock HorizontalAlignment="Left" Margin="323.25,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="4.519,0.562" Grid.Column="2"/>
+                <TextBlock HorizontalAlignment="Left" Margin="22,30,0,0" TextWrapping="Wrap" Text="приход/расход:" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <TextBlock HorizontalAlignment="Left" Margin="40,5,0,0" TextWrapping="Wrap" Text="Отбор операций по параметрам:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
             </Grid>
 
 
