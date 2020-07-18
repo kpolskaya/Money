@@ -179,7 +179,7 @@ namespace WpfDB
 
                 TranslateTransform transform = new TranslateTransform
                     (
-                        AdornedElement.RenderSize.Width - 2,
+                        AdornedElement.RenderSize.Width - 5,
                         (AdornedElement.RenderSize.Height - 5) / 2
                     );
                 drawingContext.PushTransform(transform);
@@ -190,6 +190,16 @@ namespace WpfDB
                 drawingContext.DrawGeometry(Brushes.Black, null, geometry);
 
                 drawingContext.Pop();
+            }
+        }
+
+        private void listViewR_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var item = (sender as ListView).SelectedItem;
+            if (item != null)
+            {
+                Window1 taskWindow = new Window1();
+                taskWindow.Show();
             }
         }
     }

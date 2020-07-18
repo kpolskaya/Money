@@ -216,7 +216,7 @@
                     <ListView.View>
                         <GridView>
 
-                            <GridViewColumn Width="45" DisplayMemberBinding="{Binding RecNumber}">
+                            <GridViewColumn Width="45" DisplayMemberBinding="{Binding RecNumber, Mode=TwoWay}">
                                 <GridViewColumn.Header>
                                     <GridViewColumnHeader Tag="RecNumber" Click="lvUsersColumnHeader_Click">Номер</GridViewColumnHeader>
                                 </GridViewColumn.Header>
@@ -273,11 +273,12 @@
 
 
 
-                <ListView x:Name ="listViewR" HorizontalAlignment="Center" Height="250" Margin="13,5,13,0" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="3">
+                <ListView x:Name ="listViewR" HorizontalAlignment="Center" Height="250" Margin="13,5,13,0" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="3" PreviewMouseLeftButtonUp="listViewR_PreviewMouseLeftButtonUp" >
+                    
                     <ListView.View>
                         <GridView>
 
-                            <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding RecNumber}" Width="45">
+                            <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding RecNumber}" Width="45" >
 
                             </GridViewColumn>
                             <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding OpDate}" Width="80"/>
@@ -291,8 +292,7 @@
 
                     </ListView.View>
                 </ListView>
-
-
+                
                 <Button Content="Отобрать" HorizontalAlignment="Left" Margin="379.25,5,0,0" VerticalAlignment="Top" Width="75" FontSize="14" FontWeight="Bold" Click="Button_Click_3" Grid.Column="2"/>
                 <TextBlock HorizontalAlignment="Left" Margin="35,30,0,0" TextWrapping="Wrap" Text="за период:" VerticalAlignment="Top" RenderTransformOrigin="0.485,-0.094" Width="201" Grid.ColumnSpan="2"/>
                 <TextBlock HorizontalAlignment="Left" Margin="78.25,30,0,0" TextWrapping="Wrap" Text="счет:" Grid.Column="2"/>
