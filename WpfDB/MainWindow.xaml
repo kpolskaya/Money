@@ -27,110 +27,7 @@
             </Grid>
         </TabItem>
         <TabItem Header="Расход">
-            <!--<Grid Margin="3">
-        <Grid.ColumnDefinitions>
-            -->
-            <!--<ColumnDefinition Width="21*"/>
-            <ColumnDefinition Width="23*"/>
-        </Grid.ColumnDefinitions>
-        <TextBox x:Name="date" 
-                 HorizontalAlignment="Left" 
-                 Height="23" 
-                 Margin="319,14,0,0" 
-                 TextWrapping="Wrap" 
-                 Text="" 
-                 VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <TextBox 
-            x:Name="sum" 
-            HorizontalAlignment="Left" 
-            Height="23" Margin="319,58,0,0" 
-            TextWrapping="Wrap" 
-            Text="" 
-            VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <TextBox 
-            x:Name="optype" 
-            HorizontalAlignment="Left" 
-            Height="23" Margin="319,103,0,0" 
-            TextWrapping="Wrap" 
-            Text="" 
-            VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <TextBox 
-            x:Name="acc" 
-            HorizontalAlignment="Left" 
-            Height="23" Margin="319,149,0,0"
-            TextWrapping="Wrap" 
-            Text="" 
-            VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <TextBox 
-            x:Name="cat" 
-            HorizontalAlignment="Left" 
-            Height="23" Margin="319,195,0,0" 
-            TextWrapping="Wrap" 
-            Text="" 
-            VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <TextBox 
-            x:Name="note" 
-            HorizontalAlignment="Left" 
-            Height="23" Margin="319,238,0,0" 
-            TextWrapping="Wrap" 
-            Text="" 
-            VerticalAlignment="Top" Width="270" Grid.ColumnSpan="2"/>
-        <Button 
-            Content="Save" 
-            Grid.Column="1" 
-            HorizontalAlignment="Left" 
-            Margin="329,267,0,0" 
-            VerticalAlignment="Top" Width="75"
-            Click="Save_Click"/>
-        <Label Content="Дата операции:" 
-               HorizontalAlignment="Right" 
-               Margin="0,11,118,0" 
-               VerticalAlignment="Top"/>
-        <Label Content="Сумма:" 
-               HorizontalAlignment="Right"
-               Margin="0,55,118,0" 
-               VerticalAlignment="Top"/>
-        <Label Content="Доход/расход?" 
-               HorizontalAlignment="Right" 
-               Margin="0,100,118,0" 
-               VerticalAlignment="Top" Width="96"/>
-        <Label Content="Счет:" 
-               HorizontalAlignment="Right" 
-               Margin="0,146,118,0" 
-               VerticalAlignment="Top"/>
-        <Label Content="Категория:" 
-               HorizontalAlignment="Right" 
-               Margin="0,192,118,0" 
-               VerticalAlignment="Top" Width="69"/>
-        <Label Content="Примечание:" 
-               HorizontalAlignment="Right" 
-               Margin="0,238,118,0" 
-               VerticalAlignment="Top" Width="87"/>-->
-            <!--
-        <ListView x:Name ="listView" HorizontalAlignment="Left" Height="267" Margin="10,292,0,0" VerticalAlignment="Top" Width="772" Grid.ColumnSpan="2">
-            <ListView.View>
-                <GridView>
-                  
-                    <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding RecNumber}" Width="45"/>
-                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding OpDate}" Width="80"/>
-                    <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding Sum}" Width="100"/>
-                    
-                    <GridViewColumn Header="Счет" DisplayMemberBinding="{Binding Account}" Width="100" />
-                    <GridViewColumn Header="Категория" DisplayMemberBinding="{Binding Category}" Width="130" />
-                    <GridViewColumn Header="Примечание" DisplayMemberBinding="{Binding Note}" Width="315" />
-                    
-                </GridView>
-                
-            </ListView.View>
-            
-        </ListView>
-        <Button  
-                Content="Add" 
-                Grid.Column="1" 
-                HorizontalAlignment="Left" 
-                Margin="329,238,0,0" 
-                VerticalAlignment="Top" Width="75"
-                Click="Add_Click"/>-->
+      
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -148,7 +45,8 @@
                 <StackPanel Orientation="Horizontal" Grid.Row ="1" Grid.ColumnSpan="3" >
                     <DatePicker x:Name="dp1" Margin="10" Width="100" />
                     <TextBox x:Name="sum" VerticalScrollBarVisibility="Auto"
-         HorizontalScrollBarVisibility="Auto"  Margin="10" Width="100" PreviewTextInput="sumOp_PreviewTextInput" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"  />
+                     HorizontalScrollBarVisibility="Auto"  Margin="10" Width="100" 
+                     PreviewTextInput="sumOp_PreviewTextInput" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"  />
 
                     <ComboBox Name ="acc" Margin="10" Width="100" ToolTipService.Placement="Mouse" ToolTip="Выберите счет" >
 
@@ -159,17 +57,14 @@
                     <TextBox x:Name="note" Margin="10" Width="100" ToolTipService.Placement="Mouse" ToolTip="Введите примечания"/>
 
                 </StackPanel>
-
-
-                <Button Content="Save" HorizontalAlignment="Left" Margin="15,15,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="Button_Click"/>
+               
                 <Button Content="Add" HorizontalAlignment="Right" Margin="0,15,15,0" VerticalAlignment="Top" Width="75" Height="20" Click="Button_Click_1" Grid.Column="2"/>
 
-                <ListView x:Name ="listView" HorizontalAlignment="Center" Height="250" Margin="13,5,13,0" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="3">
+                <ListView x:Name ="listView" HorizontalAlignment="Center" Height="250" Margin="5" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="3">
                     <ListView.View>
                         <GridView>
-
-                            <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding RecNumber}" Width="45"/>
-                            <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding OpDate}" Width="80"/>
+                          
+                            <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding OpDate}" Width="100"/>
                             <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding Sum}" Width="100"/>
 
                             <GridViewColumn Header="Счет" DisplayMemberBinding="{Binding Account}" Width="100" />
@@ -212,11 +107,11 @@
                 <Button Content="Save" HorizontalAlignment="Left" Margin="15" VerticalAlignment="Top" Width="75" Height="20" Grid.ColumnSpan="2" />
                 <Button Content="Add" HorizontalAlignment="Right" Margin="15" VerticalAlignment="Top" Width="75" Height="20" Grid.ColumnSpan="2" Click="Button_Click_2" />
 
-                <ListView x:Name ="listViewP" HorizontalAlignment="Center" Height="250" Margin="5" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="2">
+                <ListView x:Name ="listViewP" HorizontalAlignment="Center" Height="250" Margin="5" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="2" >
                     <ListView.View>
                         <GridView>
 
-                            <GridViewColumn Width="45" DisplayMemberBinding="{Binding RecNumber, Mode=TwoWay}">
+                            <GridViewColumn Width="45" DisplayMemberBinding="{Binding RecNumber, Mode=TwoWay}" >
                                 <GridViewColumn.Header>
                                     <GridViewColumnHeader Tag="RecNumber" Click="lvUsersColumnHeader_Click">Номер</GridViewColumnHeader>
                                 </GridViewColumn.Header>
@@ -273,20 +168,39 @@
 
 
 
-                <ListView x:Name ="listViewR" HorizontalAlignment="Center" Height="250" Margin="13,5,13,0" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="3" PreviewMouseLeftButtonUp="listViewR_PreviewMouseLeftButtonUp" >
+                <ListView x:Name ="listViewR" HorizontalAlignment="Center" Height="250" Margin="5" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="3" 
+                          ToolTipService.Placement="Mouse" ToolTip="Нажмите левую кнопку мыши для редактирования, правую - для удаления записи" >
                     
                     <ListView.View>
                         <GridView>
 
-                            <GridViewColumn Header="Номер" DisplayMemberBinding="{Binding RecNumber}" Width="45" >
-
+ 
+                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding OpDate}" >
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" Tag="OpDate" Click="lvUsersColumnHeader_Click"   >Дата</GridViewColumnHeader>
+                                </GridViewColumn.Header>
                             </GridViewColumn>
-                            <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding OpDate}" Width="80"/>
-                            <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding Sum}" Width="100"/>
 
-                            <GridViewColumn Header="Счет" DisplayMemberBinding="{Binding Account}" Width="100" />
-                            <GridViewColumn Header="Категория" DisplayMemberBinding="{Binding Category}" Width="130" />
-                            <GridViewColumn Header="Примечание" DisplayMemberBinding="{Binding Note}" Width="315" />
+                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding Sum}" >
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" Tag="Sum" Click="lvUsersColumnHeader_Click">Сумма</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding Account}" >
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" Tag="Account" Click="lvUsersColumnHeader_Click">Счет</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="130" DisplayMemberBinding="{Binding Category}" >
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="130" Tag="RecNumber" Click="lvUsersColumnHeader_Click">Категория</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                          
+                            <GridViewColumn Header="Примечание" DisplayMemberBinding="{Binding Note}" Width="305" />
 
                         </GridView>
 

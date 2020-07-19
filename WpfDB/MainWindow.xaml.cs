@@ -44,6 +44,7 @@ namespace WpfDB
             catP.ItemsSource = catsP;
             catR.ItemsSource = all.Concat(cats.Concat(catsP));
             dp2R.SelectedDate = DateTime.Today;
+           
         }
 
        
@@ -141,7 +142,7 @@ namespace WpfDB
             if (listViewSortCol != null)
             {
                 AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
-                listViewP.Items.SortDescriptions.Clear();
+                listViewR.Items.SortDescriptions.Clear();
             }
 
             ListSortDirection newDir = ListSortDirection.Ascending;
@@ -151,7 +152,7 @@ namespace WpfDB
             listViewSortCol = column;
             listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
             AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
-            listViewP.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+            listViewR.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
 
         public class SortAdorner : Adorner
@@ -179,7 +180,7 @@ namespace WpfDB
 
                 TranslateTransform transform = new TranslateTransform
                     (
-                        AdornedElement.RenderSize.Width - 5,
+                        AdornedElement.RenderSize.Width - 10,
                         (AdornedElement.RenderSize.Height - 5) / 2
                     );
                 drawingContext.PushTransform(transform);
@@ -202,5 +203,7 @@ namespace WpfDB
                 taskWindow.Show();
             }
         }
+
+       
     }
 }
