@@ -176,7 +176,7 @@
 
 
                 <ListView x:Name ="listViewR" HorizontalAlignment="Center" Height="250" Margin="5" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="3" 
-                          ToolTipService.Placement="Mouse" ToolTip="Нажмите левую кнопку мыши для редактирования, правую - для удаления записи" >
+                          ToolTipService.Placement="Mouse" ToolTip="Нажмите левую кнопку мыши для редактирования, правую - для удаления записи" PreviewMouseLeftButtonUp="listViewR_PreviewMouseLeftButtonUp" >
 
                     <ListView.View>
                         <GridView>

@@ -25,6 +25,7 @@ namespace WpfDB
     {
 
         Repository db;
+        public Record opR; // запись для редактирования
         string[] accs = new string[] { "карта", "наличные", "кредит" };
         string[] cats = new string[] { "продукты", "дом", "коммунальные платежи","животные","отдых","погашение кредита","инвестиции","одежда и обувь","прочее" };
         string[] catsP = new string[] { "зарплата", "подработка", "проценты от инвестиций", "благотворительность", "воровство", "подарки и находки", "прочее" };
@@ -194,13 +195,15 @@ namespace WpfDB
             }
         }
 
-        private void listViewR_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        public void listViewR_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var item = (sender as ListView).SelectedItem;
             if (item != null)
             {
                 Window1 taskWindow = new Window1();
+                opR = (Record)item; 
                 taskWindow.Show();
+               
             }
         }
 

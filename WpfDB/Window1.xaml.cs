@@ -11,17 +11,21 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DBF;
 
 namespace WpfDB
 {
+    
     /// <summary>
     /// Логика взаимодействия для Window1.xaml
     /// </summary>
     public partial class Window1 : Window
     {
+        //public Record opR; // запись для редактирования
         public Window1()
         {
             InitializeComponent();
+            string t = MainWindow..opR.Account;
         }
     }
 }

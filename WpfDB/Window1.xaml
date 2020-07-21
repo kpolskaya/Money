@@ -5,8 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfDB"
         mc:Ignorable="d"
-        Title="Окно редактирования" Height="450" Width="800">
+        Title="Окно редактирования" Height="200" Width="800">
     <Grid>
-        
+          <ListView x:Name ="listopR" HorizontalAlignment="Center" Height="60" Margin="5,20,5,5" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="3" >
+
+                    <ListView.View>
+                        <GridView>
+
+
+                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding OpDate}" >
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" >Дата</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding Sum}" >
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" >Сумма</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding Account}" >
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" >Счет</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="130" DisplayMemberBinding="{Binding Category}" >
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="130" >Категория</GridViewColumnHeader>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+
+
+                            <GridViewColumn Header="Примечание" DisplayMemberBinding="{Binding Note}" Width="305" />
+
+                        </GridView>
+
+                    </ListView.View>
+                </ListView>
     </Grid>
 </Window>
