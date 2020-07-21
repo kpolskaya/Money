@@ -11,6 +11,7 @@ namespace DBF
         {
             string path = @"data.csv";
             Repository db = new Repository(path);
+            double newBalance = 10000;
             Console.WriteLine($"Файл {path} открыт успешно.");
 
                       
@@ -24,10 +25,12 @@ namespace DBF
                     Console.WriteLine();
                 }
 
-            Record[] lastRecords = db.FilteredList(new Template(Convert.ToDateTime("01.01.0001"), Convert.ToDateTime("07.07.2020"), (sbyte)0, "", ""));
+            Record[] lastRecords = db.FilteredList(new Template(Convert.ToDateTime("01.01.0001"), Convert.ToDateTime("31.07.2022"), (sbyte)0, "", ""));
+            db.Save();
 
             foreach (var item in lastRecords)
             {
+                newBalance += item.Sum;
                 Console.WriteLine("{0};{1};{2};{3};{4};{5};{6};{7}",
                                         item.RecNumber,
                                         item.CrDate,
@@ -38,6 +41,10 @@ namespace DBF
                                         item.Category,
                                         item.Note);
             }
+
+            Console.WriteLine($"Balance = {db.Balance}, but counted balance is {newBalance} what makes a difference of {db.Balance - newBalance}");
+            Console.WriteLine($"Starting date is {db.StartingDate}");
+            Console.WriteLine($"Last saving at {db.LastSavingTime}");
 
             //do
             //{ 
