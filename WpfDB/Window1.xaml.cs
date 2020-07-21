@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DBF;
 
-
 namespace WpfDB
 {
     
@@ -22,10 +21,16 @@ namespace WpfDB
     /// </summary>
     public partial class Window1 : Window
     {
+        string acc;
+        DateTime opdate;
+       
         
         public Window1()
         {
             InitializeComponent();
+            opdate = MainWindow.opR.OpDate;
+            acc = MainWindow.opR.Account;
+            dp1.SelectedDate = opdate;
         }
     }
 }
