@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:WpfDB"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <TabControl HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch">
+    <Window.Resources>
+        <DataTemplate x:Key="ToRightTemplate">
+            <TextBlock HorizontalAlignment="Right" />
+        </DataTemplate>
+    </Window.Resources>
+        <TabControl HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch">
         <TabItem Header="Программа учета личных финансов">
             <Grid Background="#FFE5E5E5">
                 <Grid.ColumnDefinitions>
@@ -67,12 +72,19 @@
 
                 <ListView x:Name ="listView" HorizontalAlignment = "Left"  Margin="10" Height="240"  Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="5" >
 
-                 
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    
                     <ListView.View>
+                        
                         <GridView>
 
-                            <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Path=OpDate, StringFormat='dd-mm-yyyy'}" Width="120" />
-                            <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding Sum}" Width="130"/>
+                            <GridViewColumn Header="Дата"  DisplayMemberBinding="{Binding Path=OpDate, StringFormat='dd.MM.yyyy'}" Width="120" />
+                            <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding Path=OpSum, StringFormat='### ### ##0.00'}" Width="130"  
+                             CellTemplate="{StaticResource ToRightTemplate}" />
 
                             <GridViewColumn Header="Счет" DisplayMemberBinding="{Binding Account}" Width="130" />
                             <GridViewColumn Header="Категория" DisplayMemberBinding="{Binding Category}" Width="130" />
@@ -126,7 +138,7 @@
 
 
                             <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding OpDate}" Width="80"/>
-                            <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding Sum}" Width="100"/>
+                            <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding OpSum}" Width="100"/>
 
                             <GridViewColumn Header="Счет" DisplayMemberBinding="{Binding Account}" Width="100" />
                             <GridViewColumn Header="Категория" DisplayMemberBinding="{Binding Category}" Width="130" />
