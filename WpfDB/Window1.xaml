@@ -5,44 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfDB"
         mc:Ignorable="d"
-        Title="Окно редактирования" Height="200" Width="800">
-    <Grid>
-          <ListView x:Name ="listopR" HorizontalAlignment="Center" Height="60" Margin="5,20,5,5" Grid.Row="2" VerticalAlignment="Top" Width="740" Grid.ColumnSpan="3" >
+        Title="Окно редактирования" Height="150" Width="800">
+    <Grid Background="#FFE5E5E5">
 
-                    <ListView.View>
-                        <GridView>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
 
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
 
-                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding OpDate}" >
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" >Дата</GridViewColumnHeader>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding Sum}" >
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" >Сумма</GridViewColumnHeader>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding Account}" >
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" >Счет</GridViewColumnHeader>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn Width="130" DisplayMemberBinding="{Binding Category}" >
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="130" >Категория</GridViewColumnHeader>
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
+        </Grid.RowDefinitions>
+        <TextBox  Grid.Row ="0" Grid.Column="0" 
+                     Width="100"  Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"  HorizontalContentAlignment="Center" 
+                     Text="Дата" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"    />
+        <DatePicker x:Name="dp1" Grid.Row ="1" Grid.Column="0" Height="25" SelectedDate=""
+                     Width="100"   HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        
+        <TextBox  Grid.Row ="0" Grid.Column="1" 
+                     Width="100"  Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"  HorizontalContentAlignment="Center"
+                     Text="Сумма" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"   />
+        <TextBox x:Name="Sum" Grid.Row ="1" Grid.Column="1" 
+                     Width="100"  Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
 
-                            <GridViewColumn Header="Примечание" DisplayMemberBinding="{Binding Note}" Width="305" />
+        <TextBox  Grid.Row ="0" Grid.Column="2" 
+                     Width="100"  Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"  HorizontalContentAlignment="Center"
+                     Text="Счет" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"   />
 
-                        </GridView>
+        <ComboBox Name ="accR" Grid.Row ="1" Grid.Column="2" VerticalAlignment="Top" Height="25" Width="100" ToolTipService.Placement="Mouse" ToolTip="Выберите счет" >
 
-                    </ListView.View>
-                </ListView>
+        </ComboBox>
+
+        <TextBox  Grid.Row ="0" Grid.Column="3" 
+                     Width="130"  Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"  HorizontalContentAlignment="Center"
+                     Text="Категория" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"   />
+        <ComboBox Name ="Cat" Grid.Row ="1" Grid.Column="3" VerticalAlignment="Top" Height="25" Width="130"  ToolTipService.Placement="Mouse" ToolTip="Выберите счет" >
+
+        </ComboBox>
+
+        <TextBox  Grid.Row ="0" Grid.Column="4" 
+                     Width="305"  Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"  HorizontalContentAlignment="Center"
+                     Text="Примечания" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"   />
+        <TextBox x:Name="Note" Grid.Row ="1" Grid.Column="4" 
+                     Width="305"  Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+
+       
     </Grid>
 </Window>

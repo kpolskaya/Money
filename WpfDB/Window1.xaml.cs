@@ -21,11 +21,16 @@ namespace WpfDB
     /// </summary>
     public partial class Window1 : Window
     {
-        //public Record opR; // запись для редактирования
+        string acc;
+        DateTime opdate;
+       
+        
         public Window1()
         {
             InitializeComponent();
-            string t = MainWindow..opR.Account;
+            opdate = MainWindow.opR.OpDate;
+            acc = MainWindow.opR.Account;
+            dp1.SelectedDate = opdate;
         }
     }
 }
