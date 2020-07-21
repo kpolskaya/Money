@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DBF;
 
+
 namespace WpfDB
 {
     
@@ -21,11 +22,10 @@ namespace WpfDB
     /// </summary>
     public partial class Window1 : Window
     {
-        //public Record opR; // запись для редактирования
+        
         public Window1()
         {
             InitializeComponent();
-            string t = MainWindow..opR.Account;
         }
     }
 }
