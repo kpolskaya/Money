@@ -36,6 +36,12 @@ namespace DBF
         /// </summary>
         private double balance;
 
+        private DateTime lastSavingTime;
+
+        private DateTime startingDate;
+
+
+
         #endregion
 
         #region Свойства
@@ -53,7 +59,9 @@ namespace DBF
         /// <summary>
         /// Время последнего сохранения базы данных в файл
         /// </summary>
-        public DateTime LastSavingTime { get; set; }
+        public DateTime LastSavingTime { get { return this.lastSavingTime; } }
+
+        public DateTime StartingDate { get { return startingDate; } }
 
         /// <summary>
         /// Остаток денежных средств по всем счетам
@@ -69,11 +77,14 @@ namespace DBF
         /// <param name="DbPath">Путь к файлу базы данных</param>
         public Repository(string DbPath)
         {
-            this.LastSavingTime = DateTime.Now;     // когда в последний раз были сохранены данные
+            string path = @"settings.ini";          // файл с начальными настройками учета   
+            this.lastSavingTime = DateTime.Now;     // когда в последний раз были сохранены данные
+            this.startingDate = DateTime.MinValue;  // дата начала учета
             this.dbPath = DbPath;                   // получение пути к файлу с данными
             this.index = 0;                         // первый элемент базы имеет нулевой индекс
             this.balance = 0;                       // начальный баланс
             this.titles = new string[8]             // задание строк заголовка
+            
             {
                                 "No",
                                 "Дата записи",
@@ -86,7 +97,32 @@ namespace DBF
             };
             this.records = new Record[1];           // длина массива при инициализации - 1 запись 
 
-            Load();                                 // сразу же при создании происходит загрузка данных из файла
+            char[] seps = new char[] { ',', ' ', '=' };
+            if (File.Exists(path))       // чтение настроек учета
+            {
+                using (StreamReader iniStream = new StreamReader(path))
+                {
+
+                    while (!iniStream.EndOfStream)
+                    {
+                        string[] args = iniStream.ReadLine().Split(seps, System.StringSplitOptions.RemoveEmptyEntries);
+
+                        switch (args[0])
+                        {
+                            case "balance":
+                                this.balance = Convert.ToDouble(args[1]);
+                                break;
+                            case "date":
+                                this.startingDate = Convert.ToDateTime(args[1]);
+                                break;
+                            default:
+                                break;
+                        }
+
+                    }
+                }
+                Load();                                 // загрузка данных из файла
+            }
         }
 
 
@@ -160,7 +196,7 @@ namespace DBF
                 {
                     string[] args = dbStream.ReadLine().Split(';');
 
-                    Record temp = new Record(DateTime.Parse(args[1]), DateTime.Parse(args[2]), Convert.ToSByte(args[3]), Convert.ToDouble(args[4]), args[5], args[6], args[7]);
+                    Record temp = new Record(Convert.ToDateTime(args[1]), Convert.ToDateTime(args[2]), Convert.ToSByte(args[3]), Convert.ToDouble(args[4]), args[5], args[6], args[7]);
 
                     if (Match(temp, filter))
                         Add(temp); 
@@ -203,7 +239,7 @@ namespace DBF
                                             this.records[i].Category,
                                             this.records[i].Note);
                     File.AppendAllText(path, $"{temp}\n");
-                    this.LastSavingTime = DateTime.Now;
+                    
                 }    
             }
         }
@@ -214,6 +250,7 @@ namespace DBF
         public void Save()
         {
             Save(this.dbPath, new Template(DateTime.MinValue, DateTime.MaxValue, (sbyte)0));
+            this.lastSavingTime = DateTime.Now;
         }
         
         /// <summary>
