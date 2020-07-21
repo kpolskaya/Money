@@ -99,13 +99,15 @@ namespace DBF
         {
 
             this.CrFromDate = DateTime.MinValue;
-            this.CrEndDate = DateTime.MinValue;
+            this.CrEndDate = DateTime.MaxValue;
             this.FromDate = FromDate;
             this.EndDate = EndDate;
             this.WhatType = WhatType;
             this.WhatAcc = WhatAcc;
             this.WhatCat = WhatCat;
         }
+
+        
 
     }
 }
