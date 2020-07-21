@@ -53,6 +53,8 @@ namespace DBF
         /// <summary>
         /// Конструктор фильтра
         /// </summary>
+        /// <param name="CrFromDate">Дата создания от</param>
+        /// <param name="CrEndDate">Дата создания до</param>
         /// <param name="FromDate">От даты</param>
         /// <param name="EndDate">До даты</param>
         /// <param name="WhatType">Вид операции (расход: -1 / доход: 1 / все: 0</param>
@@ -71,10 +73,12 @@ namespace DBF
         }
 
         /// <summary>
-        /// Конструктор фильтра записей, сделанных в определенные даты
+        /// Конструктор фильтра записей, сделанных в определенные даты, с определенным типом операции
+        /// без учета всех остальных полей
         /// </summary>
         /// <param name="CrFromDate">Начальная дата создания записи</param>
         /// <param name="CrEndDate">Конечная дата создания записей</param>
+        /// <param name="WhatType">Тип операции (-1 - расходы, 1 - доход, 0 - все)</param>
         public Template(DateTime CrFromDate, DateTime CrEndDate,  sbyte WhatType)
         {
 

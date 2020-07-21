@@ -105,7 +105,7 @@ namespace DBF
         /// </summary>
         private void Load()
         {
-           Load(this.dbPath);
+           Load(this.dbPath, new Template(DateTime.MinValue, DateTime.MaxValue, (sbyte)0));
         }
 
 
@@ -117,28 +117,37 @@ namespace DBF
         /// <returns>true - если запись соответствует,  false - если нет, или такая запись отстутствует</returns>
         private bool Match(int num, Template filter)
         {
-            if (num < 0 || num >= this.index) return false;
-            if (this.records[num].Deleted) return false;
-
-            bool crDateOK = this.records[num].CrDate >= filter.CrFromDate && this.records[num].CrDate <= filter.CrEndDate;
-            bool dateOK = this.records[num].OpDate >= filter.FromDate && this.records[num].OpDate <= filter.EndDate;
-            bool typeOK = filter.WhatType == 0 || this.records[num].OpType == filter.WhatType;
-            bool accOK = filter.WhatAcc == "" || this.records[num].Account == filter.WhatAcc;
-            bool catOK = filter.WhatCat == "" || this.records[num].Category == filter.WhatCat;
-
-            return crDateOK && dateOK && typeOK && accOK && catOK;
+            return Match(this.records[num], filter);
         }
 
         #endregion
+        /// <summary>
+        /// Проверяет запись на соответствие заданным условиям
+        /// </summary>
+        /// <param name="record">запись</param>
+        /// <param name="filter">шаблон с условиями</param>
+        /// <returns></returns>
+        private bool Match(Record record, Template filter)
+        {
+            if (record.Deleted) return false;
+
+            bool crDateOK = record.CrDate >= filter.CrFromDate && record.CrDate <= filter.CrEndDate;
+            bool dateOK = record.OpDate >= filter.FromDate && record.OpDate <= filter.EndDate;
+            bool typeOK = filter.WhatType == 0 || record.OpType == filter.WhatType;
+            bool accOK = filter.WhatAcc == "" || record.Account == filter.WhatAcc;
+            bool catOK = filter.WhatCat == "" || record.Category == filter.WhatCat;
+
+            return crDateOK && dateOK && typeOK && accOK && catOK;
+        }
 
 
         #region Публичные Методы
 
         /// <summary>
-        /// Загружает в хранилище все записи из файла
+        /// Загружает из файла в хранилище все записи, соответствующие заданным условиям
         /// </summary>
         /// <param name="path">путь к файлу</param>
-        public void Load(string path)
+        public void Load(string path, Template filter)
         {
             if (!File.Exists(path)) return;
 
@@ -151,10 +160,11 @@ namespace DBF
                 {
                     string[] args = dbStream.ReadLine().Split(';');
 
+                    Record temp = new Record(DateTime.Parse(args[1]), DateTime.Parse(args[2]), Convert.ToSByte(args[3]), Convert.ToDouble(args[4]), args[5], args[6], args[7]);
 
-
-                    Add(new Record(DateTime.Parse(args[1]), DateTime.Parse(args[2]), Convert.ToSByte(args[3]), Convert.ToDouble(args[4]), args[5], args[6], args[7]));
-                }
+                    if (Match(temp, filter))
+                        Add(temp); 
+                } 
             }
 
         }
