@@ -71,7 +71,7 @@
                     <ListView.View>
                         <GridView>
 
-                            <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding OpDate}" Width="120" />
+                            <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Path=OpDate, StringFormat='dd-mm-yyyy'}" Width="120" />
                             <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding Sum}" Width="130"/>
 
                             <GridViewColumn Header="Счет" DisplayMemberBinding="{Binding Account}" Width="130" />
