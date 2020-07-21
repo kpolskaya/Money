@@ -31,6 +31,11 @@ namespace DBF
         /// </summary>
         private string[] titles;
 
+        /// <summary>
+        /// Остаток денежных средств по всем счетам
+        /// </summary>
+        private double balance;
+
         #endregion
 
         #region Свойства
@@ -50,6 +55,11 @@ namespace DBF
         /// </summary>
         public DateTime LastSavingTime { get; set; }
 
+        /// <summary>
+        /// Остаток денежных средств по всем счетам
+        /// </summary>
+        public double Balance { get { return this.balance; } }
+
         #endregion
 
 
@@ -62,6 +72,7 @@ namespace DBF
             this.LastSavingTime = DateTime.Now;     // когда в последний раз были сохранены данные
             this.dbPath = DbPath;                   // получение пути к файлу с данными
             this.index = 0;                         // первый элемент базы имеет нулевой индекс
+            this.balance = 0;                       // начальный баланс
             this.titles = new string[8]             // задание строк заголовка
             {
                                 "No",
@@ -90,44 +101,13 @@ namespace DBF
         }
 
         /// <summary>
-        ///  Загружает в структуру записи из файла
+        ///  Загружает в хранилище все записи из файла по умолчанию
         /// </summary>
         private void Load()
         {
-            if (!File.Exists(this.dbPath)) return;
-
-            using (StreamReader dbStream = new StreamReader(this.dbPath))
-            {
-                //this.titles = 
-                dbStream.ReadLine();
-
-                while (!dbStream.EndOfStream)
-                {
-                    string[] args = dbStream.ReadLine().Split(';');
-
-
-
-                    Add(new Record(DateTime.Parse(args[1]), DateTime.Parse(args[2]), Convert.ToSByte(args[3]), Convert.ToDouble(args[4]), args[5], args[6], args[7]));
-                }
-            }
-
+           Load(this.dbPath);
         }
 
-
-            /// <summary>
-            /// Добавляет текущую запись в базу данных
-            /// </summary>
-            /// <param name="currentRecord"></param>
-        public void Add(Record currentRecord)
-        {
-            if (this.index >= this.records.Length)
-                Resize();
-            this.records[index] = currentRecord;
-            this.records[index].RecNumber = index;
-            this.index++;
-        }
-
-        
 
         /// <summary>
         /// Проверяет запись с указанным номером на соответствие заданным условиям
@@ -153,13 +133,41 @@ namespace DBF
 
 
         #region Публичные Методы
+
         /// <summary>
-        /// Сохраняет в файл все записи, которые не помечены для удаления
+        /// Загружает в хранилище все записи из файла
         /// </summary>
-        public void Save()
+        /// <param name="path">путь к файлу</param>
+        public void Load(string path)
         {
-            if (File.Exists(this.dbPath))
-                File.Delete(this.dbPath);
+            if (!File.Exists(path)) return;
+
+            using (StreamReader dbStream = new StreamReader(path))
+            {
+               
+                dbStream.ReadLine();  // пропускаем заголовки
+
+                while (!dbStream.EndOfStream)
+                {
+                    string[] args = dbStream.ReadLine().Split(';');
+
+
+
+                    Add(new Record(DateTime.Parse(args[1]), DateTime.Parse(args[2]), Convert.ToSByte(args[3]), Convert.ToDouble(args[4]), args[5], args[6], args[7]));
+                }
+            }
+
+        }
+
+
+        /// <summary>
+        /// Сохраняет в файл записи, которые не помечены для удаления и сответствуют заданному условию
+        /// </summary>
+        /// <param name="path">путь к файлу</param>
+        public void Save(string path, Template filter)
+        {
+            if (File.Exists(path))
+                File.Delete(path);
             string temp = String.Format("{0};{1};{2};{3};{4};{5};{6};{7}",
                                         this.titles[0],
                                         this.titles[1],
@@ -170,24 +178,32 @@ namespace DBF
                                         this.titles[6],
                                         this.titles[7]);
 
-            File.WriteAllText(this.dbPath, $"{temp}\n");
+            File.WriteAllText(path, $"{temp}\n");
             for (int i = 0; i < index; i++)
             {
-                if (this.records[i].Deleted) continue;
-
-                temp = String.Format("{0};{1};{2};{3};{4};{5};{6};{7}",
-                                        this.records[i].RecNumber,
-                                        this.records[i].CrDate,
-                                        this.records[i].OpDate,
-                                        this.records[i].OpType,
-                                        this.records[i].OpSum,
-                                        this.records[i].Account,
-                                        this.records[i].Category,
-                                        this.records[i].Note);
-                File.AppendAllText(dbPath, $"{temp}\n");
-                this.LastSavingTime = DateTime.Now;
-
+                if (!this.records[i].Deleted && Match(i, filter))
+                {
+                    temp = String.Format("{0};{1};{2};{3};{4};{5};{6};{7}",
+                                            this.records[i].RecNumber,
+                                            this.records[i].CrDate,
+                                            this.records[i].OpDate,
+                                            this.records[i].OpType,
+                                            this.records[i].OpSum,
+                                            this.records[i].Account,
+                                            this.records[i].Category,
+                                            this.records[i].Note);
+                    File.AppendAllText(path, $"{temp}\n");
+                    this.LastSavingTime = DateTime.Now;
+                }    
             }
+        }
+
+        /// <summary>
+        /// Сохраняет в файл по умолчанию все записи, не помеченные как удаленные
+        /// </summary>
+        public void Save()
+        {
+            Save(this.dbPath, new Template(DateTime.MinValue, DateTime.MaxValue, (sbyte)0));
         }
         
         /// <summary>
@@ -198,6 +214,7 @@ namespace DBF
         {
             if (num < index && num >= 0)
                 this.records[num].Deleted = true;
+            this.balance -= this.records[num].Sum; 
         }
 
         /// <summary>
@@ -264,6 +281,21 @@ namespace DBF
                 lst[i] = this.records[selected[i]];
             }
             return lst;
+        }
+
+        /// <summary>
+        /// Добавляет текущую запись в базу данных
+        /// </summary>
+        /// <param name="currentRecord"></param>
+        public void Add(Record currentRecord)
+        {
+            if (this.index >= this.records.Length)
+                Resize();
+            this.records[this.index] = currentRecord;
+            this.records[this.index].RecNumber = index;
+            this.balance += this.records[this.index].Sum;
+            this.index++;
+            
         }
 
         #endregion
