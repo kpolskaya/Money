@@ -87,7 +87,7 @@
                                 <GridViewColumn.CellTemplate>
 
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=OpDate, StringFormat=\{0:dd.MM.yyyy\}}" HorizontalAlignment="Center" ></TextBlock>
+                                        <TextBlock Text="{Binding Path=OpDate, StringFormat=\{0:dd.MM.yyyy\}}" HorizontalAlignment="Left" ></TextBlock>
                                     </DataTemplate>
                                     
                                 </GridViewColumn.CellTemplate>
@@ -97,7 +97,7 @@
                                 <GridViewColumn.CellTemplate>
 
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Sum}" HorizontalAlignment="Center" ></TextBlock>
+                                        <TextBlock Text="{Binding Path=OpSum, StringFormat=\{0: ### ### ##0.00\}}" HorizontalAlignment="Right" ></TextBlock>
                                     </DataTemplate>
 
                                 </GridViewColumn.CellTemplate>
@@ -109,7 +109,7 @@
                                 <GridViewColumn.CellTemplate>
 
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Account}" HorizontalAlignment="Right" ></TextBlock>
+                                        <TextBlock Text="{Binding Account}" HorizontalAlignment="Left" ></TextBlock>
                                     </DataTemplate>
 
                                 </GridViewColumn.CellTemplate>
@@ -119,7 +119,7 @@
                                 <GridViewColumn.CellTemplate>
 
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Category}" HorizontalAlignment="Right" ></TextBlock>
+                                        <TextBlock Text="{Binding Category}" HorizontalAlignment="Left" ></TextBlock>
                                     </DataTemplate>
 
                                 </GridViewColumn.CellTemplate>
@@ -130,7 +130,7 @@
                                 <GridViewColumn.CellTemplate>
 
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Note}" HorizontalAlignment="Right" ></TextBlock>
+                                        <TextBlock Text="{Binding Note}" HorizontalAlignment="Left" ></TextBlock>
                                     </DataTemplate>
 
                                 </GridViewColumn.CellTemplate>
@@ -215,7 +215,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Horizontal" Grid.Row ="1" Grid.ColumnSpan="3" Height="30" Margin="5,5,5,10" >
-                    <DatePicker x:Name="dp1R" Margin="30,0,5,0" Width="100" SelectedDate="01.01.2020"/>
+                    <DatePicker x:Name="dp1R" Margin="30,0,5,0" Width="100" />
                     <DatePicker x:Name="dp2R" Margin="5,0,5,0" Width="100"/>
                     <ComboBox Name ="typeR" Margin="5,0,5,0" Width="100" ToolTipService.Placement="Mouse" ToolTip="Выберите категорию" >
                         <TextBlock></TextBlock>

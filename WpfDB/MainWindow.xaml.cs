@@ -45,6 +45,7 @@ namespace WpfDB
             catP.ItemsSource = catsP;
             catR.ItemsSource = all.Concat(cats.Concat(catsP));
             dp2R.SelectedDate = DateTime.Today;
+            dp1R.SelectedDate = db.StartingDate;
            
         }
 

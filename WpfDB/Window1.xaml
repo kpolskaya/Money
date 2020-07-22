@@ -12,7 +12,7 @@
             <ColumnDefinition Width="110"/>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -26,7 +26,7 @@
                      Text="Дата" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"    />
         <DatePicker x:Name="dp1" Grid.Row ="1" Grid.Column="0" Height="25" SelectedDate=""
                      Width="100"   HorizontalAlignment="Right" VerticalAlignment="Top"/>
-        
+
         <TextBox  Grid.Row ="0" Grid.Column="1" 
                      Width="100"  Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"  HorizontalContentAlignment="Center"
                      Text="Сумма" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"   />
@@ -43,18 +43,17 @@
         </ComboBox>
 
         <TextBox  Grid.Row ="0" Grid.Column="3" 
-                     Width="130"  Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"  HorizontalContentAlignment="Center"
+                     Width="150"  Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"  HorizontalContentAlignment="Center"
                      Text="Категория" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"   />
-        <ComboBox Name ="Cat" Grid.Row ="1" Grid.Column="3" VerticalAlignment="Top" Height="25" Width="130"  ToolTipService.Placement="Mouse" ToolTip="Выберите счет" >
+        <ComboBox Name ="Cat" Grid.Row ="1" Grid.Column="3" VerticalAlignment="Top" Height="25" Width="150"  ToolTipService.Placement="Mouse" ToolTip="Выберите счет" >
 
         </ComboBox>
 
         <TextBox  Grid.Row ="0" Grid.Column="4" 
                      Width="305"  Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"  HorizontalContentAlignment="Center"
                      Text="Примечания" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"   />
-        <TextBox x:Name="Note" Grid.Row ="1" Grid.Column="4" 
-                     Width="305"  Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <TextBox x:Name="Note" Grid.Row ="1" Grid.Column="4"  Height="25" VerticalAlignment="Top" Margin="0,0,-104,0"/>
 
-       
+
     </Grid>
 </Window>
