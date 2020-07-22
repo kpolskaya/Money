@@ -198,10 +198,10 @@ namespace WpfDB
         public void listViewR_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var item = (sender as ListView).SelectedItem;
+            opR = (Record)item;
             if (item != null)
             {
                 Window1 taskWindow = new Window1();
-                opR = (Record)item; 
                 taskWindow.Show();
                
             }

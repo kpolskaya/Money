@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:WpfDB"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    
     <TabControl HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch">
+        
         <TabItem Header="Программа учета личных финансов">
             <Grid Background="#FFE5E5E5">
                 <Grid.ColumnDefinitions>
@@ -66,17 +74,69 @@
                 <Button Content="Add" HorizontalAlignment="Center" Margin="0,15,15,0" VerticalAlignment="Top" Width="75" Height="20" Click="Button_Click_1" Grid.Row="0" Grid.Column="0"/>
 
                 <ListView x:Name ="listView" HorizontalAlignment = "Left"  Margin="10" Height="240"  Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="5" >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
 
-                 
                     <ListView.View>
                         <GridView>
 
-                            <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Path=OpDate, StringFormat='dd-mm-yyyy'}" Width="120" />
-                            <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding Sum}" Width="130"/>
+                            <GridViewColumn Header="Дата" Width="120">
+                                <GridViewColumn.CellTemplate>
 
-                            <GridViewColumn Header="Счет" DisplayMemberBinding="{Binding Account}" Width="130" />
-                            <GridViewColumn Header="Категория" DisplayMemberBinding="{Binding Category}" Width="130" />
-                            <GridViewColumn Header="Примечание" DisplayMemberBinding="{Binding Note}" Width="270" />
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=OpDate, StringFormat=\{0:dd.MM.yyyy\}}" HorizontalAlignment="Center" ></TextBlock>
+                                    </DataTemplate>
+                                    
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Сумма" Width="130">
+                                <GridViewColumn.CellTemplate>
+
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Sum}" HorizontalAlignment="Center" ></TextBlock>
+                                    </DataTemplate>
+
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!--<GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Path=OpDate, StringFormat='dd-mm-yyyy'}" Width="120" />-->
+                            <!--<GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding Sum}" Width="130"/>-->
+                            <GridViewColumn Header="Счет" Width="130">
+                                <GridViewColumn.CellTemplate>
+
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Account}" HorizontalAlignment="Right" ></TextBlock>
+                                    </DataTemplate>
+
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <!--<GridViewColumn Header="Счет" DisplayMemberBinding="{Binding Account}" Width="130" />-->
+                            <GridViewColumn Header="Категория" Width="130">
+                                <GridViewColumn.CellTemplate>
+
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Category}" HorizontalAlignment="Right" ></TextBlock>
+                                    </DataTemplate>
+
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!--<GridViewColumn Header="Категория" DisplayMemberBinding="{Binding Category}" Width="130" />-->
+                            <GridViewColumn Header="Примечание" Width="270">
+                                <GridViewColumn.CellTemplate>
+
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Note}" HorizontalAlignment="Right" ></TextBlock>
+                                    </DataTemplate>
+
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!--<GridViewColumn Header="Примечание" DisplayMemberBinding="{Binding Note}" Width="270" />-->
 
                         </GridView>
 
