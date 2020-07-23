@@ -34,17 +34,38 @@ namespace WpfDB
             opdate = MainWindow.opR.OpDate;
             acc = MainWindow.opR.Account;
             dp1.SelectedDate = opdate;
-            Sum.Text = Convert.ToString(MainWindow.opR.OpSum);
-            Cat.SelectedItem = MainWindow.opR.Category;
+            sumR.Text = Convert.ToString(MainWindow.opR.OpSum);
+            catR.SelectedItem = MainWindow.opR.Category;
            // Cat.Text = MainWindow.opR.Category;
-            Note.Text =  MainWindow.opR.Note;
+            noteR.Text =  MainWindow.opR.Note;
             //acc.ItemsSource = accs;
             //accP.ItemsSource = accs;
             accR.ItemsSource = accs;
-            Cat.ItemsSource = all.Concat(cats.Concat(catsP));
+            if (MainWindow.opR.OpType == 1)
+            {
+                catR.ItemsSource = catsP;
+            }
+            else
+            {
+                catR.ItemsSource = cats;
+            }
+            
             accR.SelectedItem = MainWindow.opR.Account;
             //catP.ItemsSource = catsP;
             //catR.ItemsSource = all.Concat(cats.Concat(catsP));
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.db.Delete(MainWindow.opR.RecNumber);
+            MainWindow.db.Add(new Record(Convert.ToDateTime(dp1.SelectedDate.Value.Date.ToShortDateString()), (MainWindow.opR.OpType),
+                Convert.ToDouble(sumR.Text), accR.Text, catR.Text, noteR.Text));
+            sumR.Text = "0";
+            accR.Text = "";
+            catR.Text = "";
+            noteR.Text = "";
+            this.Close();
 
         }
     }

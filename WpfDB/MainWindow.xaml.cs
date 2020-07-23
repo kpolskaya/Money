@@ -24,7 +24,7 @@ namespace WpfDB
     public partial class MainWindow : Window
     {
 
-        Repository db;
+        public static Repository db;
         public static Record opR = new Record(); // запись для редактирования
         string[] accs = new string[] { "карта", "наличные", "кредит" };
         string[] cats = new string[] { "продукты", "дом", "коммунальные платежи","животные","отдых","погашение кредита","инвестиции","одежда и обувь","прочее" };
@@ -208,5 +208,6 @@ namespace WpfDB
             }
         }
 
+      
     }
 }
