@@ -15,11 +15,12 @@ namespace WpfDB
     /// </summary>
     public partial class App : Application
     {
+        public iniValues Settings;
         protected override void OnStartup(StartupEventArgs e)
         {
             string iniPath = @"settings.ini";
             
-            iniValues Settings;
+            
             if (File.Exists(iniPath))
             { 
                 Settings = new iniValues(@"settings.ini");
