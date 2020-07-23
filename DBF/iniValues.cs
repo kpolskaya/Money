@@ -39,9 +39,9 @@ namespace DBF
         {
             this.StartingDate = Convert.ToDateTime($"01.01.{DateTime.Now : yyyy}");
             this.Balance = 0;
-            this.Accounts = "";
-            this.InCategories = "";
-            this.OutCategories = "";
+            this.Accounts = " ";
+            this.InCategories = " ";
+            this.OutCategories = " ";
 
             if(File.Exists(IniPath))
             {

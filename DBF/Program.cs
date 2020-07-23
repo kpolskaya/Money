@@ -10,11 +10,28 @@ namespace DBF
         static void Main(string[] args)
         {
             string path = @"data.csv";
-            iniValues Settings = new iniValues(@"settings.ini");
-            Settings.Save(@"settings.ini");
+            string iniPath = @"settings.ini";
+            iniValues Settings;
+            if (File.Exists(iniPath))
+                Settings = new iniValues(@"settings.ini");
+            else
+            {
+                DateTime date = Convert.ToDateTime("02.01.2020");
+                double balance = 9999.99;
+                string accounts = "наличные, карта, другое";
+                string inCats = "зарплата, подарки, находки, украдено, кредиты, неизвестно";
+                string outCats = "продукты, дом, машина, животные, развлечения, инвестиции, электроника, обучение, украдено, потери, комиссии, налоги, здоровье, кредиты, неизвестно";
+                Settings = new iniValues(date, balance, accounts, inCats, outCats);
+                Settings.Save(@"settings.ini");
+            }
+            
+            
 
             Repository db = new Repository(path);
-            double newBalance = 10000;
+            double newBalance = 9999.99;
+            double income = 0;
+            double outflow = 0;
+
             Console.WriteLine($"Файл {path} открыт успешно.");
 
                       
@@ -33,19 +50,25 @@ namespace DBF
 
             foreach (var item in lastRecords)
             {
+                if (item.OpType > 0)
+                    income += item.OpSum;
+                else
+                    outflow += item.OpSum;
+
                 newBalance += item.Sum;
                 Console.WriteLine("{0};{1};{2};{3};{4};{5};{6};{7}",
                                         item.RecNumber,
                                         item.CrDate,
                                         item.OpDate,
                                         item.OpType,
-                                        item.OpSum,
+                                        item.Sum,
                                         item.Account,
                                         item.Category,
                                         item.Note);
             }
 
-            Console.WriteLine($"Balance = {db.Balance}, but counted balance is {newBalance} what makes a difference of {db.Balance - newBalance}");
+            Console.WriteLine($"initial balance = {Settings.Balance}; total income = {income}; total outflow = {outflow}");
+            Console.WriteLine($"Final balance = {db.Balance}, but counted balance is {newBalance} what makes a difference of {db.Balance - newBalance : 0.00}");
             Console.WriteLine($"Starting date is {db.StartingDate}");
             Console.WriteLine($"Last saving at {db.LastSavingTime}");
 

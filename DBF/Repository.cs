@@ -99,8 +99,8 @@ namespace DBF
             };
             this.records = new Record[1];           // длина массива при инициализации - 1 запись 
 
-            char[] seps = new char[] { ',', ' ', '=' };
-            if (File.Exists(path))       // чтение настроек учета
+            char[] seps = new char[] { ' ', '=' };
+            if (File.Exists(path))                  // чтение настроек учета
             {
                 using (StreamReader iniStream = new StreamReader(path))
                 {
