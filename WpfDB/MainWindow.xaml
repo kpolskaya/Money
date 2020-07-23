@@ -12,9 +12,11 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
-    
+
     <TabControl HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch">
-        
+
+
+
         <TabItem Header="Программа учета личных финансов">
             <Grid Background="#FFE5E5E5">
                 <Grid.ColumnDefinitions>
@@ -33,8 +35,44 @@
                     <Run Text="Куда деваются деньги?"/><LineBreak/><Run FontSize="14" Text="учет личных финансов"/></TextBlock>
 
             </Grid>
-            
+
         </TabItem>
+
+        <TabItem Header="Начало учета">
+            <Grid Background="#FFE5E5E5" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/> 
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+
+
+
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Height="30" Text="Введите категории прихода"/>
+                    <TextBox Name="i0" Height="20" Width="120"/>
+                    <TextBox Name="i1" Height="20" Width="120"/>
+                    <TextBox Name="i2" Height="20" Width="120"/>
+                    <TextBox Name="i3" Height="20" Width="120"/>
+                    <TextBox Name="i4" Height="20" Width="120"/>
+                    <TextBox Name="i5" Height="20" Width="120"/>
+                    <TextBox Name="i6" Height="20" Width="120"/>
+                    <TextBox Name="i7" Height="20" Width="120"/>
+                    <TextBox Name="i8" Height="20" Width="120"/>
+                    <TextBox Name="i9" Height="20" Width="120"/>
+                   
+                </StackPanel>
+             
+                <TextBlock HorizontalAlignment="Left" Margin="52,29,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="550,37,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+
+
+            </Grid>
+
+        </TabItem>
+
+
         <TabItem Header="Расход">
 
 
@@ -55,21 +93,21 @@
                 </Grid.RowDefinitions>
 
                 <DatePicker x:Name="dp1" Margin="10"  Grid.Row ="1" Grid.Column="0"  Width="100"/>
-                
-                    <TextBox x:Name="sum" Grid.Row ="1" Grid.Column="1" 
+
+                <TextBox x:Name="sum" Grid.Row ="1" Grid.Column="1" 
                       Margin="10" Width="100"
                      PreviewTextInput="sumOp_PreviewTextInput" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"  />
 
                 <ComboBox Name ="acc" Margin="10" Width="100" ToolTipService.Placement="Mouse" ToolTip="Выберите счет" Grid.Row ="1" Grid.Column="2"  >
 
-                    </ComboBox>
+                </ComboBox>
                 <ComboBox Name ="cat" Margin="10" Width="100" ToolTipService.Placement="Mouse" ToolTip="Выберите категорию" Grid.Row ="1" Grid.Column="3"  >
 
-                    </ComboBox>
+                </ComboBox>
                 <TextBox x:Name="note"  Margin="10" Width="100" HorizontalAlignment="Left" 
                          ToolTipService.Placement="Mouse" ToolTip="Введите примечания" RenderTransformOrigin="0.5,0.5" Grid.Row ="1" Grid.Column="4" />
 
-              
+
 
                 <Button Content="Add" HorizontalAlignment="Center" Margin="0,15,15,0" VerticalAlignment="Top" Width="75" Height="20" Click="Button_Click_1" Grid.Row="0" Grid.Column="0"/>
 
@@ -89,7 +127,7 @@
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Path=OpDate, StringFormat=\{0:dd.MM.yyyy\}}" HorizontalAlignment="Left" ></TextBlock>
                                     </DataTemplate>
-                                    
+
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
