@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace DBF
 {
-
+    /// <summary>
+    /// Хранилище записей
+    /// </summary>
     public struct Repository
     {
         #region Поля
@@ -212,8 +214,7 @@ namespace DBF
         /// <param name="path">путь к файлу</param>
         public void Save(string path, Template filter)
         {
-            if (File.Exists(path))
-                File.Delete(path);
+           
             string temp = String.Format("{0};{1};{2};{3};{4};{5};{6};{7}",
                                         this.titles[0],
                                         this.titles[1],

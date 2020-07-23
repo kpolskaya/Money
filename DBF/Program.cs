@@ -10,6 +10,9 @@ namespace DBF
         static void Main(string[] args)
         {
             string path = @"data.csv";
+            iniValues Settings = new iniValues(@"settings.ini");
+            Settings.Save(@"settings.ini");
+
             Repository db = new Repository(path);
             double newBalance = 10000;
             Console.WriteLine($"Файл {path} открыт успешно.");
