@@ -41,16 +41,19 @@
         <TabItem Header="Начало учета">
             <Grid Background="#FFE5E5E5" Margin="5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="130"/> 
-
+                    <ColumnDefinition Width="266*"/>
+                    <ColumnDefinition Width="250*"/>
+                    <ColumnDefinition Width="266*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="90"/>
 
-
+                    <RowDefinition Height="*"/>
 
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Height="30" Text="Введите категории прихода"/>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="160" Grid.Row ="1" Grid.Column="0" >
+                    <TextBlock Height="30" Text="Введите категории прихода" HorizontalAlignment="Center"/>
                     <TextBox Name="i0" Height="20" Width="120"/>
                     <TextBox Name="i1" Height="20" Width="120"/>
                     <TextBox Name="i2" Height="20" Width="120"/>
@@ -61,12 +64,53 @@
                     <TextBox Name="i7" Height="20" Width="120"/>
                     <TextBox Name="i8" Height="20" Width="120"/>
                     <TextBox Name="i9" Height="20" Width="120"/>
-                   
+ 
                 </StackPanel>
-             
-                <TextBlock HorizontalAlignment="Left" Margin="52,29,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-                <TextBlock HorizontalAlignment="Left" Margin="550,37,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
 
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="160" Grid.Row ="1" Grid.Column="1" >
+                    <TextBlock Height="30" Text="Введите категории расхода" HorizontalAlignment="Center" />
+                    <TextBox Name="o0" Height="20" Width="120"/>
+                    <TextBox Name="o1" Height="20" Width="120"/>
+                    <TextBox Name="o2" Height="20" Width="120"/>
+                    <TextBox Name="o3" Height="20" Width="120"/>
+                    <TextBox Name="o4" Height="20" Width="120"/>
+                    <TextBox Name="o5" Height="20" Width="120"/>
+                    <TextBox Name="o6" Height="20" Width="120"/>
+                    <TextBox Name="o7" Height="20" Width="120"/>
+                    <TextBox Name="o8" Height="20" Width="120"/>
+                    <TextBox Name="o9" Height="20" Width="120"/>
+
+                </StackPanel>
+
+                <ListBox Name ="acclist" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="160" Grid.Row ="1" Grid.Column="2" >
+                    <TextBlock Height="30" Text="Введите счета" HorizontalAlignment="Center"/>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="120"/>
+                    </ListBoxItem>
+                    <TextBox  Height="20" Width="120"/>
+                    <TextBox  Height="20" Width="120"/>
+                    <TextBox  Height="20" Width="120"/>
+                    <TextBox  Height="20" Width="120"/>
+                    <TextBox  Height="20" Width="120"/>
+                    <TextBox  Height="20" Width="120"/>
+                    <TextBox  Height="20" Width="120"/>
+                    <TextBox  Height="20" Width="120"/>
+                    <TextBox  Height="20" Width="120"/>
+
+                </ListBox>
+
+                <StackPanel Orientation="Vertical" Grid.Row ="0" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                    <TextBlock  Text="Введите дату начала учета:" Height="20" Width="150" />
+                    <DatePicker Name="bdate"  Height="25" Width="150" Text="Введите дату" />
+
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Row ="0" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                    <TextBlock  Text="Введите остаток средств:" Height="20" Width="150" />
+                    <TextBox Name="bsaldo" Height="25" Width="150" Text="Введите сумму" />
+
+                </StackPanel>
+                <Button Content="Записать" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="30" Width="150" Click="Button_Click_4"/>
 
             </Grid>
 

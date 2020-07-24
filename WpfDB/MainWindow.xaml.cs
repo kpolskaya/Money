@@ -208,6 +208,18 @@ namespace WpfDB
             }
         }
 
-      
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            DateTime date = Convert.ToDateTime(Convert.ToDateTime(bdate.SelectedDate.Value.Date.ToShortDateString()));
+            double balance = Convert.ToDouble(bsaldo.Text);
+            //string accounts = "";
+            //string x = (string)acclist.Items.GetItemAt(1);
+            //accounts += x;
+            
+           
+            //string inCats = "зарплата, подарки, находки, украдено, кредиты, неизвестно";
+            //string outCats = "продукты, дом, машина, животные, развлечения, инвестиции, электроника, обучение, украдено, потери, комиссии, налоги, здоровье, кредиты, неизвестно";
+           
+        }
     }
 }
