@@ -36,7 +36,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="iniValues.cs" />
+    <Compile Include="IniValues.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Record.cs" />
     <Compile Include="Repository.cs" />

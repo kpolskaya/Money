@@ -10,7 +10,7 @@ namespace DBF
     /// <summary>
     /// Структура для начальных параметров ведения учета
     /// </summary>
-    public class iniValues
+    public struct IniValues
     {
         public DateTime StartingDate { get; }
 
@@ -24,42 +24,47 @@ namespace DBF
 
         //public string IniPath { get; }
 
-        public iniValues(DateTime StartingDate, double Balance, string Accounts, string InCategories, string OutCategories)
+        public IniValues(DateTime StartingDate, double Balance, string Accounts, string InCategories, string OutCategories)
         {
             this.StartingDate = StartingDate;
             this.Balance = Balance;
             this.Accounts = Accounts;
             this.InCategories = InCategories;
             this.OutCategories = OutCategories;
-            //this.IniPath = IniPath;
+
+            //Array.Copy(Accounts, this.Accounts, Accounts.Length);
+            //Array.Copy(InCategories, this.InCategories, InCategories.Length);
+            //Array.Copy(OutCategories, this.OutCategories, OutCategories.Length);
+
 
         }
 
-        public iniValues(string IniPath)
+        public IniValues(string IniPath)
         {
             this.StartingDate = Convert.ToDateTime($"01.01.{DateTime.Now : yyyy}");
             this.Balance = 0;
-            this.Accounts = " ";
-            this.InCategories = " ";
-            this.OutCategories = " ";
+            this.Accounts = "не задано";
+            this.InCategories = "не задано";
+            this.OutCategories ="не задано";
 
             if(File.Exists(IniPath))
             {
-                char[] seps = new char[] {' ', '=' };
+                char[] seps = new char[] {'='};
+                //char[] commas = new char[] { ',' };
                 using (StreamReader iniStream = new StreamReader(IniPath))
                 {
 
                     while (!iniStream.EndOfStream)
                     {
-                        string[] args = iniStream.ReadLine().Split(seps, System.StringSplitOptions.RemoveEmptyEntries);
+                        string[] args = iniStream.ReadLine().Split(seps, StringSplitOptions.RemoveEmptyEntries);
 
                         switch (args[0])
                         {
                             case "balance":
-                                this.Balance = Convert.ToDouble(args[1]);
+                                this.Balance = Convert.ToDouble(args[1].TrimStart(' '));
                                 break;
                             case "date":
-                                this.StartingDate = Convert.ToDateTime(args[1]);
+                                this.StartingDate = Convert.ToDateTime(args[1].TrimStart(' '));
                                 break;
                             case "accounts":
                                 this.Accounts = args[1];
@@ -83,11 +88,11 @@ namespace DBF
         {
             using (StreamWriter iniFile = new StreamWriter(IniPath, false))
             {
-                iniFile.WriteLine($"date = {this.StartingDate: dd.MM.yyyy}");
-                iniFile.WriteLine($"balance = {this.Balance}");                     // нужно проверить формат записи, чтобы потом не было проблем с парсингом обратно!
-                iniFile.WriteLine($"accounts = {this.Accounts}");
-                iniFile.WriteLine($"inCategories = {this.InCategories}");
-                iniFile.WriteLine($"outCategories = {this.OutCategories}");
+                iniFile.WriteLine($"date={this.StartingDate:dd.MM.yyyy}");
+                iniFile.WriteLine($"balance={this.Balance}");                     // нужно проверить формат записи, чтобы потом не было проблем с парсингом обратно!
+                iniFile.WriteLine($"accounts={this.Accounts}");
+                iniFile.WriteLine($"inCategories={this.InCategories}");
+                iniFile.WriteLine($"outCategories={this.OutCategories}");
 
             }
         }

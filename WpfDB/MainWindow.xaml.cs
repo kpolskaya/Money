@@ -26,9 +26,9 @@ namespace WpfDB
 
         public static Repository db;
         public static Record opR = new Record(); // запись для редактирования
-        public static string[] accs = new string[11];
-        public static string[] cats = new string[11];
-        public static string[] catsP = new string[11];
+        public static string[] accs = App.Settings.Accounts.Split(',');
+        public static string[] cats = App.Settings.OutCategories.Split(',');
+        public static string[] catsP = App.Settings.InCategories.Split(',');
         string[] all = new string[] {""};
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;

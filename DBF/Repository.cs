@@ -99,7 +99,7 @@ namespace DBF
             };
             this.records = new Record[1];           // длина массива при инициализации - 1 запись 
 
-            char[] seps = new char[] { ' ', '=' };
+            char[] seps = new char[] {'='};
             if (File.Exists(path))                  // чтение настроек учета
             {
                 using (StreamReader iniStream = new StreamReader(path))
@@ -107,7 +107,7 @@ namespace DBF
 
                     while (!iniStream.EndOfStream)
                     {
-                        string[] args = iniStream.ReadLine().Split(seps, System.StringSplitOptions.RemoveEmptyEntries);
+                        string[] args = iniStream.ReadLine().Split(seps);
 
                         switch (args[0])
                         {

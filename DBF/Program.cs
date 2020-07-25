@@ -11,17 +11,17 @@ namespace DBF
         {
             string path = @"data.csv";
             string iniPath = @"settings.ini";
-            iniValues Settings;
+            IniValues Settings;
             if (File.Exists(iniPath))
-                Settings = new iniValues(@"settings.ini");
+                Settings = new IniValues(@"settings.ini");
             else
             {
                 DateTime date = Convert.ToDateTime("02.01.2020");
                 double balance = 9999.99;
-                string accounts = "наличные, карта, другое";
-                string inCats = "зарплата, подарки, находки, украдено, кредиты, неизвестно";
-                string outCats = "продукты, дом, машина, животные, развлечения, инвестиции, электроника, обучение, украдено, потери, комиссии, налоги, здоровье, кредиты, неизвестно";
-                Settings = new iniValues(date, balance, accounts, inCats, outCats);
+                string accounts = "наличные,карта,другое";
+                string inCats = "зарплата,подарки,находки,украдено,кредиты,неизвестно";
+                string outCats = "продукты,дом,машина,животные,развлечения,инвестиции,электроника,обучение,украдено,потери,комиссии,налоги,здоровье,кредиты,неизвестно";
+                Settings = new IniValues(date, balance, accounts, inCats, outCats);
                 Settings.Save(@"settings.ini");
             }
             
