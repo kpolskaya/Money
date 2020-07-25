@@ -64,7 +64,7 @@
                     <TextBox Name="i7" Height="20" Width="120"/>
                     <TextBox Name="i8" Height="20" Width="120"/>
                     <TextBox Name="i9" Height="20" Width="120"/>
-
+ 
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="160" Grid.Row ="1" Grid.Column="1" >
@@ -124,8 +124,7 @@
                 <Grid.ColumnDefinitions>
 
                     <ColumnDefinition Width="130"/>
-                    <ColumnDefinition Width="103.58"/>
-                    <ColumnDefinition Width="26.42"/>
+                    <ColumnDefinition Width="130"/>
                     <ColumnDefinition Width="130"/>
                     <ColumnDefinition Width="130"/>
                     <ColumnDefinition Width="*"/>
@@ -137,26 +136,26 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <DatePicker x:Name="dp1" Margin="15,10"  Grid.Row ="1" Grid.Column="0"  Width="100"/>
+                <DatePicker x:Name="dp1" Margin="10"  Grid.Row ="1" Grid.Column="0"  Width="100"/>
 
                 <TextBox x:Name="sum" Grid.Row ="1" Grid.Column="1" 
-                      Margin="15,10" Width="100"
-                     PreviewTextInput="sumOp_PreviewTextInput" ToolTipService.Placement="Mouse" ToolTip="Введите сумму" Grid.ColumnSpan="2"  />
+                      Margin="10" Width="100"
+                     PreviewTextInput="sumOp_PreviewTextInput" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"  />
 
-                <ComboBox Name ="acc" Margin="15,10" Width="100" ToolTipService.Placement="Mouse" ToolTip="Выберите счет" Grid.Row ="1" Grid.Column="3"  >
-
-                </ComboBox>
-                <ComboBox Name ="cat" Margin="15,10" Width="100" ToolTipService.Placement="Mouse" ToolTip="Выберите категорию" Grid.Row ="1" Grid.Column="4"  >
+                <ComboBox Name ="acc" Margin="10" Width="100" ToolTipService.Placement="Mouse" ToolTip="Выберите счет" Grid.Row ="1" Grid.Column="2"  >
 
                 </ComboBox>
-                <TextBox x:Name="note"  Margin="10,10,0,10" Width="100" HorizontalAlignment="Left" 
-                         ToolTipService.Placement="Mouse" ToolTip="Введите примечания" RenderTransformOrigin="0.5,0.5" Grid.Row ="1" Grid.Column="5" />
+                <ComboBox Name ="cat" Margin="10" Width="100" ToolTipService.Placement="Mouse" ToolTip="Выберите категорию" Grid.Row ="1" Grid.Column="3"  >
+
+                </ComboBox>
+                <TextBox x:Name="note"  Margin="10" Width="100" HorizontalAlignment="Left" 
+                         ToolTipService.Placement="Mouse" ToolTip="Введите примечания" RenderTransformOrigin="0.5,0.5" Grid.Row ="1" Grid.Column="4" />
 
 
 
-                <Button Content="Add" HorizontalAlignment="Center" Margin="20,15,35,0" VerticalAlignment="Top" Width="75" Height="20" Click="Button_Click_1" Grid.Row="0" Grid.Column="0"/>
+                <Button Content="Add" HorizontalAlignment="Center" Margin="0,15,15,0" VerticalAlignment="Top" Width="75" Height="20" Click="Button_Click_1" Grid.Row="0" Grid.Column="0"/>
 
-                <ListView x:Name ="listView" HorizontalAlignment = "Left"  Margin="10,10,0,0" Height="240"  Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="6" >
+                <ListView x:Name ="listView" HorizontalAlignment = "Left"  Margin="10" Height="240"  Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="5" >
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
