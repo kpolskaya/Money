@@ -52,51 +52,112 @@
 
                 </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="160" Grid.Row ="1" Grid.Column="0" >
+                <ListBox Name ="catsPlist" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="200" Grid.Row ="1" Grid.Column="0" >
                     <TextBlock Height="30" Text="Введите категории прихода" HorizontalAlignment="Center"/>
-                    <TextBox Name="i0" Height="20" Width="120"/>
-                    <TextBox Name="i1" Height="20" Width="120"/>
-                    <TextBox Name="i2" Height="20" Width="120"/>
-                    <TextBox Name="i3" Height="20" Width="120"/>
-                    <TextBox Name="i4" Height="20" Width="120"/>
-                    <TextBox Name="i5" Height="20" Width="120"/>
-                    <TextBox Name="i6" Height="20" Width="120"/>
-                    <TextBox Name="i7" Height="20" Width="120"/>
-                    <TextBox Name="i8" Height="20" Width="120"/>
-                    <TextBox Name="i9" Height="20" Width="120"/>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
  
-                </StackPanel>
+                    
+                </ListBox>
 
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="160" Grid.Row ="1" Grid.Column="1" >
+                <ListBox Name ="catslist" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="200" Grid.Row ="1" Grid.Column="1" >
                     <TextBlock Height="30" Text="Введите категории расхода" HorizontalAlignment="Center" />
-                    <TextBox Name="o0" Height="20" Width="120"/>
-                    <TextBox Name="o1" Height="20" Width="120"/>
-                    <TextBox Name="o2" Height="20" Width="120"/>
-                    <TextBox Name="o3" Height="20" Width="120"/>
-                    <TextBox Name="o4" Height="20" Width="120"/>
-                    <TextBox Name="o5" Height="20" Width="120"/>
-                    <TextBox Name="o6" Height="20" Width="120"/>
-                    <TextBox Name="o7" Height="20" Width="120"/>
-                    <TextBox Name="o8" Height="20" Width="120"/>
-                    <TextBox Name="o9" Height="20" Width="120"/>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
 
-                </StackPanel>
 
-                <ListBox Name ="acclist" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="160" Grid.Row ="1" Grid.Column="2" >
+                    </ListBox>
+
+                    <ListBox Name ="acclist" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="200" Grid.Row ="1" Grid.Column="2" >
                     <TextBlock Height="30" Text="Введите счета" HorizontalAlignment="Center"/>
                     <ListBoxItem>
-                        <TextBox  Height="20" Width="120"/>
+                        <TextBox  Height="20" Width="160"/>
                     </ListBoxItem>
-                    <TextBox  Height="20" Width="120"/>
-                    <TextBox  Height="20" Width="120"/>
-                    <TextBox  Height="20" Width="120"/>
-                    <TextBox  Height="20" Width="120"/>
-                    <TextBox  Height="20" Width="120"/>
-                    <TextBox  Height="20" Width="120"/>
-                    <TextBox  Height="20" Width="120"/>
-                    <TextBox  Height="20" Width="120"/>
-                    <TextBox  Height="20" Width="120"/>
-
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <TextBox  Height="20" Width="160"/>
+                    </ListBoxItem>
+ 
+                    
                 </ListBox>
 
                 <StackPanel Orientation="Vertical" Grid.Row ="0" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" >

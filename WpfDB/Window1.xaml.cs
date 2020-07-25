@@ -23,9 +23,9 @@ namespace WpfDB
     {
         string acc;
         DateTime opdate;
-        string[] accs = new string[] { "карта", "наличные", "кредит" };
-        string[] cats = new string[] { "продукты", "дом", "коммунальные платежи", "животные", "отдых", "погашение кредита", "инвестиции", "одежда и обувь", "прочее" };
-        string[] catsP = new string[] { "зарплата", "подработка", "проценты от инвестиций", "благотворительность", "воровство", "подарки и находки", "прочее" };
+        string[] accs = MainWindow.accs;
+        string[] cats = MainWindow.cats;
+        string[] catsP = MainWindow.catsP;
         string[] all = new string[] { "" };
 
         public Window1()

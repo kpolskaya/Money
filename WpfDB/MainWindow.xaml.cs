@@ -26,9 +26,9 @@ namespace WpfDB
 
         public static Repository db;
         public static Record opR = new Record(); // запись для редактирования
-        string[] accs = new string[] { "карта", "наличные", "кредит" };
-        string[] cats = new string[] { "продукты", "дом", "коммунальные платежи","животные","отдых","погашение кредита","инвестиции","одежда и обувь","прочее" };
-        string[] catsP = new string[] { "зарплата", "подработка", "проценты от инвестиций", "благотворительность", "воровство", "подарки и находки", "прочее" };
+        public static string[] accs = new string[11];
+        public static string[] cats = new string[11];
+        public static string[] catsP = new string[11];
         string[] all = new string[] {""};
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
@@ -212,14 +212,44 @@ namespace WpfDB
         {
             DateTime date = Convert.ToDateTime(Convert.ToDateTime(bdate.SelectedDate.Value.Date.ToShortDateString()));
             double balance = Convert.ToDouble(bsaldo.Text);
-            //string accounts = "";
-            //string x = (string)acclist.Items.GetItemAt(1);
-            //accounts += x;
-            
-           
-            //string inCats = "зарплата, подарки, находки, украдено, кредиты, неизвестно";
-            //string outCats = "продукты, дом, машина, животные, развлечения, инвестиции, электроника, обучение, украдено, потери, комиссии, налоги, здоровье, кредиты, неизвестно";
+
+            //string x = (string)acclist.Items[1];
+            //
+
+            for (int i = 1; i < 11; i++)
+            {
+                string x = (acclist.Items.GetItemAt(i).ToString());
+                if (x != $"System.Windows.Controls.ListBoxItem")
+                {
+                    accs[i] = x.Substring(37);
+                }
+                else
+                    accs[i] = null;
+            }
+
+            for (int i = 1; i < 11; i++)
+            {
+                string x = (catslist.Items.GetItemAt(i).ToString());
+                if (x != $"System.Windows.Controls.ListBoxItem")
+                {
+                    cats[i] = x.Substring(37);
+                }
+                else
+                    cats[i] = null;
+            }
+
+            for (int i = 1; i < 11; i++)
+            {
+                string x = (catsPlist.Items.GetItemAt(i).ToString());
+                if (x != $"System.Windows.Controls.ListBoxItem")
+                {
+                    catsP[i] = x.Substring(37);
+                }
+                else
+                    catsP[i] = null;
+            }
            
         }
+
     }
 }
