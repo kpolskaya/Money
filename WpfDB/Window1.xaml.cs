@@ -24,8 +24,8 @@ namespace WpfDB
         string acc;
         DateTime opdate;
         string[] accs = MainWindow.accs;
-        string[] cats = MainWindow.cats;
-        string[] catsP = MainWindow.catsP;
+        string[] catsE = MainWindow.catsE;
+        string[] catsI = MainWindow.catsI;
         string[] all = new string[] { "" };
 
         public Window1()
@@ -43,11 +43,11 @@ namespace WpfDB
             accR.ItemsSource = accs;
             if (MainWindow.opR.OpType == 1)
             {
-                catR.ItemsSource = catsP;
+                catR.ItemsSource = catsI;
             }
             else
             {
-                catR.ItemsSource = cats;
+                catR.ItemsSource = catsE;
             }
             
             accR.SelectedItem = MainWindow.opR.Account;

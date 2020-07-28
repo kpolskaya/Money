@@ -23,12 +23,12 @@ namespace WpfDB
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        static char[] comma = new char[] { ',' };
         public static Repository db;
         public static Record opR = new Record(); // запись для редактирования
-        public static string[] accs = App.Settings.Accounts.Split(',');
-        public static string[] cats = App.Settings.OutCategories.Split(',');
-        public static string[] catsP = App.Settings.InCategories.Split(',');
+        public static string[] accs = App.Settings.Accounts.Split(comma, StringSplitOptions.RemoveEmptyEntries);
+        public static string[] catsE = App.Settings.OutCategories.Split(comma, StringSplitOptions.RemoveEmptyEntries);
+        public static string[] catsI = App.Settings.InCategories.Split(comma, StringSplitOptions.RemoveEmptyEntries);
         string[] all = new string[] {""};
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
@@ -38,12 +38,12 @@ namespace WpfDB
             InitializeComponent();
             db = new Repository(@"data.csv");
             MessageBox.Show($"База загружена из файла {db.DbPath}. Количество записей: {db.Count}.");
-            acc.ItemsSource = accs;
-            accP.ItemsSource = accs;
+            accE.ItemsSource = accs;
+            accI.ItemsSource = accs;
             accR.ItemsSource = accs;
-            cat.ItemsSource = cats;
-            catP.ItemsSource = catsP;
-            catR.ItemsSource = all.Concat(cats.Concat(catsP));
+            catE.ItemsSource = catsE;
+            catI.ItemsSource = catsI;
+            catR.ItemsSource = all.Concat(catsE.Concat(catsI));
             dp2R.SelectedDate = DateTime.Today;
             dp1R.SelectedDate = db.StartingDate;
            
@@ -81,28 +81,28 @@ namespace WpfDB
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            db.Add(new Record(Convert.ToDateTime(dp1.SelectedDate.Value.Date.ToShortDateString()), (sbyte)(-1),
-                Convert.ToDouble(sum.Text), acc.Text, cat.Text, note.Text));
-            sum.Text = "0";
-            acc.Text = "";
-            cat.Text = "";
-            note.Text = "";
+            db.Add(new Record(Convert.ToDateTime(dp1E.SelectedDate.Value.Date.ToShortDateString()), (sbyte)(-1),
+                Convert.ToDouble(sumE.Text), accE.Text, catE.Text, noteE.Text));
+            sumE.Text = " ";
+            accE.Text = "";
+            catE.Text = "";
+            noteE.Text = "";
             Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now,(sbyte)(-1)));
-            listView.ItemsSource = lastRecords;
-            listView.Items.Refresh();
+            listViewE.ItemsSource = lastRecords;
+            listViewE.Items.Refresh();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            db.Add(new Record(Convert.ToDateTime(dp1P.SelectedDate.Value.Date.ToShortDateString()), (sbyte)(1),
-               Convert.ToDouble(sumP.Text), accP.Text, catP.Text, noteP.Text));
-            sum.Text = "0";
-            acc.Text = "";
-            cat.Text = "";
-            note.Text = "";
+            db.Add(new Record(Convert.ToDateTime(dp1I.SelectedDate.Value.Date.ToShortDateString()), (sbyte)(1),
+               Convert.ToDouble(sumI.Text), accI.Text, catI.Text, noteI.Text));
+            sumE.Text = " ";
+            accI.Text = "";
+            catI.Text = "";
+            noteI.Text = "";
             Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now, (sbyte)(1)));
-            listViewP.ItemsSource = lastRecords;
-            listViewP.Items.Refresh();
+            listViewI.ItemsSource = lastRecords;
+            listViewI.Items.Refresh();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -196,60 +196,33 @@ namespace WpfDB
             }
         }
 
-        public void listViewR_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        //public void listViewR_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        //{
+        //    var item = (sender as ListView).SelectedItem;
+        //    opR = (Record)item;
+        //    if (item != null)
+        //    {
+        //        Window1 taskWindow = new Window1();
+        //        taskWindow.Show();
+               
+        //    }
+        //}
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            var item = (sender as ListView).SelectedItem;
+          
+        }
+
+        private void TextBlock_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var item = (sender as TextBlock).DataContext;
             opR = (Record)item;
             if (item != null)
             {
                 Window1 taskWindow = new Window1();
                 taskWindow.Show();
-               
+
             }
         }
-
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            DateTime date = Convert.ToDateTime(Convert.ToDateTime(bdate.SelectedDate.Value.Date.ToShortDateString()));
-            double balance = Convert.ToDouble(bsaldo.Text);
-
-            //string x = (string)acclist.Items[1];
-            //
-
-            for (int i = 1; i < 11; i++)
-            {
-                string x = (acclist.Items.GetItemAt(i).ToString());
-                if (x != $"System.Windows.Controls.ListBoxItem")
-                {
-                    accs[i] = x.Substring(37);
-                }
-                else
-                    accs[i] = null;
-            }
-
-            for (int i = 1; i < 11; i++)
-            {
-                string x = (catslist.Items.GetItemAt(i).ToString());
-                if (x != $"System.Windows.Controls.ListBoxItem")
-                {
-                    cats[i] = x.Substring(37);
-                }
-                else
-                    cats[i] = null;
-            }
-
-            for (int i = 1; i < 11; i++)
-            {
-                string x = (catsPlist.Items.GetItemAt(i).ToString());
-                if (x != $"System.Windows.Controls.ListBoxItem")
-                {
-                    catsP[i] = x.Substring(37);
-                }
-                else
-                    catsP[i] = null;
-            }
-           
-        }
-
     }
 }
