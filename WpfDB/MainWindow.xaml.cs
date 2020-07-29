@@ -26,9 +26,9 @@ namespace WpfDB
         static char[] comma = new char[] { ',' };
         public static Repository db;
         public static Record opR = new Record(); // запись для редактирования
-        public static string[] accs = App.Settings.Accounts.Split(comma, StringSplitOptions.RemoveEmptyEntries);
-        public static string[] catsE = App.Settings.OutCategories.Split(comma, StringSplitOptions.RemoveEmptyEntries);
-        public static string[] catsI = App.Settings.InCategories.Split(comma, StringSplitOptions.RemoveEmptyEntries);
+        public static string[] accs; 
+        public static string[] catsE; 
+        public static string[] catsI; 
         string[] all = new string[] {""};
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
@@ -38,9 +38,19 @@ namespace WpfDB
             InitializeComponent();
             db = new Repository(@"data.csv");
             MessageBox.Show($"База загружена из файла {db.DbPath}. Количество записей: {db.Count}.");
+            
+            if (App.Settings.Accounts == null)
+            {
+                Window2 window = new Window2();
+                window.ShowDialog();
+            }
+            accs = App.Settings.Accounts.Split(comma, StringSplitOptions.RemoveEmptyEntries);
+            catsE = App.Settings.OutCategories.Split(comma, StringSplitOptions.RemoveEmptyEntries);
+            catsI = App.Settings.InCategories.Split(comma, StringSplitOptions.RemoveEmptyEntries);
+
             accE.ItemsSource = accs;
             accI.ItemsSource = accs;
-            accR.ItemsSource = accs;
+            accR.ItemsSource = all.Concat(accs);
             catE.ItemsSource = catsE;
             catI.ItemsSource = catsI;
             catR.ItemsSource = all.Concat(catsE.Concat(catsI));

@@ -23,11 +23,11 @@ namespace WpfDB
             {
                 App.Settings = new IniValues(App.iniPath);
             }
-            else
-            {
+            //else
+            //{
 
-                Window2 window = new Window2();
-                window.ShowDialog();
+                //Window2 window = new Window2();
+                //window.ShowDialog();
                 //    DateTime date = Convert.ToDateTime("02.01.2020");
                 //    double balance = 9999.99;
                 //    string accs = ",карта,наличные,кредит";
@@ -35,7 +35,7 @@ namespace WpfDB
                 //    string catsE = ",продукты,дом,автомобиль,коммунальные платежи,животные,отдых,кредиты,инвестиции,одежда,воровство,благотворительность,прочее";
 
 
-            }
+            //}
 
         }
 
