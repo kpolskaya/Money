@@ -28,11 +28,12 @@ namespace WpfDB
         public static Record opR = new Record(); // запись для редактирования
         public static string[] accs; 
         public static string[] catsE; 
-        public static string[] catsI; 
+        public static string[] catsI;
+        public static string balance;
         string[] all = new string[] {""};
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
-
+       // public static string balance = String.Format("{0 : 0.00}", db.Balance);
         public MainWindow()
         {
             InitializeComponent();
@@ -54,9 +55,12 @@ namespace WpfDB
             catE.ItemsSource = catsE;
             catI.ItemsSource = catsI;
             catR.ItemsSource = all.Concat(catsE.Concat(catsI));
+            dp1E.SelectedDate = DateTime.Today;
             dp2R.SelectedDate = DateTime.Today;
             dp1R.SelectedDate = db.StartingDate;
-           
+          
+            balance = String.Format("{0 : 0.00}", db.Balance);
+            this.DataContext = db;         
         }
 
        
@@ -91,18 +95,28 @@ namespace WpfDB
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            db.Add(new Record(Convert.ToDateTime(dp1E.SelectedDate.Value.Date.ToShortDateString()), (sbyte)(-1),
-                Convert.ToDouble(sumE.Text), accE.Text, catE.Text, noteE.Text));
-            sumE.Text = " ";
-            accE.Text = "";
-            catE.Text = "";
-            noteE.Text = "";
-            Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now,(sbyte)(-1)));
-            listViewE.ItemsSource = lastRecords;
-            listViewE.Items.Refresh();
-        }
+            if (dp1E.SelectedDate == null || sumE.Text == "" || accE.Text == "" || catE.Text == "")
+            {
+                MessageBox.Show($"Не все поля заполнены");
+            }
+            else
+            {
+                db.Add(new Record(Convert.ToDateTime(dp1E.SelectedDate.Value.Date.ToShortDateString()), (sbyte)(-1),
+                    Convert.ToDouble(sumE.Text), accE.Text, catE.Text, noteE.Text));
+                sumE.Text = " ";
+                accE.Text = "";
+                catE.Text = "";
+                noteE.Text = "";
+                Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now,(sbyte)(-1)));
+                listViewE.ItemsSource = lastRecords;
+                listViewE.Items.Refresh();
+                saldo.Text = db.Balance.ToString("0.00");
+                
+            }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+            }
+
+            private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             db.Add(new Record(Convert.ToDateTime(dp1I.SelectedDate.Value.Date.ToShortDateString()), (sbyte)(1),
                Convert.ToDouble(sumI.Text), accI.Text, catI.Text, noteI.Text));
@@ -113,6 +127,7 @@ namespace WpfDB
             Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now, (sbyte)(1)));
             listViewI.ItemsSource = lastRecords;
             listViewI.Items.Refresh();
+           
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -233,6 +248,11 @@ namespace WpfDB
                 taskWindow.Show();
 
             }
+        }
+
+        private void listViewE_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
