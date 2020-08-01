@@ -75,9 +75,11 @@ namespace WpfDB
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MainWindow_Closed(object sender, EventArgs e)
+        private void DataWindow_Closing(object sender, CancelEventArgs e)
         {
+            MessageBox.Show("Деньги надо не экономить, а зарабатывать");
             db.Save();
+            Application.Current.Shutdown();
         }
         /// <summary>
         /// Ввод суммы операции, только цифры, разделитель запятая, 9 знаков максимум
@@ -114,6 +116,7 @@ namespace WpfDB
                 listViewE.Items.Refresh();
                 saldo.Text = db.Balance.ToString("0.00");
                 saldoI.Text = db.Balance.ToString("0.00");
+                saldoR.Text = db.Balance.ToString("0.00");
             }
 
             }
@@ -140,6 +143,8 @@ namespace WpfDB
                 listViewI.ItemsSource = lastRecords;
                 listViewI.Items.Refresh();
                 saldoI.Text = db.Balance.ToString("0.00");
+                saldo.Text = db.Balance.ToString("0.00");
+                saldoR.Text = db.Balance.ToString("0.00");
             }
         }
         /// <summary>
@@ -177,6 +182,8 @@ namespace WpfDB
             listViewR.ItemsSource = lastRecords;
             listViewR.Items.Refresh();
             saldoR.Text = db.Balance.ToString("0.00");
+            saldo.Text = db.Balance.ToString("0.00");
+            saldoI.Text = db.Balance.ToString("0.00");
         }
         /// <summary>
         /// Сортировка по значению в колонке
