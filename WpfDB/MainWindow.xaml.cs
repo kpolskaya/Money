@@ -28,17 +28,17 @@ namespace WpfDB
         static char[] comma = new char[] { ',' };
         public static Repository db;
         public static Record opR = new Record(); // запись для редактирования
-        public static string[] accs; 
-        public static string[] catsE; 
-        public static string[] catsI;
-        public static string balance;
+        public static string[] accs;        // счета
+        public static string[] catsE;       // категории расходов
+        public static string[] catsI;       // категории приходов
+        public static string balance;       // баланс по всем счетам
         string[] all = new string[] {""};
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
-        // public static string balance = String.Format("{0 : 0.00}", db.Balance);
-        sbyte t;
-        string a;
-        string c;
+        //временные переменные:
+        sbyte t;    // тип приход =1/расход  =-1  
+        string a;   // счет
+        string c;   // категория
         public MainWindow()
         {
             InitializeComponent();
@@ -47,7 +47,7 @@ namespace WpfDB
             
             if (App.Settings.Accounts == null)
             {
-                Window2 window = new Window2();
+                Window2 window = new Window2(); // окно начала учета
                 window.ShowDialog();
             }
             accs = App.Settings.Accounts.Split(comma, StringSplitOptions.RemoveEmptyEntries);
@@ -70,27 +70,34 @@ namespace WpfDB
             balance = String.Format("{0 : 0.00}", db.Balance);
             this.DataContext = db;         
         }
-
+        /// <summary>
+        /// Выход из программы, сохранение
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainWindow_Closed(object sender, EventArgs e)
         {
             db.Save();
         }
-
+        /// <summary>
+        /// Ввод суммы операции, только цифры, разделитель запятая, 9 знаков максимум
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sumOp_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             TextBox ctrl = sender as TextBox;
             e.Handled = ",0123456789".IndexOf(e.Text) < 0;//только цифры и ,
             ctrl.MaxLength = 9;//длина текста в текстбоксе
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            db.Save();
-        }
-
+        /// <summary>
+        /// Записать данные по расходу
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (dp1E.SelectedDate == null || sumE.Text == "" || accE.Text == "" || catE.Text == "")
+            if (dp1E.SelectedDate == null || sumE.Text == "" || accE.Text == "" || catE.Text == "") //проверка полноты заполнения
             {
                 MessageBox.Show($"Не все поля заполнены");
             }
@@ -110,10 +117,14 @@ namespace WpfDB
             }
 
             }
-
+        /// <summary>
+        /// Записать данные по приходу
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
             private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (dp1I.SelectedDate == null || sumI.Text == "" || accI.Text == "" || catI.Text == "")
+            if (dp1I.SelectedDate == null || sumI.Text == "" || accI.Text == "" || catI.Text == "") //проверка полноты заполнения
             {
                 MessageBox.Show($"Не все поля заполнены");
             }
@@ -131,7 +142,11 @@ namespace WpfDB
                 saldoI.Text = db.Balance.ToString("0.00");
             }
         }
-
+        /// <summary>
+        /// Показать данные согласно отбору
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_3(object sender, RoutedEventArgs e)
         { 
             if (typeR.Text == "приход")
@@ -163,7 +178,11 @@ namespace WpfDB
             listViewR.Items.Refresh();
             saldoR.Text = db.Balance.ToString("0.00");
         }
-
+        /// <summary>
+        /// Сортировка по значению в колонке
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvUsersColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
@@ -183,7 +202,9 @@ namespace WpfDB
             AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
             listViewR.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
-
+        /// <summary>
+        /// Стрелочка сортировки по значению в колонке
+        /// </summary>
         public class SortAdorner : Adorner
         {
             private static Geometry ascGeometry =
@@ -199,7 +220,10 @@ namespace WpfDB
             {
                 this.Direction = dir;
             }
-
+            /// <summary>
+            /// Отрисовка стрелочки сортировки согласно направлению сортировки
+            /// </summary>
+            /// <param name="drawingContext"></param>
             protected override void OnRender(DrawingContext drawingContext)
             {
                 base.OnRender(drawingContext);
@@ -224,11 +248,11 @@ namespace WpfDB
         }
 
       
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-          
-        }
-
+       /// <summary>
+       /// Переход в режим редактирования записи
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
         private void TextBlock_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var item = (sender as TextBlock).DataContext;
@@ -240,7 +264,11 @@ namespace WpfDB
 
             }
         }
-
+        /// <summary>
+        /// Выгрузка в файл с указанием пути в диалоге
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
            SaveFileDialog openFileDialog = new SaveFileDialog();
@@ -252,7 +280,11 @@ namespace WpfDB
             }
             
         }
-
+        /// <summary>
+        /// Удаление выбранной записи с диалогом (да/нет)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBlock_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             var item = (sender as TextBlock).DataContext;
@@ -270,7 +302,11 @@ namespace WpfDB
             }
           
         }
-
+        /// <summary>
+        /// Загрузка из файла с выбором пути к файлу и отбором записей по датам и счету
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
             int temp = db.Count;
@@ -281,7 +317,7 @@ namespace WpfDB
                  Convert.ToDateTime(dp2L.SelectedDate.Value.Date.ToShortDateString()), 0, accL.Text, ""));
                 temp = db.Count - temp;
                 MessageBox.Show($"Загружено из {openFileDialog.FileName} {temp} записей");
-               // saldoL.Text = db.Balance.ToString("0.00");
+               
             }
          
         }

@@ -27,7 +27,9 @@ namespace WpfDB
         string[] catsE = MainWindow.catsE;
         string[] catsI = MainWindow.catsI;
         string[] all = new string[] { "" };
-
+        /// <summary>
+        /// окно редактирования записи
+        /// </summary>
         public Window1()
         {
             InitializeComponent();
@@ -36,12 +38,9 @@ namespace WpfDB
             dp1.SelectedDate = opdate;
             sumR.Text = Convert.ToString(MainWindow.opR.OpSum);
             catR.SelectedItem = MainWindow.opR.Category;
-           // Cat.Text = MainWindow.opR.Category;
             noteR.Text =  MainWindow.opR.Note;
-            //acc.ItemsSource = accs;
-            //accP.ItemsSource = accs;
             accR.ItemsSource = accs;
-            if (MainWindow.opR.OpType == 1)
+            if (MainWindow.opR.OpType == 1)         // выбор категории в зависимости от типа операции (приход/расход)
             {
                 catR.ItemsSource = catsI;
             }
@@ -51,11 +50,13 @@ namespace WpfDB
             }
             
             accR.SelectedItem = MainWindow.opR.Account;
-            //catP.ItemsSource = catsP;
-            //catR.ItemsSource = all.Concat(cats.Concat(catsP));
-
+           
         }
-
+        /// <summary>
+        /// редактирование выбранной записи: удалить запись с выбранным номером и записать новую
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.db.Delete(MainWindow.opR.RecNumber);

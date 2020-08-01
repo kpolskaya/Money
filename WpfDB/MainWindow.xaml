@@ -49,10 +49,13 @@
                     <ColumnDefinition Width="280"/>
 
                 </Grid.ColumnDefinitions>
+                
                 <Grid.RowDefinitions>
+                    
                     <RowDefinition Height="55"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="275"/>
+                    
                 </Grid.RowDefinitions>
 
                 <DatePicker x:Name="dp1E"  Margin="15,5"  Grid.Row ="1" Grid.Column="0"  Width="100" />
@@ -141,8 +144,6 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-
-
                         </GridView>
 
                     </ListView.View>
@@ -153,8 +154,6 @@
                 <TextBox x:Name="saldo" Grid.Column="1" TextAlignment="Right"  HorizontalAlignment="Left"  Text="{Binding Path=Balance, Mode=OneWay}"
                          Height="24"  VerticalAlignment="Top" Width="120" IsReadOnly="True">
                 </TextBox>
-
-
 
             </Grid>
         </TabItem>
@@ -170,10 +169,13 @@
                     <ColumnDefinition Width="280"/>
 
                 </Grid.ColumnDefinitions>
+                
                 <Grid.RowDefinitions>
+                    
                     <RowDefinition Height="55"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="275"/>
+                    
                 </Grid.RowDefinitions>
 
                 <DatePicker x:Name="dp1I"  Margin="15,5"  Grid.Row ="1" Grid.Column="0"  Width="100" />
@@ -251,7 +253,6 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-
                             <GridViewColumn Header="Примечание" Width="270">
                                 <GridViewColumn.CellTemplate>
 
@@ -261,8 +262,6 @@
 
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
-
 
                         </GridView>
 
@@ -274,8 +273,6 @@
                 <TextBox  x:Name="saldoI" Grid.Column="1" TextAlignment="Right"  HorizontalAlignment="Left"  Text="{Binding Path=Balance, Mode=OneWay }"
                          Height="24"  VerticalAlignment="Top" Width="120" IsReadOnly="True">
                 </TextBox>
-
-
 
             </Grid>
         </TabItem>
@@ -291,11 +288,14 @@
                     <ColumnDefinition Width="275"/>
 
                 </Grid.ColumnDefinitions>
+                
                 <Grid.RowDefinitions>
+                    
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="255"/>
                     <RowDefinition Height="50"/>
+                    
                 </Grid.RowDefinitions>
 
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Отбор операций по параметрам:" 
@@ -347,7 +347,6 @@
                                                           Tag="OpDate" Click="lvUsersColumnHeader_Click"   >Дата</GridViewColumnHeader>
                                 </GridViewColumn.Header>
 
-
                                 <GridViewColumn.CellTemplate>
 
                                     <DataTemplate>
@@ -359,8 +358,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Width="130">
-                                <!--<GridViewColumn Header="Сумма" Width="130">-->
-                                <GridViewColumn.Header>
+                                    <GridViewColumn.Header>
                                     <GridViewColumnHeader HorizontalAlignment="Left" Width="130"
                                                           Tag="Sum" Click="lvUsersColumnHeader_Click">Сумма</GridViewColumnHeader>
                                 </GridViewColumn.Header>
@@ -375,7 +373,6 @@
 
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
 
                             <GridViewColumn Width="130">
                                 <GridViewColumn.Header>
@@ -447,16 +444,16 @@
 
                     <ColumnDefinition Width="280"/>
                     <ColumnDefinition Width="220"/>
-
-
                     <ColumnDefinition Width="280"/>
 
                 </Grid.ColumnDefinitions>
+                
                 <Grid.RowDefinitions>
+                    
                     <RowDefinition Height="70"/>
                     <RowDefinition Height="90"/>
-
                     <RowDefinition Height="150"/>
+                    
                 </Grid.RowDefinitions>
 
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="Отбор операций по параметрам:" 
@@ -468,24 +465,13 @@
                 <TextBlock HorizontalAlignment="Center"  TextWrapping="Wrap" Text="счет:" 
                            VerticalAlignment="Top" Grid.Row="1" Grid.Column="3"/>
 
-
                 <DatePicker x:Name="dp1L" Margin="90,20,55,40" Width="130" Height="30" Grid.Row="1" Grid.Column="0"/>
                 <DatePicker x:Name="dp2L" Margin="30,20,55,40" Width="130" Height="30" Grid.Row="1" Grid.Column="1"/>
-
 
                 <ComboBox Name ="accL" Margin="75,20,75,40" Width="130" Height="30" Grid.Row="1" Grid.Column="2" 
                           ToolTipService.Placement="Mouse" ToolTip="Выберите счет" >
 
                 </ComboBox>
-
-
-                <!--<TextBlock  HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2"  TextWrapping="Wrap"
-                            Text="У вас осталось:" VerticalAlignment="Top" Margin="150,10,40,0"/>
-
-
-                <TextBox x:Name="saldoL" Grid.Column="1" Grid.Row="2"  TextAlignment="Right"  HorizontalAlignment="Left"  Text="{Binding Path=Balance, Mode=OneWay}"
-                           VerticalAlignment="Top" Width="130" Height="25" IsReadOnly="True" Margin="20,10,0,0">
-                </TextBox>-->
 
                 <Button Content="Загрузить из файла" TextBlock.TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" 
                         Grid.Column="1" Grid.Row="3"

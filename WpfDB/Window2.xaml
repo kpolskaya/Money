@@ -183,7 +183,8 @@
                         <TextBox Name="bsaldo" Height="25" Width="150" Text="Введите сумму" />
 
                     </StackPanel>
-                    <Button Content="Записать" Grid.Row="1"  Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="30" Width="150" Click="Button_Click"/>
+                    <Button Content="Записать" Grid.Row="1"  Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center"
+                            Height="30" Width="150" Click="Button_Click"/>
 
                 </Grid>
 
