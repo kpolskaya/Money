@@ -5,145 +5,194 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfDB"
         mc:Ignorable="d"
+        
+
         Title="Начало учета" Height="450" Width="800">
-    <Grid>
-       
-            <Grid Background="#FFE5E5E5" Margin="5">
+
+    <TabControl HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch">
+
+        <TabItem Header="Программа учета личных финансов">
+            <Grid Background="#FFE5E5E5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="266*"/>
-                    <ColumnDefinition Width="250*"/>
-                    <ColumnDefinition Width="266*"/>
+                    <ColumnDefinition Width="400*"/>
+                    <ColumnDefinition Width="400*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="90"/>
 
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="5*"/>
 
                 </Grid.RowDefinitions>
-
-                <ListBox Name ="catsIlist" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="200" Grid.Row ="1" Grid.Column="0" >
-                    <TextBlock Height="30" Text="Введите категории прихода" HorizontalAlignment="Center"/>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-
-
-                </ListBox>
-
-                <ListBox Name ="catsElist" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="200" Grid.Row ="1" Grid.Column="1" >
-                    <TextBlock Height="30" Text="Введите категории расхода" HorizontalAlignment="Center" />
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-
-
-                </ListBox>
-
-                <ListBox Name ="acclist" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="200" Grid.Row ="1" Grid.Column="2" >
-                    <TextBlock Height="30" Text="Введите счета" HorizontalAlignment="Center"/>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-                    <ListBoxItem>
-                        <TextBox  Height="20" Width="160"/>
-                    </ListBoxItem>
-
-
-                </ListBox>
-
-                <StackPanel Orientation="Vertical" Grid.Row ="0" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" >
-                    <TextBlock  Text="Введите дату начала учета:" Height="20" Width="150" />
-                    <DatePicker Name="bdate"  Height="25" Width="150" Text="Введите дату" />
-
-                </StackPanel>
-
-                <StackPanel Orientation="Vertical" Grid.Row ="0" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" >
-                    <TextBlock  Text="Введите остаток средств:" Height="20" Width="150" />
-                    <TextBox Name="bsaldo" Height="25" Width="150" Text="Введите сумму" />
-
-                </StackPanel>
-                <Button Content="Записать" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="30" Width="150" Click="Button_Click"/>
+                <Image Source="wallet-2292428__480.jpg"  Grid.Column="0" Margin="10"/>
+                <TextBlock HorizontalAlignment="Left"  Margin="10"  TextWrapping="Wrap" VerticalAlignment="Center" 
+                           FontFamily="Matura MT Script Capitals" FontSize="24" FontWeight="Bold" FontStyle="Italic" Grid.Row="1" Grid.Column="0">
+                    <Run Text="Куда деваются деньги?"/><LineBreak/><Run FontSize="14" Text="учет личных финансов"/></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0"  Margin="10,20,10,10"  TextWrapping="Wrap" FontFamily="Matura MT Script Capitals" FontSize="16"
+                           FontWeight="Bold" FontStyle="Italic" >   Сейчас Вы начнете наводить порядок в своих финансах!
+                           <LineBreak />
+                    Для начала вам необходимо определить дату начала учета, остаток средств на всех ваших счетах и во всех карманах,
+                    ввести номера или обозначения счетов и определить категории ваших расходов. 
+                    <LineBreak />
+                    Программа не поддерживает мультивалютный учет, 
+                    пока придется пересчитывать вручную.
+                </TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Margin="10,10,10,60" FontFamily="Matura MT Script Capitals" FontSize="16"
+                           FontWeight="Bold" FontStyle="Italic" >   Если вам лень, воспользуйтесь примерной настройкой
+                </TextBlock>
+                <Button Content="Загрузить настройки" Grid.Column="1" Grid.Row="1" Margin="30"  VerticalAlignment="Bottom" Width="200" Height="30" FontFamily="Matura MT Script Capitals" FontSize="16"
+                           FontWeight="Bold" FontStyle="Italic" Click="Button_Click_1"/>
 
             </Grid>
 
-        
-    </Grid>
+        </TabItem>
+
+        <TabItem Header="Ввод начальных данных">
+            <Grid>
+
+                <Grid Background="#FFE5E5E5" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="266*"/>
+                        <ColumnDefinition Width="250*"/>
+                        <ColumnDefinition Width="266*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+
+                        <RowDefinition Height="3"/>
+
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+
+                    <ListBox Name ="catsIlist" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="200" Grid.Row ="2" Grid.Column="0" >
+                        <TextBlock Height="30" Text="Введите категории прихода" HorizontalAlignment="Center"/>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+
+
+                    </ListBox>
+
+                    <ListBox Name ="catsElist" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="200" Grid.Row ="2" Grid.Column="1" >
+                        <TextBlock Height="30" Text="Введите категории расхода" HorizontalAlignment="Center" />
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+
+
+                    </ListBox>
+
+                    <ListBox Name ="acclist" HorizontalAlignment="Center" VerticalAlignment="Center" Height="230"  Width="200" Grid.Row ="2" Grid.Column="2" >
+                        <TextBlock Height="30" Text="Введите счета" HorizontalAlignment="Center"/>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBox  Height="20" Width="160"/>
+                        </ListBoxItem>
+
+
+                    </ListBox>
+
+                    <StackPanel Orientation="Vertical" Grid.Row ="1" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                        <TextBlock  Text="Введите дату начала учета:" Height="20" Width="150" />
+                        <DatePicker Name="bdate"  Height="25" Width="150" Text="Введите дату" />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Grid.Row ="1" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                        <TextBlock  Text="Введите остаток средств:" Height="20" Width="150" />
+                        <TextBox Name="bsaldo" Height="25" Width="150" Text="Введите сумму" />
+
+                    </StackPanel>
+                    <Button Content="Записать" Grid.Row="1"  Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="30" Width="150" Click="Button_Click"/>
+
+                </Grid>
+
+
+
+            </Grid>
+
+        </TabItem>
+
+    </TabControl>
+
 </Window>

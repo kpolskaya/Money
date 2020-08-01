@@ -16,8 +16,6 @@
 
     <TabControl HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch">
 
-
-
         <TabItem Header="Программа учета личных финансов">
             <Grid Background="#FFE5E5E5">
                 <Grid.ColumnDefinitions>
@@ -39,11 +37,7 @@
 
         </TabItem>
 
-
-
-
         <TabItem Header="Расход">
-
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -82,7 +76,8 @@
                 <TextBlock HorizontalAlignment="Center"  TextWrapping="Wrap" Text="Выберите категорию:" Grid.Column="3" Grid.Row="0" VerticalAlignment="Bottom" />
                 <TextBlock HorizontalAlignment="Center"  TextWrapping="Wrap" Text="Введите примечания:" Grid.Column="4" Grid.Row="0" VerticalAlignment="Bottom" />
 
-                <Button Content="Добавить" HorizontalAlignment="Center" Margin="20,7" VerticalAlignment="Top" Width="90" Height="25" Click="Button_Click_1" Grid.Row="0" Grid.Column="4" FontSize="14" FontWeight="Bold"/>
+                <Button Content="Добавить" HorizontalAlignment="Center" Margin="20,7" VerticalAlignment="Top" Width="90" Height="25"
+                        Click="Button_Click_1" Grid.Row="0" Grid.Column="4" FontSize="14" FontWeight="Bold"/>
 
                 <ListView x:Name ="listViewE" Grid.Row="2" Grid.ColumnSpan="5"  HorizontalAlignment="Left" Height="270" Width="765"   >
                     <ListView.ItemContainerStyle>
@@ -299,10 +294,10 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
-                    <RowDefinition Height="265"/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="255"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                
+
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Отбор операций по параметрам:" 
                            FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Column="0"/>
                 <Button Content="Обновить" HorizontalAlignment="Center"  VerticalAlignment="Top" 
@@ -319,24 +314,23 @@
                 <DatePicker x:Name="dp1R" Margin="5" Width="100" Grid.Row="1" Grid.Column="0"/>
                 <DatePicker x:Name="dp2R" Margin="5" Width="100" Grid.Row="1" Grid.Column="1"/>
                 <ComboBox Name ="typeR" Margin="5" Width="100" Grid.Row="1" Grid.Column="2" ToolTipService.Placement="Mouse" ToolTip="Выберите категорию" >
-                        <TextBlock></TextBlock>
-                        <TextBlock> приход</TextBlock>
-                        <TextBlock> расход</TextBlock>
-                    </ComboBox>
+                    <TextBlock></TextBlock>
+                    <TextBlock> приход</TextBlock>
+                    <TextBlock> расход</TextBlock>
+                </ComboBox>
 
                 <ComboBox Name ="accR" Margin="5" Grid.Row="1" Grid.Column="3" Width="120" ToolTipService.Placement="Mouse" ToolTip="Выберите счет" >
 
-                    </ComboBox>
-                <ComboBox Name ="catR" Margin="5" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left" Width="120" ToolTipService.Placement="Mouse" ToolTip="Выберите категорию" >
+                </ComboBox>
+                <ComboBox Name ="catR" Margin="5" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left" Width="120" 
+                          ToolTipService.Placement="Mouse" ToolTip="Выберите категорию" >
 
-                    </ComboBox>
-
-
+                </ComboBox>
 
                 <ListView x:Name ="listViewR" Grid.Row="2" Grid.ColumnSpan="5" 
                           HorizontalAlignment="Left" Height="250" Width="765" 
                           ToolTipService.Placement="Mouse" ToolTip="Нажмите левую кнопку мыши для редактирования, правую - для удаления записи"  >
-                    
+
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -349,7 +343,7 @@
                             <GridViewColumn Width="130">
 
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" 
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="130" 
                                                           Tag="OpDate" Click="lvUsersColumnHeader_Click"   >Дата</GridViewColumnHeader>
                                 </GridViewColumn.Header>
 
@@ -358,7 +352,8 @@
 
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Path=OpDate, StringFormat=\{0:dd.MM.yyyy\}}" 
-                                                   HorizontalAlignment="Right" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp"  ></TextBlock>
+                                                   HorizontalAlignment="Right" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp" 
+                                                   PreviewMouseRightButtonUp="TextBlock_PreviewMouseRightButtonUp"  ></TextBlock>
                                     </DataTemplate>
 
                                 </GridViewColumn.CellTemplate>
@@ -366,14 +361,16 @@
                             <GridViewColumn Width="130">
                                 <!--<GridViewColumn Header="Сумма" Width="130">-->
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100"
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="130"
                                                           Tag="Sum" Click="lvUsersColumnHeader_Click">Сумма</GridViewColumnHeader>
                                 </GridViewColumn.Header>
 
                                 <GridViewColumn.CellTemplate>
 
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Sum, StringFormat=\{0: ### ### ##0.00\}}" HorizontalAlignment="Right" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp" ></TextBlock>
+                                        <TextBlock Text="{Binding Path=Sum, StringFormat=\{0: ### ### ##0.00\}}"
+                                                   HorizontalAlignment="Right" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp" 
+                                                   PreviewMouseRightButtonUp="TextBlock_PreviewMouseRightButtonUp" ></TextBlock>
                                     </DataTemplate>
 
                                 </GridViewColumn.CellTemplate>
@@ -382,12 +379,15 @@
 
                             <GridViewColumn Width="130">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" Tag="Sum" Click="lvUsersColumnHeader_Click"   >Счет</GridViewColumnHeader>
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="130" Tag="Sum" 
+                                                          Click="lvUsersColumnHeader_Click"   >Счет</GridViewColumnHeader>
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
 
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Account}" HorizontalAlignment="Left" PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp" ></TextBlock>
+                                        <TextBlock Text="{Binding Path=Account}" HorizontalAlignment="Left" 
+                                                   PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp"
+                                                   PreviewMouseRightButtonUp="TextBlock_PreviewMouseRightButtonUp" ></TextBlock>
                                     </DataTemplate>
 
                                 </GridViewColumn.CellTemplate>
@@ -395,30 +395,33 @@
 
                             <GridViewColumn  Width="130">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="100" Tag="Account" Click="lvUsersColumnHeader_Click">Счет</GridViewColumnHeader>
+                                    <GridViewColumnHeader HorizontalAlignment="Left" Width="130" Tag="Category" 
+                                                          Click="lvUsersColumnHeader_Click">Категория</GridViewColumnHeader>
                                 </GridViewColumn.Header>
 
                                 <GridViewColumn.CellTemplate>
 
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Category}" HorizontalAlignment="Left" ></TextBlock>
+                                        <TextBlock Text="{Binding Category}" HorizontalAlignment="Left" 
+                                                   PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp" 
+                                                   PreviewMouseRightButtonUp="TextBlock_PreviewMouseRightButtonUp" ></TextBlock>
                                     </DataTemplate>
 
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
 
-                            <GridViewColumn Header="Примечание" Width="270">
+                            <GridViewColumn Header="Примечание" Width="275">
                                 <GridViewColumn.CellTemplate>
 
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Note}" HorizontalAlignment="Left" ></TextBlock>
+                                        <TextBlock Text="{Binding Note}" HorizontalAlignment="Left" 
+                                                   PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp" 
+                                                   PreviewMouseRightButtonUp="TextBlock_PreviewMouseRightButtonUp"  ></TextBlock>
                                     </DataTemplate>
 
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
-
 
                         </GridView>
                     </ListView.View>
@@ -428,19 +431,70 @@
 
 
                 <TextBox x:Name="saldoR" Grid.Column="1" Grid.Row="3"  TextAlignment="Right"  HorizontalAlignment="Left"  Text="{Binding Path=Balance, Mode=OneWay}"
-                           VerticalAlignment="Top" Width="130" IsReadOnly="True">
+                           VerticalAlignment="Top" Width="130" Height="25" IsReadOnly="True">
                 </TextBox>
 
-                <Button Content="Выгрузить в файл" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="4" Grid.Row="3" Width="185" Click="Button_Click_5"/>
-                   
-               
-              
+                <Button Content="Выгрузить в файл" TextBlock.TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="4" Grid.Row="3"
+                        Width="185" Height="25" Click="Button_Click_5" FontSize="14" FontWeight="Bold"/>
+
             </Grid>
 
+        </TabItem>
+
+        <TabItem Header="Загрузить">
+            <Grid>
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="280"/>
+                    <ColumnDefinition Width="220"/>
 
 
+                    <ColumnDefinition Width="280"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="90"/>
+
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="Отбор операций по параметрам:" 
+                           FontSize="14" FontWeight="Bold"  Grid.ColumnSpan="3" Grid.Column="0" Margin="85,0,190,20"/>
+
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="за период:" 
+                           VerticalAlignment="Top" Grid.Row="1" Grid.Column="0"/>
+
+                <TextBlock HorizontalAlignment="Center"  TextWrapping="Wrap" Text="счет:" 
+                           VerticalAlignment="Top" Grid.Row="1" Grid.Column="3"/>
+
+
+                <DatePicker x:Name="dp1L" Margin="90,20,55,40" Width="130" Height="30" Grid.Row="1" Grid.Column="0"/>
+                <DatePicker x:Name="dp2L" Margin="30,20,55,40" Width="130" Height="30" Grid.Row="1" Grid.Column="1"/>
+
+
+                <ComboBox Name ="accL" Margin="75,20,75,40" Width="130" Height="30" Grid.Row="1" Grid.Column="2" 
+                          ToolTipService.Placement="Mouse" ToolTip="Выберите счет" >
+
+                </ComboBox>
+
+
+                <!--<TextBlock  HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2"  TextWrapping="Wrap"
+                            Text="У вас осталось:" VerticalAlignment="Top" Margin="150,10,40,0"/>
+
+
+                <TextBox x:Name="saldoL" Grid.Column="1" Grid.Row="2"  TextAlignment="Right"  HorizontalAlignment="Left"  Text="{Binding Path=Balance, Mode=OneWay}"
+                           VerticalAlignment="Top" Width="130" Height="25" IsReadOnly="True" Margin="20,10,0,0">
+                </TextBox>-->
+
+                <Button Content="Загрузить из файла" TextBlock.TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                        Grid.Column="1" Grid.Row="3"
+                        Width="185" Height="25" Click="Button_Click_6" FontSize="14" FontWeight="Bold"/>
+
+            </Grid>
 
         </TabItem>
+
     </TabControl>
 
 </Window>

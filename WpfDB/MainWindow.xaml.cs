@@ -57,18 +57,25 @@ namespace WpfDB
             accE.ItemsSource = accs;
             accI.ItemsSource = accs;
             accR.ItemsSource = all.Concat(accs);
+            accL.ItemsSource = accs;
             catE.ItemsSource = catsE;
             catI.ItemsSource = catsI;
             catR.ItemsSource = all.Concat(catsE.Concat(catsI));
             dp1E.SelectedDate = DateTime.Today;
+            dp1I.SelectedDate = DateTime.Today;
             dp2R.SelectedDate = DateTime.Today;
             dp1R.SelectedDate = db.StartingDate;
-          
+            dp2L.SelectedDate = DateTime.Today;
+            dp1L.SelectedDate = db.StartingDate;
             balance = String.Format("{0 : 0.00}", db.Balance);
             this.DataContext = db;         
         }
 
-          
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            db.Save();
+        }
+
         private void sumOp_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             TextBox ctrl = sender as TextBox;
@@ -229,7 +236,7 @@ namespace WpfDB
             if (item != null)
             {
                 Window1 taskWindow = new Window1();
-                taskWindow.Show();
+                taskWindow.ShowDialog();
 
             }
         }
@@ -238,10 +245,47 @@ namespace WpfDB
         {
            SaveFileDialog openFileDialog = new SaveFileDialog();
             if (openFileDialog.ShowDialog() == true)
-            
-            db.Save(openFileDialog.FileName, new Template(Convert.ToDateTime(dp1R.SelectedDate.Value.Date.ToShortDateString()),
+            {
+                db.Save(openFileDialog.FileName, new Template(Convert.ToDateTime(dp1R.SelectedDate.Value.Date.ToShortDateString()),
                 Convert.ToDateTime(dp2R.SelectedDate.Value.Date.ToShortDateString()), t, a, c));
-            MessageBox.Show($"Данные сохранены в {openFileDialog.FileName}");
+                MessageBox.Show($"Данные сохранены в {openFileDialog.FileName}");
+            }
+            
         }
+
+        private void TextBlock_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var item = (sender as TextBlock).DataContext;
+            opR = (Record)item;
+
+            if (MessageBox.Show("Удалить запись?",
+             "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                db.Delete(opR.RecNumber);
+                Record[] lastRecords = db.FilteredList(new Template(Convert.ToDateTime(dp1R.SelectedDate.Value.Date.ToShortDateString()),
+                   Convert.ToDateTime(dp2R.SelectedDate.Value.Date.ToShortDateString()), t, a, c));
+                listViewR.ItemsSource = lastRecords;
+                listViewR.Items.Refresh();
+                saldoR.Text = db.Balance.ToString("0.00");
+            }
+          
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            int temp = db.Count;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                db.Load(openFileDialog.FileName, new Template(Convert.ToDateTime(dp1L.SelectedDate.Value.Date.ToShortDateString()),
+                 Convert.ToDateTime(dp2L.SelectedDate.Value.Date.ToShortDateString()), 0, accL.Text, ""));
+                temp = db.Count - temp;
+                MessageBox.Show($"Загружено из {openFileDialog.FileName} {temp} записей");
+               // saldoL.Text = db.Balance.ToString("0.00");
+            }
+         
+        }
+
+        
     }
 }
