@@ -38,8 +38,7 @@ namespace WpfDB
             dp1.SelectedDate = opdate;
             sumR.Text = Convert.ToString(MainWindow.opR.OpSum);
             catR.SelectedItem = MainWindow.opR.Category;
-            noteR.Text =  MainWindow.opR.Note;
-            accR.ItemsSource = accs;
+            
             if (MainWindow.opR.OpType == 1)         // выбор категории в зависимости от типа операции (приход/расход)
             {
                 catR.ItemsSource = catsI;
@@ -48,7 +47,8 @@ namespace WpfDB
             {
                 catR.ItemsSource = catsE;
             }
-            
+            noteR.Text = MainWindow.opR.Note;
+            accR.ItemsSource = accs;
             accR.SelectedItem = MainWindow.opR.Account;
            
         }

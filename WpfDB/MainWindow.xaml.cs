@@ -35,21 +35,21 @@ namespace WpfDB
         string[] all = new string[] {""};
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
-        //временные переменные:
+        
+        //временные переменные для фильтрации отчетов:
         sbyte t;    // тип приход =1/расход  =-1  
         string a;   // счет
         string c;   // категория
         public MainWindow()
         {
             InitializeComponent();
-            db = new Repository(@"data.csv");
-            MessageBox.Show($"База загружена из файла {db.DbPath}. Количество записей: {db.Count}.");
-            
             if (App.Settings.Accounts == null)
             {
                 Window2 window = new Window2(); // окно начала учета
                 window.ShowDialog();
             }
+            db = new Repository(@"data.csv");
+            MessageBox.Show($"База загружена из файла {db.DbPath}. Количество записей: {db.Count}.");
             accs = App.Settings.Accounts.Split(comma, StringSplitOptions.RemoveEmptyEntries);
             catsE = App.Settings.OutCategories.Split(comma, StringSplitOptions.RemoveEmptyEntries);
             catsI = App.Settings.InCategories.Split(comma, StringSplitOptions.RemoveEmptyEntries);
@@ -306,6 +306,8 @@ namespace WpfDB
                 listViewR.ItemsSource = lastRecords;
                 listViewR.Items.Refresh();
                 saldoR.Text = db.Balance.ToString("0.00");
+                saldo.Text = db.Balance.ToString("0.00");
+                saldoI.Text = db.Balance.ToString("0.00");
             }
           
         }
