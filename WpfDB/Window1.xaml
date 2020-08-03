@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:WpfDB"
         mc:Ignorable="d"
         Title="Окно редактирования" Height="150" Width="800">
-    <Grid Background="#FFE5E5E5">
+   
+    <Grid Background="#FFE5E5E5" >
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="110"/>
@@ -28,10 +29,11 @@
                      Width="100"   HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
         <TextBox  Grid.Row ="0" Grid.Column="1" 
-                     Width="100"  Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"  HorizontalContentAlignment="Center"
+                     Width="100"  Height="20" VerticalAlignment="Bottom"  HorizontalContentAlignment="Center"
                      Text="Сумма" ToolTipService.Placement="Mouse" ToolTip="Введите сумму"   />
-        <TextBox x:Name="sumR" Grid.Row ="1" Grid.Column="1" 
-                     Width="100"  Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        
+        <TextBox x:Name="sumR" Grid.Row ="1" Grid.Column="1" HorizontalContentAlignment="Right" 
+                     Width="100"  Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" PreviewTextInput="sumR_PreviewTextInput"/>
 
 
         <TextBox  Grid.Row ="0" Grid.Column="2" 

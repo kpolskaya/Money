@@ -84,5 +84,12 @@ namespace WpfDB
             this.Close();
 
         }
+
+        private void sumR_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox ctrl = sender as TextBox;
+            e.Handled = ",0123456789".IndexOf(e.Text) < 0;//только цифры и ,
+            ctrl.MaxLength = 9;//длина текста в текстбоксе
+        }
     }
 }
