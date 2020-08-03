@@ -21,12 +21,28 @@ namespace WpfDB
     /// </summary>
     public partial class Window1 : Window
     {
-        string acc;
+       
+        /// <summary>
+        /// Дата редактируемой операции
+        /// </summary>
         DateTime opdate;
+
+        /// <summary>
+        /// Список счетов для редактирования операции
+        /// </summary>
         string[] accs = MainWindow.accs;
+
+        /// <summary>
+        /// Список расходных категорий для редактирования операции
+        /// </summary>
         string[] catsE = MainWindow.catsE;
+
+        /// <summary>
+        /// Список приходных категорий для редактирования операции
+        /// </summary>
         string[] catsI = MainWindow.catsI;
-        string[] all = new string[] { "" };
+
+                        
         /// <summary>
         /// окно редактирования записи
         /// </summary>
@@ -34,7 +50,6 @@ namespace WpfDB
         {
             InitializeComponent();
             opdate = MainWindow.opR.OpDate;
-            acc = MainWindow.opR.Account;
             dp1.SelectedDate = opdate;
             sumR.Text = Convert.ToString(MainWindow.opR.OpSum);
             catR.SelectedItem = MainWindow.opR.Category;
@@ -53,7 +68,7 @@ namespace WpfDB
            
         }
         /// <summary>
-        /// редактирование выбранной записи: удалить запись с выбранным номером и записать новую
+        /// Удаляет предыдущую редакцию записи и записывает новую
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -62,10 +77,10 @@ namespace WpfDB
             MainWindow.db.Delete(MainWindow.opR.RecNumber);
             MainWindow.db.Add(new Record(Convert.ToDateTime(dp1.SelectedDate.Value.Date.ToShortDateString()), (MainWindow.opR.OpType),
                 Convert.ToDouble(sumR.Text), accR.Text, catR.Text, noteR.Text));
-            sumR.Text = "0";
-            accR.Text = "";
-            catR.Text = "";
-            noteR.Text = "";
+            //sumR.Text = "0";
+            //accR.Text = "";
+            //catR.Text = "";
+            //noteR.Text = "";
             this.Close();
 
         }

@@ -15,27 +15,27 @@ namespace WpfDB
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// Настройки учета
+        /// </summary>
         public static IniValues Settings;
+        
+        /// <summary>
+        /// Путь к файлу с настройками (жестко закодирован)
+        /// </summary>
         public static string iniPath = @"settings.ini";
+        
+        /// <summary>
+        /// Если при запуске файл с настройками существует, данные считываются в поле App.Settings
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnStartup(StartupEventArgs e)
         {
             if (File.Exists(App.iniPath))
             {
                 App.Settings = new IniValues(App.iniPath);
             }
-            //else
-            //{
-
-                //Window2 window = new Window2();
-                //window.ShowDialog();
-                //    DateTime date = Convert.ToDateTime("02.01.2020");
-                //    double balance = 9999.99;
-                //    string accs = ",карта,наличные,кредит";
-                //    string catsI = ",зарплата,подработка,проценты,воровство,подарки и находки,кредиты,прочее,";
-                //    string catsE = ",продукты,дом,автомобиль,коммунальные платежи,животные,отдых,кредиты,инвестиции,одежда,воровство,благотворительность,прочее";
-
-
-            //}
+            
 
         }
 

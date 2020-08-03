@@ -38,8 +38,14 @@ namespace DBF
         /// </summary>
         private double balance;
 
+        /// <summary>
+        /// Время последнего сохранения базы в файл
+        /// </summary>
         private DateTime lastSavingTime;
 
+        /// <summary>
+        /// Дата начала учета
+        /// </summary>
         private DateTime startingDate;
 
 
@@ -48,7 +54,7 @@ namespace DBF
 
         #region Свойства
         /// <summary>
-        /// Путь к файлу с данными
+        /// Путь к файлу с записями 
         /// </summary>
         public string DbPath { get { return this.dbPath; } }
 
@@ -63,10 +69,13 @@ namespace DBF
         /// </summary>
         public DateTime LastSavingTime { get { return this.lastSavingTime; } }
 
+        /// <summary>
+        /// Дата начала учета
+        /// </summary>
         public DateTime StartingDate { get { return startingDate; } }
 
         /// <summary>
-        /// Остаток денежных средств по всем счетам
+        /// Текущий остаток денежных средств по всем счетам
         /// </summary>
         public double Balance { get { return this.balance; } }
 
@@ -79,12 +88,12 @@ namespace DBF
         /// <param name="DbPath">Путь к файлу базы данных</param>
         public Repository(string DbPath)
         {
-            string path = @"settings.ini";          // файл с начальными настройками учета   
-            this.lastSavingTime = DateTime.Now;     // когда в последний раз были сохранены данные
-            this.startingDate = DateTime.MinValue;  // дата начала учета
-            this.dbPath = DbPath;                   // получение пути к файлу с данными
+            string iniPath = @"settings.ini";          // файл с начальными настройками учета жестко закодирован   
+            this.lastSavingTime = DateTime.Now;     // когда в последний раз были сохранены данные = время загрузки из файла
+            this.startingDate = DateTime.MinValue;  
+            this.dbPath = DbPath;                   
             this.index = 0;                         // первый элемент базы имеет нулевой индекс
-            this.balance = 0;                       // начальный баланс
+            this.balance = 0;                       // начальный баланс, если в настройках ничего нет
             this.titles = new string[8]             // задание строк заголовка
             
             {
@@ -99,10 +108,12 @@ namespace DBF
             };
             this.records = new Record[1];           // длина массива при инициализации - 1 запись 
 
-            char[] seps = new char[] {'='};
-            if (File.Exists(path))                  // чтение настроек учета
+            char[] seps = new char[] {'='};         // разделитель для чтения настроек    
+            
+            // чтение из файла настроек
+            if (File.Exists(iniPath))                  
             {
-                using (StreamReader iniStream = new StreamReader(path))
+                using (StreamReader iniStream = new StreamReader(iniPath))
                 {
 
                     while (!iniStream.EndOfStream)
@@ -124,7 +135,7 @@ namespace DBF
                     }
                 }
             }
-            Load();                                 // загрузка данных из файла
+            Load();                                 // загрузка записей из файла
         }
 
 
@@ -143,7 +154,7 @@ namespace DBF
         /// </summary>
         private void Load()
         {
-           Load(this.dbPath, new Template(DateTime.MinValue, DateTime.MaxValue, (sbyte)0));
+           Load(this.dbPath, new Template(DateTime.MinValue, DateTime.MaxValue, 0));
         }
 
 
@@ -230,7 +241,7 @@ namespace DBF
             {
                 if (!this.records[i].Deleted && Match(i, filter))
                 {
-                    temp = String.Format("{0};{1};{2};{3};{4};{5};{6};{7}",
+                    temp = String.Format("{0};{1};{2 : dd.MM.yyyy};{3};{4};{5};{6};{7}",
                                             this.records[i].RecNumber,
                                             this.records[i].CrDate,
                                             this.records[i].OpDate,
@@ -250,7 +261,7 @@ namespace DBF
         /// </summary>
         public void Save()
         {
-            Save(this.dbPath, new Template(DateTime.MinValue, DateTime.MaxValue, (sbyte)0));
+            Save(this.dbPath, new Template(DateTime.MinValue, DateTime.MaxValue, 0));
             this.lastSavingTime = DateTime.Now;
         }
         
@@ -279,10 +290,10 @@ namespace DBF
             
             string[] recordText = new string[]
             {
-                                            this.records[num].RecNumber.ToString("d"),
-                                            this.records[num].OpDate.ToString("d"),
+                                            this.records[num].RecNumber.ToString(),
+                                            this.records[num].OpDate.ToString("dd.MM.yyyy"),
                                             (this.records[num].OpType > 0) ? "Доход" : "Расход",
-                                            this.records[num].OpSum.ToString("f"),
+                                            this.records[num].OpSum.ToString("### ### ### ##0.00"),
                                             this.records[num].Account,
                                             this.records[num].Category,
                                             this.records[num].Note

@@ -26,52 +26,77 @@ namespace WpfDB
     public partial class MainWindow : Window
     {
         static char[] comma = new char[] { ',' };
+        
+        /// <summary>
+        /// Хранилище записей
+        /// </summary>
         public static Repository db;
-        public static Record opR = new Record(); // запись для редактирования
-        public static string[] accs;        // счета
-        public static string[] catsE;       // категории расходов
-        public static string[] catsI;       // категории приходов
-        public static string balance;       // баланс по всем счетам
+        
+        /// <summary>
+        /// Запись, отображаемая для редактирования в окне диалога
+        /// </summary>
+        public static Record opR = new Record();
+        
+        /// <summary>
+        /// Список счетов
+        /// </summary>
+        public static string[] accs;       
+        
+        /// <summary>
+        /// Список категорий  расхода
+        /// </summary>
+        public static string[] catsE;       
+
+        /// <summary>
+        /// Список категорий прихода
+        /// </summary>
+        public static string[] catsI;     
+
+        //public static string balance;       
+        
         string[] all = new string[] {""};
+        
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
         
         //временные переменные для фильтрации отчетов:
-        sbyte t;    // тип приход =1/расход  =-1  
+        sbyte t;    // тип приход 1/расход -1 / все 0  
         string a;   // счет
         string c;   // категория
+
         public MainWindow()
         {
             InitializeComponent();
-            if (App.Settings.Accounts == null)
+            if (App.Settings.Accounts == null) // настройки не были считаны при запуске программы
             {
                 Window2 window = new Window2(); // окно начала учета
                 window.ShowDialog();
             }
             db = new Repository(@"data.csv");
-            MessageBox.Show($"База загружена из файла {db.DbPath}. Количество записей: {db.Count}.");
+            //MessageBox.Show($"База загружена из файла {db.DbPath}. Количество записей: {db.Count}.");
+            
             accs = App.Settings.Accounts.Split(comma, StringSplitOptions.RemoveEmptyEntries);
             catsE = App.Settings.OutCategories.Split(comma, StringSplitOptions.RemoveEmptyEntries);
             catsI = App.Settings.InCategories.Split(comma, StringSplitOptions.RemoveEmptyEntries);
 
-            accE.ItemsSource = accs;
-            accI.ItemsSource = accs;
-            accR.ItemsSource = all.Concat(accs);
-            accL.ItemsSource = accs;
-            catE.ItemsSource = catsE;
-            catI.ItemsSource = catsI;
-            catR.ItemsSource = all.Concat(catsE.Concat(catsI));
-            dp1E.SelectedDate = DateTime.Today;
-            dp1I.SelectedDate = DateTime.Today;
-            dp2R.SelectedDate = DateTime.Today;
-            dp1R.SelectedDate = db.StartingDate;
-            dp2L.SelectedDate = DateTime.Today;
-            dp1L.SelectedDate = db.StartingDate;
-            balance = String.Format("{0 : 0.00}", db.Balance);
+            accE.ItemsSource = accs; //элемент Выбор счета расхода
+            accI.ItemsSource = accs; //элемент Выбор счета прихода
+            accR.ItemsSource = all.Concat(accs); //элемент Выбор счета в отчете
+            accL.ItemsSource = all.Concat(accs); // элемент Выбор счета в загрузке
+            catE.ItemsSource = catsE; //элемент Выбор категории в расходе
+            catI.ItemsSource = catsI; //элемент Выбор категории в приходе
+            catR.ItemsSource = all.Concat(catsE.Concat(catsI)); //элемент Выбор категории в отчете
+            dp1E.SelectedDate = DateTime.Today; // датапикер в расходе
+            dp1I.SelectedDate = DateTime.Today; // датапикер в приходе
+            dp2R.SelectedDate = DateTime.Today; //конец диапазона дат в отчете
+            dp1R.SelectedDate = db.StartingDate; //начало диапазона дат в отчете
+            dp2L.SelectedDate = DateTime.Today; //конец диапазона дат в загрузке
+            dp1L.SelectedDate = db.StartingDate; //начало диапазона дат в загрузке
+            //balance = String.Format("{0 : 0.00}", db.Balance);
             this.DataContext = db;         
         }
         /// <summary>
-        /// Выход из программы, сохранение
+        /// Выход из программы с сохранением 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -81,6 +106,7 @@ namespace WpfDB
             db.Save();
             Application.Current.Shutdown();
         }
+
         /// <summary>
         /// Ввод суммы операции, только цифры, разделитель запятая, 9 знаков максимум
         /// </summary>
@@ -92,8 +118,9 @@ namespace WpfDB
             e.Handled = ",0123456789".IndexOf(e.Text) < 0;//только цифры и ,
             ctrl.MaxLength = 9;//длина текста в текстбоксе
         }
+
         /// <summary>
-        /// Записать данные по расходу
+        /// Добавляет запись с расходом в хранилище
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -105,13 +132,13 @@ namespace WpfDB
             }
             else
             {
-                db.Add(new Record(Convert.ToDateTime(dp1E.SelectedDate.Value.Date.ToShortDateString()), (sbyte)(-1),
+                db.Add(new Record(Convert.ToDateTime(dp1E.SelectedDate.Value.Date.ToShortDateString()), -1,
                     Convert.ToDouble(sumE.Text), accE.Text, catE.Text, noteE.Text));
-                sumE.Text = " ";
+                sumE.Text = "";
                 accE.Text = "";
                 catE.Text = "";
                 noteE.Text = "";
-                Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now,(sbyte)(-1)));
+                Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now, -1));
                 listViewE.ItemsSource = lastRecords;
                 listViewE.Items.Refresh();
                 saldo.Text = db.Balance.ToString("0.00");
@@ -119,36 +146,38 @@ namespace WpfDB
                 saldoR.Text = db.Balance.ToString("0.00");
             }
 
-            }
+        }
+
         /// <summary>
-        /// Записать данные по приходу
+        /// Добавляет запись с приходом в хранилище
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
             private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            if (dp1I.SelectedDate == null || sumI.Text == "" || accI.Text == "" || catI.Text == "") //проверка полноты заполнения
             {
-                MessageBox.Show($"Не все поля заполнены");
+                if (dp1I.SelectedDate == null || sumI.Text == "" || accI.Text == "" || catI.Text == "") //проверка полноты заполнения
+                {
+                    MessageBox.Show($"Не все поля заполнены");
+                }
+                else
+                {
+                    db.Add(new Record(Convert.ToDateTime(dp1I.SelectedDate.Value.Date.ToShortDateString()), 1,
+                   Convert.ToDouble(sumI.Text), accI.Text, catI.Text, noteI.Text));
+                    sumI.Text = "";
+                    accI.Text = "";
+                    catI.Text = "";
+                    noteI.Text = "";
+                    Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now, 1));
+                    listViewI.ItemsSource = lastRecords;
+                    listViewI.Items.Refresh();
+                    saldoI.Text = db.Balance.ToString("0.00");
+                    saldo.Text = db.Balance.ToString("0.00");
+                    saldoR.Text = db.Balance.ToString("0.00");
+                }
             }
-            else
-            {
-                db.Add(new Record(Convert.ToDateTime(dp1I.SelectedDate.Value.Date.ToShortDateString()), (sbyte)(1),
-               Convert.ToDouble(sumI.Text), accI.Text, catI.Text, noteI.Text));
-                sumE.Text = " ";
-                accI.Text = "";
-                catI.Text = "";
-                noteI.Text = "";
-                Record[] lastRecords = db.FilteredList(new Template(db.LastSavingTime, DateTime.Now, (sbyte)(1)));
-                listViewI.ItemsSource = lastRecords;
-                listViewI.Items.Refresh();
-                saldoI.Text = db.Balance.ToString("0.00");
-                saldo.Text = db.Balance.ToString("0.00");
-                saldoR.Text = db.Balance.ToString("0.00");
-            }
-        }
+
         /// <summary>
-        /// Показать данные согласно отбору
+        /// Показывает данные согласно фильтру отбора в отчете
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -175,18 +204,21 @@ namespace WpfDB
             { 
                 c = ""; }
             else
-            c = catR.Text;
+                c = catR.Text;
 
             Record[] lastRecords = db.FilteredList(new Template(Convert.ToDateTime(dp1R.SelectedDate.Value.Date.ToShortDateString()), 
-                Convert.ToDateTime(dp2R.SelectedDate.Value.Date.ToShortDateString()),t,a,c));
+                                   Convert.ToDateTime(dp2R.SelectedDate.Value.Date.ToShortDateString()),t,a,c));
+            
             listViewR.ItemsSource = lastRecords;
             listViewR.Items.Refresh();
+            
             saldoR.Text = db.Balance.ToString("0.00");
             saldo.Text = db.Balance.ToString("0.00");
             saldoI.Text = db.Balance.ToString("0.00");
         }
+
         /// <summary>
-        /// Сортировка по значению в колонке
+        /// Сортировка по значению в колонке в отчете
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -207,8 +239,10 @@ namespace WpfDB
             listViewSortCol = column;
             listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
             AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
-            listViewR.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+            
+            listViewR.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir)); 
         }
+
         /// <summary>
         /// Стрелочка сортировки по значению в колонке
         /// </summary>
@@ -227,6 +261,7 @@ namespace WpfDB
             {
                 this.Direction = dir;
             }
+
             /// <summary>
             /// Отрисовка стрелочки сортировки согласно направлению сортировки
             /// </summary>
@@ -256,7 +291,7 @@ namespace WpfDB
 
       
        /// <summary>
-       /// Переход в режим редактирования записи
+       /// Вызывает окно редактирования записи по левой кнопке мыши
        /// </summary>
        /// <param name="sender"></param>
        /// <param name="e"></param>
@@ -271,8 +306,9 @@ namespace WpfDB
 
             }
         }
+
         /// <summary>
-        /// Выгрузка в файл с указанием пути в диалоге
+        /// Выгружает записи в файл с указанием пути в диалоге
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -287,8 +323,9 @@ namespace WpfDB
             }
             
         }
+
         /// <summary>
-        /// Удаление выбранной записи с диалогом (да/нет)
+        /// Удаляет выбранную запись с диалогом (да/нет)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -302,17 +339,20 @@ namespace WpfDB
             {
                 db.Delete(opR.RecNumber);
                 Record[] lastRecords = db.FilteredList(new Template(Convert.ToDateTime(dp1R.SelectedDate.Value.Date.ToShortDateString()),
-                   Convert.ToDateTime(dp2R.SelectedDate.Value.Date.ToShortDateString()), t, a, c));
+                                       Convert.ToDateTime(dp2R.SelectedDate.Value.Date.ToShortDateString()), t, a, c));
+
                 listViewR.ItemsSource = lastRecords;
                 listViewR.Items.Refresh();
+
                 saldoR.Text = db.Balance.ToString("0.00");
                 saldo.Text = db.Balance.ToString("0.00");
                 saldoI.Text = db.Balance.ToString("0.00");
             }
           
         }
+
         /// <summary>
-        /// Загрузка из файла с выбором пути к файлу и отбором записей по датам и счету
+        /// Загружает записи из файла с выбором пути к файлу и отбором записей по датам и счету
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -323,9 +363,11 @@ namespace WpfDB
             if (openFileDialog.ShowDialog() == true)
             {
                 db.Load(openFileDialog.FileName, new Template(Convert.ToDateTime(dp1L.SelectedDate.Value.Date.ToShortDateString()),
-                 Convert.ToDateTime(dp2L.SelectedDate.Value.Date.ToShortDateString()), 0, accL.Text, ""));
+                Convert.ToDateTime(dp2L.SelectedDate.Value.Date.ToShortDateString()), 0, accL.Text, ""));
+
                 temp = db.Count - temp;
                 MessageBox.Show($"Загружено из {openFileDialog.FileName} {temp} записей");
+                accL.Text = "";
                
             }
          

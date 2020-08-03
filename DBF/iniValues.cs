@@ -12,18 +12,39 @@ namespace DBF
     /// </summary>
     public struct IniValues
     {
+        /// <summary>
+        /// Свойство Дата начала учета
+        /// </summary>
         public DateTime StartingDate { get; }
 
+        /// <summary>
+        /// Свойство Начальный баланс
+        /// </summary>
         public double Balance { get; }
-
+        
+        /// <summary>
+        /// Свойство Счета
+        /// </summary>
         public string Accounts { get; }
 
+        /// <summary>
+        /// Свойство Категории прихода
+        /// </summary>
         public string InCategories { get; }
 
+        /// <summary>
+        /// Свойство Категории расхода
+        /// </summary>
         public string OutCategories { get; }
 
-        //public string IniPath { get; }
-
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="StartingDate">Дата начала учета</param>
+        /// <param name="Balance">Начальный баланс</param>
+        /// <param name="Accounts">Счета</param>
+        /// <param name="InCategories">Категории прихода</param>
+        /// <param name="OutCategories">Категории расхода</param>
         public IniValues(DateTime StartingDate, double Balance, string Accounts, string InCategories, string OutCategories)
         {
             this.StartingDate = StartingDate;
@@ -31,14 +52,13 @@ namespace DBF
             this.Accounts = Accounts;
             this.InCategories = InCategories;
             this.OutCategories = OutCategories;
-
-            //Array.Copy(Accounts, this.Accounts, Accounts.Length);
-            //Array.Copy(InCategories, this.InCategories, InCategories.Length);
-            //Array.Copy(OutCategories, this.OutCategories, OutCategories.Length);
-
-
+            
         }
 
+        /// <summary>
+        /// Конструктор для загрузки данных из файла
+        /// </summary>
+        /// <param name="IniPath">Путь к файлу с настройками</param>
         public IniValues(string IniPath)
         {
             this.StartingDate = Convert.ToDateTime($"01.01.{DateTime.Now : yyyy}");
@@ -50,7 +70,6 @@ namespace DBF
             if(File.Exists(IniPath))
             {
                 char[] seps = new char[] {'='};
-                //char[] commas = new char[] { ',' };
                 using (StreamReader iniStream = new StreamReader(IniPath))
                 {
 
@@ -84,12 +103,16 @@ namespace DBF
             }
         }
 
+        /// <summary>
+        /// Сохраняет настройки в файл
+        /// </summary>
+        /// <param name="IniPath">Путь к файлу с настройками</param>
         public void Save(string IniPath)
         {
             using (StreamWriter iniFile = new StreamWriter(IniPath, false))
             {
                 iniFile.WriteLine($"date={this.StartingDate:dd.MM.yyyy}");
-                iniFile.WriteLine($"balance={this.Balance}");                     // нужно проверить формат записи, чтобы потом не было проблем с парсингом обратно!
+                iniFile.WriteLine($"balance={this.Balance}");                     
                 iniFile.WriteLine($"accounts={this.Accounts}");
                 iniFile.WriteLine($"inCategories={this.InCategories}");
                 iniFile.WriteLine($"outCategories={this.OutCategories}");

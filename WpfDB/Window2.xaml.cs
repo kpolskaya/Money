@@ -21,19 +21,18 @@ namespace WpfDB
     /// </summary>
     public partial class Window2 : Window
     {
-       
-        public Window2()    /// окно ввода начальных значений
+               
+        public Window2()    
         {
             InitializeComponent();
             
         }
+
         /// <summary>
-        /// запись всех значений, введенных в форму
+        /// Записывает все значения, введенные в форму
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// позорный ввод, потому что я не смогла прочесть значения из ListBoxItem, только с служебным текстом "System.Windows.Controls.ListBoxItem",
-        /// 37 символов просто отрезала
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -49,8 +48,10 @@ namespace WpfDB
                 string x = (acclist.Items.GetItemAt(i).ToString());
                 if (x != $"System.Windows.Controls.ListBoxItem")
                 {
-                    accs = accs + x.Substring(37) +',';
-                }
+                    // позорный ввод, потому что я не смогла прочесть значения из ListBoxItem, только с служебным текстом "System.Windows.Controls.ListBoxItem",
+                    // 37 символов просто отрезала
+                    accs = accs + x.Substring(37) +',';  
+                }                                           
                 
             }
 
@@ -82,7 +83,7 @@ namespace WpfDB
             this.Close();
         }
         /// <summary>
-        /// первоначальные настройки если лень вводить
+        /// Формирует первоначальные настройки если лень вводить
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
